@@ -7,26 +7,30 @@ export default function RecipeResults() {
 
     useEffect(() => {
       axios
-        .get('www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata')
+        .get('https://www.themealdb.com/api/json/v2/9973533/randomselection.php?key=value')
         .then((response) => {
-        console.log('rendering:',response.data)
+        
           setRecipes(response.data)
         })
     }, [])
 
-    console.log(recipes)
+    console.log('recipes is ', recipes)
 
     return (
       <div>
         <h1>Recipeezy</h1>
           <div className='recipe-list'>
+          {recipes.meals ? (
               <ul>
-                {recipes.map((recipe) => (
+                {recipes.meals.map((recipe) => (
                   <li>
-                    <p>{recipe.meals.strMeal}</p>
+                    <p>{recipe.strMeal}</p>
                   </li>
                 ))}
               </ul>
+            ) : (
+              <p>Loading...</p>
+            )}
           </div>
       </div>
     )
