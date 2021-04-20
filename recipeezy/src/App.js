@@ -1,6 +1,7 @@
 import React from 'react'
 import './App.css';
 import RecipeResults from './components/RecipeResults'
+import Pantry from './components/Pantry'
 // import './App.css';
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
     <div>
       <h1>Hello</h1>
       <RecipeResults />
+      <Pantry />
     </div>
   );
 }
