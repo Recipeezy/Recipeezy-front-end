@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import RecipeDetail from './RecipeDetail'
 
 
 export default function RecipeResults() {
     const [recipes, setRecipes] = useState([])
+    const [selectedRecipe, setSelectedRecipe] = useState(false)
 
     useEffect(() => {
       axios
@@ -15,19 +17,29 @@ export default function RecipeResults() {
     }, [])
 
     console.log('recipes is ', recipes)
+    console.log('selected recipe ', selectedRecipe)
 
     return (
       <div>
         <h1>Recipeezy</h1>
           <div className='recipe-list'>
           {recipes.meals ? (
-              <ul>
+            {selectedRecipe ? (
+              <RecipeDetail />
+                ) : (
+                <ul>
                 {recipes.meals.map((recipe) => (
                   <li>
                     <p>{recipe.strMeal}</p>
+                    <button
+                    onClick={() => setSelectedRecipe(recipe)}
+                    >
+                      {recipe.strMeal}
+                    </button>
                   </li>
                 ))}
-              </ul>
+                </ul>
+            )}
             ) : (
               <p>Loading...</p>
             )}
