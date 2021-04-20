@@ -26,7 +26,7 @@ export default function RecipeResults() {
     return (
       <div>
         <h1>Recipeezy</h1>
-        <Link to='/home' type='button'>home</Link>
+        <Link to='/' type='button'>home</Link>
           <div className='recipe-list'>
           <>
             {recipes.meals ? (

@@ -1,5 +1,6 @@
 import React from 'react'
 import pantryData from '../api'
+import { Link } from 'react-router-dom'
 
 
 export default function Pantry() {
@@ -15,6 +16,7 @@ export default function Pantry() {
     
     return (
         <div className='pantry-wrapper'>
+            <Link to='/' type='button'>home</Link>
             <form>
                 {pantryData.map((food) => (
                     <li key={food.id}>
