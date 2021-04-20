@@ -1,0 +1,8 @@
+img {
+    max-width: 300px;
+    max-height: auto;
+}
+
+.ingredient-list {
+    list-style: none;
+}
