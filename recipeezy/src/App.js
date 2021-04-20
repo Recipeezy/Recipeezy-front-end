@@ -1,14 +1,49 @@
 import React from 'react'
+import Home from './components/Home'
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import RecipeResults from './components/RecipeResults'
 // import './App.css';
 
 function App() {
   return (
-    <div>
-      <h1>Hello</h1>
-      <RecipeResults />
-    </div>
+    <Router>
+      <div>
+        <h1>Hello</h1>
+        {/* <RecipeResults /> */}
+      </div>
+
+
+      <div>
+        <Switch>
+          <Route path='/reciperesults'>
+            <RecipeResults />
+          </Route>
+          <Route path='/home'>
+            <Home />
+          </Route>
+
+
+
+
+
+        </Switch>
+      </div>
+
+
+
+
+
+
+
+
+
+      </Router>
   );
 }
 

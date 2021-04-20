@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import RecipeDetail from './RecipeDetail'
+import { Link } from 'react-router-dom'
 
 
 export default function RecipeResults() {
@@ -25,6 +26,7 @@ export default function RecipeResults() {
     return (
       <div>
         <h1>Recipeezy</h1>
+        <Link to='/home' type='button'>home</Link>
           <div className='recipe-list'>
           <>
             {recipes.meals ? (
