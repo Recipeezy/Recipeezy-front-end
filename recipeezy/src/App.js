@@ -8,6 +8,7 @@ import {
   Link
 } from "react-router-dom";
 import RecipeResults from './components/RecipeResults'
+import Pantry from './components/Pantry'
 // import './App.css';
 
 function App() {
