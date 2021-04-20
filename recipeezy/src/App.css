@@ -6,3 +6,7 @@ img {
 .ingredient-list {
     list-style: none;
 }
+
+.recipe-card {
+    border: 2px solid black;
+}

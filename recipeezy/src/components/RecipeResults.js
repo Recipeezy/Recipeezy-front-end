@@ -38,12 +38,17 @@ export default function RecipeResults() {
                     <ul>
                     {recipes.meals.map((recipe) => (
                       <li key={recipe.idMeal}>
-                        <p>{recipe.strMeal}</p>
-                        <button
-                        onClick={() => setSelectedRecipe(recipe)}
-                        >
-                          {recipe.strMeal}
-                        </button>
+                        <div className="recipe-card">
+                          <img alt="recipe-pic" src={recipe.strMealThumb} />
+                          <h4>{recipe.strMeal}</h4>
+                          <p>Category: {recipe.strCategory}</p>
+                          <p>Origin: {recipe.strArea}</p>
+                          <button
+                          onClick={() => setSelectedRecipe(recipe)}
+                          >
+                            See more
+                          </button>
+                        </div>
                       </li>
                     ))}
                     </ul>
