@@ -28,6 +28,9 @@ function App() {
           <Route path='/home'>
             <Home />
           </Route>
+          <Route path='/pantry'>
+            <Pantry />
+          </Route>
 
 
 
