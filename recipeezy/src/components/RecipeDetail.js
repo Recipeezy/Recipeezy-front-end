@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function RecipeDetail({selectedRecipe, handleGoBack}) {
     console.log('selected recipe ', selectedRecipe)
