@@ -1,57 +1,84 @@
 import React, { useState, useEffect } from 'react'
 import { pantryData } from '../api'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 // import { getPantryData } from '../api'
 
 
 export default function Pantry() {
-    // pantry component needs CRUD capabilities 
-    // hardcode ingredients into checkable boxes
-    // make checkboxes (ingredients) capped 2-3 (test w/ api to determine what works and what makes the api render null)
-    // make a 'Start Plan' button that onClick takes values of checkboxes and sends those ingredients to API useEffect call in RecipeResults.js
-    // we're going to need a function that handles the separation of ingredients in the API link (they're separated by commas)
+    // 1. pantry component needs CRUD capabilities 
+    // 2. hardcode ingredients into checkable boxes
+    // 3. make checkboxes (ingredients) capped 2-3 (test w/ api to determine what works and what makes the api render null)
+    // 4. make a 'Start Plan' button that onClick takes values of checkboxes and sends those ingredients to API useEffect call in RecipeResults.js
+    // 5. we're going to need a function that handles the separation of ingredients in the API link (they're separated by commas)
+
+
     const [foodList, setFoodList] = useState([])
     // const [submitted, setSubmitted] = useState(false)
     const [name, setName] = useState('')
+    // const [deleted, setDeleted] = useState(false)
+    const { id } = useParams()
+
     const token='9600235d3622575ff38d185b19a319d8c288a59b'
     
 
 
-    
+    // get request to set foodList 
     useEffect(() => {
         axios
-          .get('http://recipeezy-app.herokuapp.com/ingredients/', {
+        .get('http://recipeezy-app.herokuapp.com/ingredients/', {
             headers: {
 
             },
-          })
-          .then((data) => {
+        })
+        .then((data) => {
             setFoodList(data.data)
             
-          })
-      }, [])
+        })
+    }, [])
     
     console.log('foodList', foodList)
 
+
+
+    // post request to add an ingredient to the Pantry
     const handleSubmit = (e) => {
         e.preventDefault()
         axios
-          .post(
+        .post(
             'http://recipeezy-app.herokuapp.com/ingredients/',
             {
                 name: name
             },
             {
                 headers: { Authorization: `Token ${token}` },
-              },
-          )
-          .then((data) => {
+            },
+        )
+        .then((data) => {
             // handleDone(data.data)
-          })
-      }
+        })
+    }
 
-     return (
+    // delete request to delete ingredient from Pantry
+    const deleteIngredient = (id, event) => {
+        axios
+            .delete(`http://recipeezy-app.herokuapp.com/ingredients/${id}`,
+            {
+                headers: { Authorization: `Token ${token}` },
+            }
+            )
+            .then((response) => {
+                console.log('deleted', response)
+                if(response.data != null) {
+                    event.target.parentElement.remove()
+                    // setDeleted(true)
+            }
+        },
+    )}
+
+
+
+    return (
         <div className='pantry-wrapper'>
             <h1>Pantry</h1>
             <Link to='/' type='button'>home</Link>
@@ -60,6 +87,7 @@ export default function Pantry() {
                     <li key={food.id}>
                         <input type='checkbox' id={food.item} value={food.item}></input>
                         <label htmlFor={food.name}>{food.name}</label>
+                        <button onClick={(event) => deleteIngredient(food.id, event)}>Delete Item</button>
                     </li>
                 )
                 )}
@@ -73,7 +101,7 @@ export default function Pantry() {
                     ></input>
 
                 </div>
-                <div class='btn'>
+                <div className='btn'>
                 <button
                     className='submit-btn'
                     type="submit"
