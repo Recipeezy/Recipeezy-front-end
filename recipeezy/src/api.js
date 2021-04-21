@@ -1,4 +1,6 @@
-const pantryData = [
+import axios from 'axios'
+
+export const pantryData = [
     {
         "id": 1,
         "item": 'steak',
@@ -26,8 +28,46 @@ const pantryData = [
     },
 ]
 
+// get data from api
 export function getPantryData () {
-    return pantryData
+    axios.get('url')
+    .then((response) => 
+        console.log(response)
+    )
 }
+// // add new ingredient
+// export function addNewFood () {
+//     axios.post('url'),
+//     {
+//         id: id,
+//         food: food,
+//     },
+//     .then((response) => {
+//         if(response.data != null) {
 
-export default pantryData 
+//         }
+//     })
+// }
+
+
+
+// const handleSubmit = (event) => {
+//     console.log('handleSubmit running')
+//     event.preventDefault()
+//     axios
+//         .post(
+//         'http://swordtail.herokuapp.com/questions/',
+//         {
+//             title: title,
+//             body: body,
+//         },
+//         {
+//             headers: { Authorization: `Token ${token}`},
+//         })
+//         .then((response) => {
+//             if(response.data != null) {
+//                 alert('Your question was submitted!')
+//                 setSubmitted(true)
+//             }
+//         })
+//     }
