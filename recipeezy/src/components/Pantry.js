@@ -14,6 +14,7 @@ export default function Pantry() {
     const [foodList, setFoodList] = useState([])
     // const [submitted, setSubmitted] = useState(false)
     const [name, setName] = useState('')
+    const token='9600235d3622575ff38d185b19a319d8c288a59b'
     
 
 
@@ -37,10 +38,13 @@ export default function Pantry() {
         e.preventDefault()
         axios
           .post(
-            'https://recipeezy-app.herokuapp.com/ingredients/',
+            'http://recipeezy-app.herokuapp.com/ingredients/',
             {
                 name: name
             },
+            {
+                headers: { Authorization: `Token ${token}` },
+              },
           )
           .then((data) => {
             // handleDone(data.data)
