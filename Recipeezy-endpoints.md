@@ -1,5 +1,66 @@
 # Endpoints
 
+## Heroku Endpoints
+
+Get Requests that are currently available
+
+https://recipeezy-app.herokuapp.com/users/
+
+https://recipeezy-app.herokuapp.com/ingredients/
+
+https://recipeezy-app.herokuapp.com/ingredients/1/  <-- the '1' designates which ingredient
+
+https://recipeezy-app.herokuapp.com/pantry/ <-- will grab the pantry for who you are logged in as
+
+https://recipeezy-app.herokuapp.com/recipes/ <-- this will show all recipes and their associated details
+
+https://recipeezy-app.herokuapp.com/recipes/1/ <-- the '1' designates which recipe you want in specific. Shows all it's details
+
+https://recipeezy-app.herokuapp.com/shopping_list/ <-- this works in a similar manner as pantry. Purely a container to hold ingredient objects
+
+### POST requests
+
+https://recipeezy-app.herokuapp.com/ingredients/ 
+
+```JSON
+# input
+{
+  "name": "Ham"
+}
+# output
+# 201
+{
+  "name": "Ham"
+}
+```
+
+### PATCH requests
+
+https://recipeezy-app.herokuapp.com/ingredients/1/ <-- make sure you designate which ingredient object we are going to PATCH
+
+```JSON
+# input
+{
+  "name": "Hammy"       <-- desired output
+}
+# output
+# 200
+{
+  "name": "Hammy"
+}
+```
+
+### DELETE requests
+
+https://recipeezy-app.herokuapp.com/ingredients/1/ <-- make sure you designate which ingredient object we are going to DELETE
+
+```JSON
+# output
+# 204 NO content
+```
+
+Now when you do a get request of all ingredients the ingredient we selected will be gone
+
 ## mealdb endpoints
 
 Let's make a GET request for a meal id that we have. 
@@ -141,3 +202,4 @@ but one random recipe is no fun, how about 10?
 https://www.themealdb.com/api/json/v2/9973533/randomselection.php
 
 This will give all the details for 10 recipes. So the output will look like a meal id but for 10 total recipes.
+
