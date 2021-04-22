@@ -164,7 +164,7 @@ export default function Pantry() {
                 {foodList.map((food) => (
                     <li key={food.id}>
                         <input type='checkbox' id={food.item} value={food.item}></input>
-                        {isEditing && selectedID  === food.id ? 
+                        {isEditing === food.id ? 
                         <div>
                             <input onChange={(event) => setEditedIngredient(event.target.value)}></input>
                         <button onClick={(event) => editIngredient(food.id, event)}
@@ -173,7 +173,7 @@ export default function Pantry() {
                          : <label htmlFor={food.name}>{food.name}</label>}
                         
                         <button onClick={(event) => deleteIngredient(food.id, event)}>Delete Item</button>
-                        <button onClick= {() => setIsEditing(true)} value={food.id}>Edit Item</button>
+                        <button onClick= {() => setIsEditing(food.id)} value={food.id}>Edit Item</button>
 
                     </li>
                 )
