@@ -19,8 +19,8 @@ export default function Pantry() {
     const [selectedID, setSelectedID] = useState(null)
 
     const [editedIngredient, setEditedIngredient] = useState('')
-    
-    
+
+
 
     const [searchResults, setSearchResults] = useState([])
     const [selectedIngredients, setSelectedIngredients] = useState([])
@@ -90,18 +90,18 @@ export default function Pantry() {
         event.preventDefault()
         axios
 
-        .put(
-            `http://recipeezy-app.herokuapp.com/ingredients/${id}`,
-            {
-                name: editedIngredient
-            },
-            {
-                headers: { Authorization: `Token ${token}` },
-            },
+            .put(
+                `http://recipeezy-app.herokuapp.com/ingredients/${id}`,
+                {
+                    name: editedIngredient
+                },
+                {
+                    headers: { Authorization: `Token ${token}` },
+                },
             )
             .then(setIsEditing(false))
 
-            
+
     }
 
     // const handleSearch = () => {
@@ -116,16 +116,22 @@ export default function Pantry() {
             if (c.checked) {
                 n.push(c.value)
             }
-
+        }
+        if (n.length > 4) {
+            n.length = 4
         }
         n.sort()
-        n.length = 4
         setSelectedIngredients(n)
+        console.log(selectedIngredients)
+
+
+
+
 
 
         // document.querySelector('.ings').textContent = selectedIngredients
 
-        axios.get(`https://www.themealdb.com/api/json/v2/9973533/filter.php?i=${selectedIngredients[0]},${selectedIngredients[1]}`).then((response) => {
+        axios.get(`https://www.themealdb.com/api/json/v2/9973533/filter.php?i=${selectedIngredients.join()}`).then((response) => {
             setSearchResults(response.data)
             console.log('SEARCH', searchResults)
 
@@ -159,27 +165,27 @@ export default function Pantry() {
             <h1>Pantry</h1>
             <Link to='/' type='button'>home</Link>
 
-            
-                {/* post request happening every time form is submitted because of above */}
-                {foodList.map((food) => (
-                    <li key={food.id}>
-                        <input type='checkbox' id={food.item} value={food.item}></input>
-                        {isEditing && selectedID  === food.id ? 
+
+            {/* post request happening every time form is submitted because of above */}
+            {foodList.map((food) => (
+                <li key={food.id}>
+                    <input className="checkboxes" type='checkbox' id={food.item} value={food.name}></input>
+                    {isEditing && selectedID === food.id ?
                         <div>
                             <input onChange={(event) => setEditedIngredient(event.target.value)}></input>
-                        <button onClick={(event) => editIngredient(food.id, event)}
-                        value={food.id}>Submit Edit</button>
+                            <button onClick={(event) => editIngredient(food.id, event)}
+                                value={food.id}>Submit Edit</button>
                         </div>
-                         : <label htmlFor={food.name}>{food.name}</label>}
-                        
-                        <button onClick={(event) => deleteIngredient(food.id, event)}>Delete Item</button>
-                        <button onClick= {() => setIsEditing(true)} value={food.id}>Edit Item</button>
+                        : <label htmlFor={food.name}>{food.name}</label>}
 
-                    </li>
-                )
-                )}
-                
-                <form onSubmit={handleSubmit}>
+                    <button onClick={(event) => deleteIngredient(food.id, event)}>Delete Item</button>
+                    <button onClick={() => setIsEditing(true)} value={food.id}>Edit Item</button>
+
+                </li>
+            )
+            )}
+
+            <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor='ingredient-name'></label>
                     <input
@@ -189,18 +195,18 @@ export default function Pantry() {
                         onChange={(event) => setName(event.target.value)}
                     ></input>
 
-                </div>  
+                </div>
                 <div className='btn'>
 
-                <button
-                    className='submit-btn'
-                    type="submit"
-                >Add</button>
+                    <button
+                        className='submit-btn'
+                        type="submit"
+                    >Add</button>
                 </div>
-                
-                </form>
 
-                    
+            </form>
+
+
             <button className='search-ingredients' onClick={handleChange2}>Search</button>
 
             <div>
