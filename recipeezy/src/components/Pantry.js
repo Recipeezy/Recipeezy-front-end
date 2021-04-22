@@ -95,16 +95,19 @@ export default function Pantry() {
             <h1>Pantry</h1>
             <Link to='/' type='button'>home</Link>
             <form onSubmit={handleSubmit}>
+                {/* post request happening every time form is submitted because of above */}
                 {foodList.map((food) => (
                     <li key={food.id}>
                         <input type='checkbox' id={food.item} value={food.item}></input>
-                        {isEditing && selectedID ===food.id ? <button onClick={(event) => setIsEditing(false)} value={food.id}>Submit Edit</button> : <label htmlFor={food.name}>{food.name}</label>}
+                        {isEditing && selectedID ===food.id ? <button onClick={(event) => setIsEditing(false)} 
+                        value={food.id}>Submit Edit</button> : <label htmlFor={food.name}>{food.name}</label>}
                         <button onClick={(event) => deleteIngredient(food.id, event)}>Delete Item</button>
-                        <button onClick={(event) => setSelectedID(event.target.value) setIsEditing(true)} value={food.id}>Edit Item</button>
+                        <button onClick={(event) =>{setSelectedID(event.target.value); setIsEditing(true)}} value={food.id}>Edit Item</button>
                     </li>
                 )
                 )}
                 <div>
+                    {/* add form wrap */}
                     <label htmlFor='ingredient-name'></label>
                     <input
                         id='ingredient-name'
