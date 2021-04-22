@@ -16,7 +16,7 @@ export default function Pantry() {
     const [foodList, setFoodList] = useState([])
     const [name, setName] = useState('')
     const [isEditing, setIsEditing] = useState(false)
-    const [selectedID, setSelectedID] = useState(null)
+    // const [selectedID, setSelectedID] = useState(null)
 
     const [editedIngredient, setEditedIngredient] = useState('')
     
@@ -87,11 +87,12 @@ export default function Pantry() {
     }
 
     const editIngredient = (id, event) => {
+        
         event.preventDefault()
         axios
 
         .put(
-            `http://recipeezy-app.herokuapp.com/ingredients/${id}`,
+            `http://recipeezy-app.herokuapp.com/ingredients/${id}/`,
             {
                 name: editedIngredient
             },
@@ -159,21 +160,19 @@ export default function Pantry() {
             <h1>Pantry</h1>
             <Link to='/' type='button'>home</Link>
 
-            
-                {/* post request happening every time form is submitted because of above */}
                 {foodList.map((food) => (
                     <li key={food.id}>
                         <input type='checkbox' id={food.item} value={food.item}></input>
                         {isEditing === food.id ? 
                         <div>
-                            <input onChange={(event) => setEditedIngredient(event.target.value)}></input>
+                            <input onChange={(event) => setEditedIngredient(event.target.value)} value={editedIngredient}></input>
                         <button onClick={(event) => editIngredient(food.id, event)}
                         value={food.id}>Submit Edit</button>
                         </div>
                          : <label htmlFor={food.name}>{food.name}</label>}
                         
                         <button onClick={(event) => deleteIngredient(food.id, event)}>Delete Item</button>
-                        <button onClick= {() => setIsEditing(food.id)} value={food.id}>Edit Item</button>
+                        <button onClick= {() => setIsEditing(food.id) && setEditedIngredient(food.name)} value={food.id}>Edit Item</button>
 
                     </li>
                 )
