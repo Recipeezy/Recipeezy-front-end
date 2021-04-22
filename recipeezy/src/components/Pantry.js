@@ -14,11 +14,9 @@ export default function Pantry() {
 
 
     const [foodList, setFoodList] = useState([])
-    // const [submitted, setSubmitted] = useState(false)
     const [name, setName] = useState('')
-    // const [deleted, setDeleted] = useState(false)
-    const { id } = useParams()
-
+    const [isEditing, setIsEditing] = useState(false)
+    const [selectedID, setSelectedID] = useState(null)
     const token='9600235d3622575ff38d185b19a319d8c288a59b'
     
 
@@ -33,11 +31,11 @@ export default function Pantry() {
         })
         .then((data) => {
             setFoodList(data.data)
-            
+            console.log('foodList', foodList)
         })
-    }, [])
+    }, [isEditing])
     
-    console.log('foodList', foodList)
+        
 
 
 
@@ -75,6 +73,20 @@ export default function Pantry() {
             }
         },
     )}
+    
+    const editIngredient = (id, event) => {
+        event.preventDefault()
+        axios
+        .put(
+            `http://recipeezy-app.herokuapp.com/ingredients/${id}`,
+            {
+                name: name
+            },
+            {
+                headers: { Authorization: `Token ${token}` },
+            },
+            )
+        }
 
 
 
@@ -86,8 +98,9 @@ export default function Pantry() {
                 {foodList.map((food) => (
                     <li key={food.id}>
                         <input type='checkbox' id={food.item} value={food.item}></input>
-                        <label htmlFor={food.name}>{food.name}</label>
+                        {isEditing && selectedID ===food.id ? <button onClick={(event) => setIsEditing(false)} value={food.id}>Submit Edit</button> : <label htmlFor={food.name}>{food.name}</label>}
                         <button onClick={(event) => deleteIngredient(food.id, event)}>Delete Item</button>
+                        <button onClick={(event) => setSelectedID(event.target.value) setIsEditing(true)} value={food.id}>Edit Item</button>
                     </li>
                 )
                 )}
@@ -112,3 +125,4 @@ export default function Pantry() {
         </div>
     )
 }
+
