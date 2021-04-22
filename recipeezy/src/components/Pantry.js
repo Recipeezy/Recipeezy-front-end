@@ -132,7 +132,9 @@ export default function Pantry() {
         // document.querySelector('.ings').textContent = selectedIngredients
 
         axios.get(`https://www.themealdb.com/api/json/v2/9973533/filter.php?i=${selectedIngredients.join()}`).then((response) => {
-            setSearchResults(response.data)
+            setSearchResults(response.data.meals.slice(0, 10))
+            // setSearchResults(searchResults.slice(0, 10))
+
             console.log('SEARCH', searchResults)
 
         })
@@ -210,9 +212,9 @@ export default function Pantry() {
             <button className='search-ingredients' onClick={handleChange2}>Search</button>
 
             <div>
-                {searchResults.meals ? (
+                {searchResults ? (
 
-                    searchResults.meals.map((result) => (
+                    searchResults.map((result) => (
                         <>
                             <img src={result.strMealThumb}></img>
                             <h1>{result.strMeal}</h1>
