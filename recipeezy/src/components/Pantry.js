@@ -92,7 +92,7 @@ export default function Pantry() {
             <Link to='/' type='button'>home</Link>
 
             {foodList.map((food) => (
-                <FoodItem food={food} key={food.id} />
+                <FoodItem food={food} key={food.id} selectedIngredients={selectedIngredients} setSelectedIngredients={setSelectedIngredients} />
             ))}
 
             <FoodItemForm addFoodItem={addFoodItem} />
