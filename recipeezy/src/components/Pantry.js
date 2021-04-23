@@ -1,34 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { pantryData } from '../api'
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import FoodItem from './FoodItem.js'
 import FoodItemForm from './FoodItemForm.js'
 import axios from 'axios'
-// import { getPantryData } from '../api'
+
 
 
 export default function Pantry() {
-    // 1. pantry component needs CRUD capabilities 
-    // 2. hardcode ingredients into checkable boxes
-    // 3. make checkboxes (ingredients) capped 2-3 (test w/ api to determine what works and what makes the api render null)
-    // 4. make a 'Start Plan' button that onClick takes values of checkboxes and sends those ingredients to API useEffect call in RecipeResults.js
-    // 5. we're going to need a function that handles the separation of ingredients in the API link (they're separated by commas)
-
-
     const [foodList, setFoodList] = useState([])
-    
-    
-    
-    
-
     const [searchResults, setSearchResults] = useState([])
     const [selectedIngredients, setSelectedIngredients] = useState([])
     
 
-
-
-
-    // get request to set foodList 
     useEffect(() => {
         axios
             .get('http://recipeezy-app.herokuapp.com/ingredients/', {
@@ -43,33 +26,6 @@ export default function Pantry() {
     }, [])
 
 
-
-
-
-
-    // post request to add an ingredient to the Pantry
-    // const handleSubmit = (e) => {
-    //     e.preventDefault()
-    //     axios
-    //         .post(
-    //             'http://recipeezy-app.herokuapp.com/ingredients/',
-    //             {
-    //                 name: name
-    //             },
-    //             {
-    //                 headers: { Authorization: `Token ${token}` },
-    //             },
-    //         )
-    //         .then((data) => {
-    //             // useEffect()
-    //             setFoodList([...foodList, data.data])
-    //         })
-    // }
-
-    // const handleSearch = () => {
-    //     console.log("STATE INGREDIENTS", selectedIngredients)
-
-    // }
     const addFoodItem = (newItem) => {
         setFoodList([...foodList, newItem])
     }
@@ -98,27 +54,6 @@ export default function Pantry() {
 
 
     }
-
-    // const handleChange = (e) => {
-    //     if (!selectedIngredients.includes(e.target.value)) {
-    //         console.log(e.target.value)
-    //         setSelectedIngredients([e.target.value, ...selectedIngredients])
-    //     } else if (selectedIngredients.includes(e.target.value)) {
-    //         let n = selectedIngredients
-    //         for (let i = 0; i < n.length; i++) {
-    //             if (n[i] === e.target.value) {
-    //                 n.pop(i)
-
-    //             }
-    //         }
-    //         n.sort()
-    //         setSelectedIngredients(n)
-    //     }
-
-    // }
-
-
-
     return (
         <div className='pantry-wrapper'>
             <h1>Pantry</h1>
@@ -129,7 +64,6 @@ export default function Pantry() {
             ))}
                 
             <FoodItemForm addFoodItem={addFoodItem} />
-      
             <button className='search-ingredients' onClick={handleChange2}>Search</button>
 
             <div>
@@ -149,3 +83,20 @@ export default function Pantry() {
     )
 }
 
+ // const handleChange = (e) => {
+    //     if (!selectedIngredients.includes(e.target.value)) {
+    //         console.log(e.target.value)
+    //         setSelectedIngredients([e.target.value, ...selectedIngredients])
+    //     } else if (selectedIngredients.includes(e.target.value)) {
+    //         let n = selectedIngredients
+    //         for (let i = 0; i < n.length; i++) {
+    //             if (n[i] === e.target.value) {
+    //                 n.pop(i)
+
+    //             }
+    //         }
+    //         n.sort()
+    //         setSelectedIngredients(n)
+    //     }
+
+    // }
