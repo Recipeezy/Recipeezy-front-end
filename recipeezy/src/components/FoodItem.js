@@ -25,7 +25,6 @@ export default function FoodItem ({food}) {
     }
     const deleteIngredient = (event) => {
         event.preventDefault();
-        // document.querySelector('#ingredient-name').value = ""
         axios.delete(`http://recipeezy-app.herokuapp.com/ingredients/${food.id}`,
                 {
                     headers: { Authorization: `Token ${token}` },
@@ -34,11 +33,7 @@ export default function FoodItem ({food}) {
             .then((response) => {
                 console.log('deleted', response)
                 setIsDeleted(true)
-                // // if (response.data != null) {
-                // //     event.target.parentElement.remove()
-                //     // setDeleted(true)
-                // }
-
+                
             },
             )
     }
