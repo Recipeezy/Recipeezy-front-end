@@ -9,9 +9,29 @@ import {
 } from "react-router-dom";
 import RecipeResults from './components/RecipeResults'
 import Pantry from './components/Pantry'
+import useLocalStorageState from 'use-local-storage-state'
+import Login from './components/Login';
+import Registration from './components/Registration';
+
 // import './App.css';
 
 function App() {
+  const [username, setUsername] = useLocalStorageState('username', '')
+  const [token, setToken] = useLocalStorageState('token', '')
+
+  function setAuth(username, token) {
+    setUsername(username)
+    setToken(token)
+  }
+
+  function logOut() {
+    setUsername(null)
+    setToken(null)
+  }
+
+  const isLoggedIn = username && token 
+
+
   return (
     <Router>
       <div>
@@ -31,7 +51,12 @@ function App() {
           <Route path='/pantry'>
             <Pantry />
           </Route>
-
+          <Route path='/login'>
+              <Login setAuth={setAuth} isLoggedIn={isLoggedIn} token={token} />
+              </Route>
+          <Route path='/registration'>
+            <Registration setAuth={setAuth} isLoggedIn={isLoggedIn} />
+            </Route>
 
 
 
