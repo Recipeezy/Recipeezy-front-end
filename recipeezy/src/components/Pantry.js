@@ -104,61 +104,28 @@ export default function Pantry() {
 
     }
 
-    // const handleSearch = () => {
-    //     console.log("STATE INGREDIENTS", selectedIngredients)
-
-    // }
-
-    const handleChange2 = (e) => {
-        var checkboxItems = document.querySelectorAll('.checkboxes')
-        let n = []
-        for (let c of checkboxItems) {
-            if (c.checked) {
-                n.push(c.value)
-            }
+    const checkBoxClick = (e) => {
+        if (!selectedIngredients.includes(e.target.value)) {
+            setSelectedIngredients([...selectedIngredients, e.target.value])
+        } else {
+            let n = [...selectedIngredients]
+            n.splice(n.indexOf(e.target.value), 1)
+            setSelectedIngredients(n)
         }
-        if (n.length > 4) {
-            n.length = 4
-        }
-        n.sort()
-        setSelectedIngredients(n)
-        console.log(selectedIngredients)
+
+    }
 
 
-
-
-
-
-        // document.querySelector('.ings').textContent = selectedIngredients
+    const handleSearch = () => {
 
         axios.get(`https://www.themealdb.com/api/json/v2/9973533/filter.php?i=${selectedIngredients.join()}`).then((response) => {
-            setSearchResults((response.data.meals.length > 10) ? response.data.meals.slice(0, 10) : response.data.meals)
+            setSearchResults((response.data.meals && response.data.meals.length > 10) ? response.data.meals.slice(0, 10) : response.data.meals)
 
             console.log('SEARCH', searchResults)
 
         })
 
-
     }
-
-    // const handleChange = (e) => {
-    //     if (!selectedIngredients.includes(e.target.value)) {
-    //         console.log(e.target.value)
-    //         setSelectedIngredients([e.target.value, ...selectedIngredients])
-    //     } else if (selectedIngredients.includes(e.target.value)) {
-    //         let n = selectedIngredients
-    //         for (let i = 0; i < n.length; i++) {
-    //             if (n[i] === e.target.value) {
-    //                 n.pop(i)
-
-    //             }
-    //         }
-    //         n.sort()
-    //         setSelectedIngredients(n)
-    //     }
-
-    // }
-
 
 
     return (
@@ -170,7 +137,7 @@ export default function Pantry() {
             {/* post request happening every time form is submitted because of above */}
             {foodList.map((food) => (
                 <li key={food.id}>
-                    <input className="checkboxes" type='checkbox' id={food.item} value={food.name}></input>
+                    <input onChange={checkBoxClick} className="checkboxes" type='checkbox' id={food.item} value={food.name}></input>
                     {isEditing && selectedID === food.id ?
                         <div>
                             <input onChange={(event) => setEditedIngredient(event.target.value)}></input>
@@ -208,12 +175,12 @@ export default function Pantry() {
             </form>
 
 
-            <button className='search-ingredients' onClick={handleChange2}>Search</button>
+            <button className='search-ingredients' onClick={handleSearch}>Search</button>
 
 
             <div>
                 {selectedIngredients.length > 0 && (
-                    <h1>Showing results for {selectedIngredients.join()}</h1>
+                    <h1>Results:</h1>
                 )}
                 {searchResults ? (
 
