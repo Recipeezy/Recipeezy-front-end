@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { pantryData } from '../api'
 import { Link, useParams } from 'react-router-dom'
+import FoodItem from './FoodItem.js'
+import FoodItemForm from './FoodItemForm.js'
 import axios from 'axios'
 // import { getPantryData } from '../api'
 
@@ -14,17 +16,14 @@ export default function Pantry() {
 
 
     const [foodList, setFoodList] = useState([])
-    const [name, setName] = useState('')
-    const [isEditing, setIsEditing] = useState(false)
-    const [selectedID, setSelectedID] = useState(null)
 
-    const [editedIngredient, setEditedIngredient] = useState('')
+
 
 
 
     const [searchResults, setSearchResults] = useState([])
     const [selectedIngredients, setSelectedIngredients] = useState([])
-    const token = '9600235d3622575ff38d185b19a319d8c288a59b'
+
 
 
 
@@ -49,71 +48,30 @@ export default function Pantry() {
 
 
     // post request to add an ingredient to the Pantry
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        axios
-            .post(
-                'http://recipeezy-app.herokuapp.com/ingredients/',
-                {
-                    name: name
-                },
-                {
-                    headers: { Authorization: `Token ${token}` },
-                },
-            )
-            .then((data) => {
-                // useEffect()
-                setFoodList([...foodList, data.data])
-            })
+    // const handleSubmit = (e) => {
+    //     e.preventDefault()
+    //     axios
+    //         .post(
+    //             'http://recipeezy-app.herokuapp.com/ingredients/',
+    //             {
+    //                 name: name
+    //             },
+    //             {
+    //                 headers: { Authorization: `Token ${token}` },
+    //             },
+    //         )
+    //         .then((data) => {
+    //             // useEffect()
+    //             setFoodList([...foodList, data.data])
+    //         })
+    // }
+
+
+    // }
+    const addFoodItem = (newItem) => {
+        setFoodList([...foodList, newItem])
     }
 
-    // delete request to delete ingredient from Pantry
-    const deleteIngredient = (id, event) => {
-        document.querySelector('#ingredient-name').value = ""
-        axios
-            .delete(`http://recipeezy-app.herokuapp.com/ingredients/${id}`,
-                {
-                    headers: { Authorization: `Token ${token}` },
-                }
-            )
-            .then((response) => {
-                console.log('deleted', response)
-                if (response.data != null) {
-                    event.target.parentElement.remove()
-                    // setDeleted(true)
-                }
-            },
-            )
-    }
-
-    const editIngredient = (id, event) => {
-        event.preventDefault()
-        axios
-
-            .put(
-                `http://recipeezy-app.herokuapp.com/ingredients/${id}`,
-                {
-                    name: editedIngredient
-                },
-                {
-                    headers: { Authorization: `Token ${token}` },
-                },
-            )
-            .then(setIsEditing(false))
-
-
-    }
-
-    const checkBoxClick = (e) => {
-        if (!selectedIngredients.includes(e.target.value)) {
-            setSelectedIngredients([...selectedIngredients, e.target.value])
-        } else {
-            let n = [...selectedIngredients]
-            n.splice(n.indexOf(e.target.value), 1)
-            setSelectedIngredients(n)
-        }
-
-    }
 
 
     const handleSearch = () => {
@@ -133,50 +91,13 @@ export default function Pantry() {
             <h1>Pantry</h1>
             <Link to='/' type='button'>home</Link>
 
-
-            {/* post request happening every time form is submitted because of above */}
             {foodList.map((food) => (
-                <li key={food.id}>
-                    <input onChange={checkBoxClick} className="checkboxes" type='checkbox' id={food.item} value={food.name}></input>
-                    {isEditing && selectedID === food.id ?
-                        <div>
-                            <input onChange={(event) => setEditedIngredient(event.target.value)}></input>
-                            <button onClick={(event) => editIngredient(food.id, event)}
-                                value={food.id}>Submit Edit</button>
-                        </div>
-                        : <label htmlFor={food.name}>{food.name}</label>}
+                <FoodItem food={food} key={food.id} />
+            ))}
 
-                    <button onClick={(event) => deleteIngredient(food.id, event)}>Delete Item</button>
-                    <button onClick={() => setIsEditing(true)} value={food.id}>Edit Item</button>
-
-                </li>
-            )
-            )}
-
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor='ingredient-name'></label>
-                    <input
-                        id='ingredient-name'
-                        type='text'
-                        placeholder='Add Ingredient'
-                        onChange={(event) => setName(event.target.value)}
-                    ></input>
-
-                </div>
-                <div className='btn'>
-
-                    <button
-                        className='submit-btn'
-                        type="submit"
-                    >Add</button>
-                </div>
-
-            </form>
-
+            <FoodItemForm addFoodItem={addFoodItem} />
 
             <button className='search-ingredients' onClick={handleSearch}>Search</button>
-
 
             <div>
                 {selectedIngredients.length > 0 && (
