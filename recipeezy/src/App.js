@@ -43,13 +43,13 @@ function App() {
       <div>
         <Switch>
           <Route path='/reciperesults'>
-            <RecipeResults />
+            <RecipeResults isLoggedIn={isLoggedIn} token={token}/>
           </Route>
           <Route exact path='/'>
             <Home />
           </Route>
           <Route path='/pantry'>
-            <Pantry />
+            <Pantry isLoggedIn={isLoggedIn} token={token}/>
           </Route>
           <Route path='/login'>
               <Login setAuth={setAuth} isLoggedIn={isLoggedIn} token={token} />
