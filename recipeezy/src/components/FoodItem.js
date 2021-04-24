@@ -33,12 +33,24 @@ export default function FoodItem({ food, setSelectedIngredients, selectedIngredi
             .then((response) => {
                 console.log('deleted', response)
                 setIsDeleted(true)
-                
+
             },
             )
     }
 
     const checkBoxClick = (e) => {
+        let checkedTotal = 0
+        let checkboxes = document.querySelectorAll('.checkboxes')
+        for (let c of checkboxes) {
+            if (c.checked === true) {
+                checkedTotal++
+            }
+        }
+        if (checkedTotal > 4) {
+            alert('only 4 at a time')
+            e.target.checked = false
+        }
+
         if (!selectedIngredients.includes(e.target.value)) {
             setSelectedIngredients([...selectedIngredients, e.target.value])
         } else {
@@ -53,7 +65,7 @@ export default function FoodItem({ food, setSelectedIngredients, selectedIngredi
 
     return (
         <li>
-            <input onChange={checkBoxClick} type='checkbox' id={food.item} value={food.name}></input>
+            <input onChange={checkBoxClick} type='checkbox' id={food.item} className="checkboxes" value={food.name}></input>
             {isEditing ?
                 <div>
                     <input onChange={(event) => setName(event.target.value)} value={name}></input>
