@@ -99,6 +99,7 @@ export default function Pantry() {
                         <>
                             <img src={result.strMealThumb}></img>
                             <h1>{result.strMeal}</h1>
+                            <p>{result.idMeal}</p>
                         </>
                     ))
 

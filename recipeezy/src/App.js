@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import RecipeResults from './components/RecipeResults'
 import Pantry from './components/Pantry'
+import ShoppingList from './components/ShoppingList'
 // import './App.css';
 
 function App() {
@@ -31,6 +32,9 @@ function App() {
           <Route path='/pantry'>
             <Pantry />
           </Route>
+          <Route path="/shoppinglist">
+            <ShoppingList />
+          </Route>
 
 
 
@@ -47,7 +51,7 @@ function App() {
 
 
 
-      </Router>
+    </Router>
   );
 }
 
