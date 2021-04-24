@@ -68,11 +68,11 @@ export default function FoodItem({ food, setSelectedIngredients, selectedIngredi
             <input onChange={checkBoxClick} type='checkbox' id={food.name} className="checkboxes" value={food.name}></input>
             {isEditing ?
                 <div>
-                    <input onChange={(event) => setName(event.target.value)} value={food.name}></input>
+                    <input onChange={(event) => setName(event.target.value)} value={name}></input>
                     <button onClick={(event) => updateFoodItem(event)}
                         value={food.id}>Submit Edit</button>
                 </div>
-                : <label htmlFor={food.name}>{food.name}</label>}
+                : <label htmlFor={name}>{name}</label>}
 
             <button onClick={(event) => deleteIngredient(event)}>Delete Item</button>
             <button onClick={() => setIsEditing(true)}>Edit Item</button>
