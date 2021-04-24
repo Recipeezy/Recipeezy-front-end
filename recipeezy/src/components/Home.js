@@ -7,7 +7,7 @@ import Icons from '@material-ui/icons'
 import Menu from '@material-ui/core/Menu'
 import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography'
-import IconButton  from '@material-ui/core/IconButton';
+import IconButton from '@material-ui/core/IconButton';
 
 export default function Home() {
     // const [anchorEl, setAnchorEl] = useState(null)
@@ -33,10 +33,12 @@ export default function Home() {
             <h1>Welcome Home</h1>
 
             <Link to="/reciperesults" type='button'>Random 10 Recipes</Link>
-            <br/>
+            <br />
             <Link to="/pantry" type='button'>View pantry</Link>
-            <br/>
+            <br />
             <Link to='/selectedrecipes' type='button'>Selected Recipes</Link>
+            <br />
+            <Link to="/shoppinglist" type="button">Shopping List</Link>
         </div>
     )
 }
