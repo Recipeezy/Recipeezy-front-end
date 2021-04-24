@@ -8,7 +8,7 @@ export default function FoodItemForm ({addFoodItem, token}) {
         e.preventDefault()
         axios
             .post(
-                'http://recipeezy-app.herokuapp.com/ingredients/',
+                'http://recipeezy-app.herokuapp.com/pantry/add/',
                 {
                     name: name
                 },
@@ -22,7 +22,7 @@ export default function FoodItemForm ({addFoodItem, token}) {
             })
     }
 
-    
+
     return(
         <form onSubmit={handleSubmit}>
                 <div>
