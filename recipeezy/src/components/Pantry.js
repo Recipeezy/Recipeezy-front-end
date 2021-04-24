@@ -8,9 +8,14 @@ import axios from 'axios'
 
 export default function Pantry() {
     const [foodList, setFoodList] = useState([])
+
+
+
+
+
     const [searchResults, setSearchResults] = useState([])
     const [selectedIngredients, setSelectedIngredients] = useState([])
-    
+
 
     useEffect(() => {
         axios
@@ -26,50 +31,71 @@ export default function Pantry() {
     }, [])
 
 
+
+
+
+
+    // post request to add an ingredient to the Pantry
+    // const handleSubmit = (e) => {
+    //     e.preventDefault()
+    //     axios
+    //         .post(
+    //             'http://recipeezy-app.herokuapp.com/ingredients/',
+    //             {
+    //                 name: name
+    //             },
+    //             {
+    //                 headers: { Authorization: `Token ${token}` },
+    //             },
+    //         )
+    //         .then((data) => {
+    //             // useEffect()
+    //             setFoodList([...foodList, data.data])
+    //         })
+    // }
+
+
+    // }
     const addFoodItem = (newItem) => {
         setFoodList([...foodList, newItem])
     }
 
-    const handleChange2 = (e) => {
-        var checkboxItems = document.querySelectorAll('.checkboxes')
-        let n = []
-        for (let c of checkboxItems) {
-            if (c.checked) {
-                n.push(c.value)
-            }
-
-        }
-        n.sort()
-        n.length = 4
-        setSelectedIngredients(n)
 
 
-        // document.querySelector('.ings').textContent = selectedIngredients
+    const handleSearch = () => {
 
-        axios.get(`https://www.themealdb.com/api/json/v2/9973533/filter.php?i=${selectedIngredients[0]},${selectedIngredients[1]}`).then((response) => {
-            setSearchResults(response.data)
+
+
+        axios.get(`https://www.themealdb.com/api/json/v2/9973533/filter.php?i=${selectedIngredients.join()}`).then((response) => {
+            setSearchResults((response.data.meals && response.data.meals.length > 10) ? response.data.meals.slice(0, 10) : response.data.meals)
+
             console.log('SEARCH', searchResults)
 
         })
 
-
     }
+
+
     return (
         <div className='pantry-wrapper'>
             <h1>Pantry</h1>
             <Link to='/' type='button'>home</Link>
 
             {foodList.map((food) => (
-                <FoodItem food={food} key={food.id}/>
+                <FoodItem food={food} key={food.id} selectedIngredients={selectedIngredients} setSelectedIngredients={setSelectedIngredients} />
             ))}
-                
+
             <FoodItemForm addFoodItem={addFoodItem} />
-            <button className='search-ingredients' onClick={handleChange2}>Search</button>
+
+            <button className='search-ingredients' onClick={handleSearch}>Search</button>
 
             <div>
-                {searchResults.meals ? (
+                {selectedIngredients.length > 0 && (
+                    <h1>Results:</h1>
+                )}
+                {searchResults ? (
 
-                    searchResults.meals.map((result) => (
+                    searchResults.map((result) => (
                         <>
                             <img src={result.strMealThumb}></img>
                             <h1>{result.strMeal}</h1>
@@ -82,21 +108,3 @@ export default function Pantry() {
         </div>
     )
 }
-
- // const handleChange = (e) => {
-    //     if (!selectedIngredients.includes(e.target.value)) {
-    //         console.log(e.target.value)
-    //         setSelectedIngredients([e.target.value, ...selectedIngredients])
-    //     } else if (selectedIngredients.includes(e.target.value)) {
-    //         let n = selectedIngredients
-    //         for (let i = 0; i < n.length; i++) {
-    //             if (n[i] === e.target.value) {
-    //                 n.pop(i)
-
-    //             }
-    //         }
-    //         n.sort()
-    //         setSelectedIngredients(n)
-    //     }
-
-    // }
