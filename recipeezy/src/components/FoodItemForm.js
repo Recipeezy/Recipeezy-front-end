@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
-export default function FoodItemForm ({addFoodItem}) {
-    const token = '9600235d3622575ff38d185b19a319d8c288a59b'
+export default function FoodItemForm ({addFoodItem, token}) {
     const [name, setName] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault()
         axios
             .post(
-                'http://recipeezy-app.herokuapp.com/ingredients/',
+                'http://recipeezy-app.herokuapp.com/pantry/add/',
                 {
                     name: name
                 },
@@ -22,6 +21,8 @@ export default function FoodItemForm ({addFoodItem}) {
                 addFoodItem(data.data)
             })
     }
+
+
     return(
         <form onSubmit={handleSubmit}>
                 <div>

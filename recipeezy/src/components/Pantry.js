@@ -6,26 +6,24 @@ import axios from 'axios'
 
 
 
-export default function Pantry() {
+export default function Pantry({token}) {
     const [foodList, setFoodList] = useState([])
-
-
-
-
-
     const [searchResults, setSearchResults] = useState([])
     const [selectedIngredients, setSelectedIngredients] = useState([])
 
 
-    useEffect(() => {
-        axios
-            .get('http://recipeezy-app.herokuapp.com/ingredients/', {
-                headers: {
 
+    useEffect(() => {
+        console.log('token is ', token)
+        axios
+            .get('http://recipeezy-app.herokuapp.com/pantry/', {
+                headers: {
+                    Authorization: `Token ${token}` 
                 },
             })
             .then((data) => {
-                setFoodList(data.data)
+                console.log('data.data is ', data.data)
+                setFoodList(data.data[0].ingredients_list)
                 console.log('foodList', foodList)
             })
     }, [])
@@ -81,31 +79,38 @@ export default function Pantry() {
             <h1>Pantry</h1>
             <Link to='/' type='button'>home</Link>
 
-            {foodList.map((food) => (
-                <FoodItem food={food} key={food.id} selectedIngredients={selectedIngredients} setSelectedIngredients={setSelectedIngredients} />
-            ))}
+            {foodList ? (
+            
+                <div>
+                {foodList.map((food) => (
+                    <FoodItem food={food} key={food.id} selectedIngredients={selectedIngredients} setSelectedIngredients={setSelectedIngredients} token={token} />
+                ))}
 
-            <FoodItemForm addFoodItem={addFoodItem} />
+                <FoodItemForm addFoodItem={addFoodItem} token={token} />
 
-            <button className='search-ingredients' onClick={handleSearch}>Search</button>
+                <button className='search-ingredients' onClick={handleSearch}>Search</button>
 
-            <div>
-                {selectedIngredients.length > 0 && (
-                    <h1>Results:</h1>
-                )}
-                {searchResults ? (
+                <div>
+                    {selectedIngredients.length > 0 && (
+                        <h1>Results:</h1>
+                    )}
+                    {searchResults ? (
 
-                    searchResults.map((result) => (
-                        <>
-                            <img src={result.strMealThumb}></img>
-                            <h1>{result.strMeal}</h1>
-                            <p>{result.idMeal}</p>
-                        </>
-                    ))
+                        searchResults.map((result) => (
+                            <>
+                                <img src={result.strMealThumb}></img>
+                                <h1>{result.strMeal}</h1>
+                                <p>{result.idMeal}</p>
+                            </>
+                        ))
 
-                ) : (<h1>No results</h1>)}
+                    ) : (<h1>No results</h1>)}
 
+                </div>
             </div>
+            ) : (
+                <p>Loading...</p>
+            )}
         </div>
     )
 }
