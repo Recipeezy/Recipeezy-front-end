@@ -9,7 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography'
 import IconButton  from '@material-ui/core/IconButton';
 
-export default function Home() {
+export default function Home({ isLoggedIn, logOut, }) {
     // const [anchorEl, setAnchorEl] = useState(null)
 
     // const handleClick = (event) => {
@@ -31,7 +31,18 @@ export default function Home() {
             </div>
 
             <h1>Welcome Home</h1>
-
+            {isLoggedIn ? (
+                <>
+                <Link to="/" onClick={logOut} type="button">Log Out</Link>
+                </>  
+            ) : (
+                <>
+                    <Link to="/registration" type="button">Register</Link>
+                    <br/>
+                    <Link to="/login" type="button">Log In</Link>
+                </>
+            )}
+            <br/>
             <Link to="/reciperesults" type='button'>Random 10 Recipes</Link>
             <br/>
             <Link to="/pantry" type='button'>View pantry</Link>

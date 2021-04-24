@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
-export default function FoodItemForm ({addFoodItem}) {
-    const token = '9600235d3622575ff38d185b19a319d8c288a59b'
+export default function FoodItemForm ({addFoodItem, token}) {
+    // const token = '9600235d3622575ff38d185b19a319d8c288a59b'
     const [name, setName] = useState('')
 
     const handleSubmit = (e) => {

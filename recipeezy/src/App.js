@@ -9,9 +9,26 @@ import {
 } from "react-router-dom";
 import RecipeResults from './components/RecipeResults'
 import Pantry from './components/Pantry'
-// import './App.css';
+import useLocalStorageState from 'use-local-storage-state'
+import Login from './components/Login';
+import Registration from './components/Registration';
 
 function App() {
+  const [username, setUsername] = useLocalStorageState('username', '')
+  const [token, setToken] = useLocalStorageState('token', '')
+
+  function setAuth(username, token) {
+    setUsername(username)
+    setToken(token)
+  }
+
+  function logOut() {
+    setUsername(null)
+    setToken(null)
+    alert('You have been logged out')
+  }
+
+  const isLoggedIn = username && token
   return (
     <Router>
       <div>
@@ -23,15 +40,20 @@ function App() {
       <div>
         <Switch>
           <Route path='/reciperesults'>
-            <RecipeResults />
+            <RecipeResults isLoggedIn={isLoggedIn} token={token}/>
           </Route>
           <Route exact path='/'>
-            <Home />
+            <Home isLoggedIn={isLoggedIn} token={token} logOut={logOut} />
           </Route>
           <Route path='/pantry'>
-            <Pantry />
+            <Pantry isLoggedIn={isLoggedIn} token={token}/>
           </Route>
-
+          <Route path='/login'>
+              <Login setAuth={setAuth} isLoggedIn={isLoggedIn} token={token} />
+              </Route>
+          <Route path='/registration'>
+            <Registration setAuth={setAuth} isLoggedIn={isLoggedIn} />
+            </Route>
 
 
 
