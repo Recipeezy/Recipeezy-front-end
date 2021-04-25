@@ -15,7 +15,8 @@ function ShoppingList() {
         })
             .then((data) => {
                 setShopList(data.data[0])
-                console.log(data.data[0])
+                console.log(data.data)
+                
                 
                 
 
@@ -33,6 +34,7 @@ function ShoppingList() {
                 {shopList ? (
                     <div>
                     {shopList.map((shopListItem) =>
+                        
                     <li>
                         <input 
                             type='checkbox' 
