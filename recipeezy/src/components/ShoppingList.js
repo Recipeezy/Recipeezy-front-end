@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import FoodItem from './FoodItem.js'
 
 function ShoppingList() {
     const [shopList, setShopList] = useState([])
@@ -14,8 +15,8 @@ function ShoppingList() {
             headers: { 'Authorization': `Token ${token}` }, 
         })
             .then((data) => {
-                setShopList(data.data[0])
-                console.log(data.data)
+                setShopList(data.data[0].shopping_list)
+                console.log(data.data[0].shopping_list)
                 
                 
                 
@@ -31,26 +32,18 @@ function ShoppingList() {
 
             <h1>SHOPPING LIST</h1>
             <div className="shopping-list-main-container">
+                
                 {shopList ? (
                     <div>
-                    {shopList.map((shopListItem) =>
-                        
-                    <li>
-                        <input 
-                            type='checkbox' 
-                            id={shopListItem.id} className="checkboxes" 
-                            value={shopListItem.name}>
-
-                        </input>
-                    </li>
-                    )
+                    {shopList.map((food) => (
+                        <FoodItem 
+                            food={food}
+                            key={food.id}
+                        />
+                    
+                    ))
                     }
 
-                    {/* {shopList && (
-                        shopList.map((e) => (
-                            <h1>{e}</h1>
-                        ))
-                    )} */}
                     </div>
                     ) : (
                         <p>Loading...</p>
