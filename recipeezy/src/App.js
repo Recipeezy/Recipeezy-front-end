@@ -9,10 +9,14 @@ import {
 } from "react-router-dom";
 import RecipeResults from './components/RecipeResults'
 import Pantry from './components/Pantry'
+<<<<<<< HEAD
 import ShoppingList from './components/ShoppingList'
 import useLocalStorageState from 'use-local-storage-state'
 import Login from './components/Login';
 import Registration from './components/Registration';
+=======
+import SearchResults from './components/SearchResults'
+>>>>>>> fixingsearch
 // import './App.css';
 
 function App() {
@@ -60,6 +64,9 @@ function App() {
 
           <Route path="/shoppinglist">
             <ShoppingList />
+          </Route>
+          <Route path='/searchresults'>
+            <SearchResults />
           </Route>
 
 

@@ -44,9 +44,9 @@ export default function Home({ isLoggedIn, logOut }) {
             )}
             <br/>
             <Link to="/reciperesults" type='button'>Random 10 Recipes</Link>
-            <br/>
+            <br />
             <Link to="/pantry" type='button'>View pantry</Link>
-            <br/>
+            <br />
             <Link to='/selectedrecipes' type='button'>Selected Recipes</Link>
             <br />
             <Link to="/shoppinglist" type="button">Shopping List</Link>
