@@ -3,6 +3,25 @@ import axios from 'axios'
 
 export default function ShopListItem ({food, token}) {
     const [isDeleted, setIsDeleted] = useState(false)
+    const [isEditing, setIsEditing] = useState(false)
+    const [name, setName] = useState(food.name)
+
+    const updateShopListItem = (event) => {
+
+        event.preventDefault()
+        axios.put(
+            `http://recipeezy-app.herokuapp.com/ingredients/${food.id}/`,
+            {
+                name: name
+            },
+            {
+                headers: { Authorization: `Token ${token}` },
+            },
+        )
+            .then(setIsEditing(false))
+
+
+    }
 
     const deleteShopListItem = (event) => {
         event.preventDefault();
@@ -31,12 +50,17 @@ export default function ShopListItem ({food, token}) {
                 
                 >
             </input>
-            <label 
-                htmlFor={food.name}>{food.name}
-            </label>
+            {isEditing ?
+                <div>
+                    <input onChange={(event) => setName(event.target.value)} value={name}></input>
+                    <button onClick={(event) => updateShopListItem(event)}
+                        value={food.id}>Submit Edit</button>
+                </div>
+                : <label htmlFor={name}>{name}</label>}
             <button 
                 onClick={(event) => deleteShopListItem(event)}>Delete Item
             </button>
+            <button onClick={() => setIsEditing(true)}>Edit Item</button>
         </li>
     )
 }
