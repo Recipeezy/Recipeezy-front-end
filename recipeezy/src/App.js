@@ -59,7 +59,8 @@ function App() {
             </Route>
 
           <Route path="/shoppinglist">
-            <ShoppingList />
+            <ShoppingList setAuth={setAuth}
+            isLoggedIn={isLoggedIn} token={token}/>
           </Route>
 
 

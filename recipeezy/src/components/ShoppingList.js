@@ -3,12 +3,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ShopListItem from './ShopListItem.js'
 
-function ShoppingList() {
+function ShoppingList({token}) {
     const [shopList, setShopList] = useState([])
 
-
-    // Hardcoded token for now
-    const token = '9600235d3622575ff38d185b19a319d8c288a59b'
 
     useEffect(() => {
         axios.get('https://recipeezy-app.herokuapp.com/shopping_list/', { 
@@ -39,6 +36,7 @@ function ShoppingList() {
                         <ShopListItem 
                             food={food}
                             key={food.id}
+                            token={token}
                         />
                     
                     ))
