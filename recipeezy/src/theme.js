@@ -30,11 +30,11 @@ const theme = createMuiTheme({
                 marginTop:"10px"
             }
         },
-        MuiSvgIcon: {
-            root:{
-                marginRight:"10px"
-            }
-        },
+        // // MuiSvgIcon: {
+        // //     root:{
+        // //         marginRight:"10px"
+        // //     }
+        // },
         MuiCard: {
             root:{
                 maxWidth:'300px'
