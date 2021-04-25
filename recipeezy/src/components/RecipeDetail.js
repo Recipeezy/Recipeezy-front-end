@@ -1,18 +1,32 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Typography, IconButton, Button } from '@material-ui/core'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { Paper } from '@material-ui/core';
 
 export default function RecipeDetail({selectedRecipe, handleGoBack}) {
     console.log('selected recipe ', selectedRecipe)
     return (
         <div>
-            <button
-            onClick={handleGoBack}
-            >Go back</button>
-            <h1>{selectedRecipe.strMeal}</h1>
-            <img alt="recipe-pic" src={selectedRecipe.strMealThumb} />
-            <p>Origin: {selectedRecipe.strArea}</p>
-            <p>Category: {selectedRecipe.strCategory}</p>
-            <div>
+            <IconButton>
+                <ArrowBackIcon
+                gutterBottom
+                onClick={handleGoBack}
+                >Go back</ArrowBackIcon>
+            </IconButton>
+            <Typography gutterBottom variant='h4' align='center'>
+                {selectedRecipe.strMeal}
+            </Typography>
+            <Paper align='center' maxWidth={300}>
+                <img align='center' alt="recipe-pic" src={selectedRecipe.strMealThumb} />
+            </Paper>
+            <Typography
+            variant='subtitle1'
+            align="center"
+            >Origin: {selectedRecipe.strArea}</Typography>
+            <Typography align='center' variant='subtitle1'>Category: {selectedRecipe.strCategory}</Typography>
+            <Typography gutterBottom align='center' variant='subtitle1'>Youtube tutorial: <a href={selectedRecipe.strYoutube}>{selectedRecipe.strYoutube}</a></Typography>
+            <Paper elevation={3} align='center'>
                 <ul className='ingredient-list'>
                     <li>{selectedRecipe.strIngredient1}</li>
                     <li>{selectedRecipe.strIngredient2}</li>
@@ -35,9 +49,10 @@ export default function RecipeDetail({selectedRecipe, handleGoBack}) {
                     <li>{selectedRecipe.strIngredient19}</li>
                     <li>{selectedRecipe.strIngredient20}</li>
                 </ul>
-            </div>
-            <p>Youtube tutorial: <a href={selectedRecipe.strYoutube}>{selectedRecipe.strYoutube}</a></p>
-            <p> Instructions: {selectedRecipe.strInstructions}</p>
+            </Paper>
+            <Paper elevation={3}>
+                <Typography variant='body1'> Instructions: {selectedRecipe.strInstructions}</Typography>
+            </Paper>
         </div>
     )
 }
