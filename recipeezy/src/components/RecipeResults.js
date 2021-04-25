@@ -2,6 +2,31 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import RecipeDetail from './RecipeDetail'
 import { Link } from 'react-router-dom'
+import { StylesProvider, ThemeProvider, createMuiTheme } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
+import { Card } from '@material-ui/core'
+import { CardMedia } from '@material-ui/core'
+import { Button } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import { ButtonBase } from '@material-ui/core'
+import theme from '../theme'
+
+const useStyles = makeStyles({
+  buttonRoot: {
+      marginTop: '30px',
+      color: '#333',
+  }
+  })
+
+  function ButtonStyled() {
+    const classes = useStyles();
+    return <Button
+    color="primary"
+    size="small"
+    className={classes.buttonRoot}>See More +</Button>
+    }
+
 
 
 export default function RecipeResults() {
@@ -24,43 +49,56 @@ export default function RecipeResults() {
     console.log('recipes is ', recipes)
 
     return (
-      <div>
-        <h1>Recipeezy</h1>
-        <Link to='/' type='button'>home</Link>
-          <div className='recipe-list'>
-          <>
-            {recipes.meals ? (
-              <div>
-                {selectedRecipe ? (
-                    <RecipeDetail
-                      selectedRecipe={selectedRecipe}
-                      handleGoBack={() => setSelectedRecipe(null)}
-                    />
-                    ) : (
-                    <ul>
-                    {recipes.meals.map((recipe) => (
-                      <li key={recipe.idMeal}>
-                        <div className="recipe-card">
-                          <img alt="recipe-pic" src={recipe.strMealThumb} />
-                          <h4>{recipe.strMeal}</h4>
-                          <p>Category: {recipe.strCategory}</p>
-                          <p>Origin: {recipe.strArea}</p>
-                          <button
-                          onClick={() => setSelectedRecipe(recipe)}
-                          >
-                            See more
-                          </button>
-                        </div>
-                      </li>
-                    ))}
-                    </ul>
-                )}
-              </div>
-              ) : (
-                <p>Loading...</p>
-            )}
-          </>
-          </div>
-      </div>
+      <ThemeProvider theme={theme}>
+        <div>
+          <Typography align='center' variant='h3'color='secondary' gutterBottom>
+            Recipe Results
+          </Typography>
+            <div className='recipe-list'>
+            <>
+              {recipes.meals ? (
+                <div>
+                  {selectedRecipe ? (
+                      <RecipeDetail
+                        selectedRecipe={selectedRecipe}
+                        handleGoBack={() => setSelectedRecipe(null)}
+                      />
+                      ) : (
+                    <Grid container justify='center' spacing={2} className='recipe-list' >
+                      {recipes.meals.map((recipe) => (
+                        <Grid item wrap="wrap" id={recipe.idMeal} maxWidth={300}>
+                          <Card height={800} maxWidth={300} className="recipe-card" elevation={3} padding={5}>
+                            <img 
+                              alt="recipe-pic" 
+                              src={recipe.strMealThumb} />
+                            <Typography gutterBottom variant='h6' align='center'>
+                              {recipe.strMeal}
+                            </Typography>
+                            <Typography variant='subtitle1' align='center'>
+                              Category: {recipe.strCategory}
+                            </Typography>
+                            <Typography gutterBottom variant='subtitle1'align='center'>
+                              Origin: {recipe.strArea}
+                            </Typography>
+                            <Button
+                            color="secondary"
+                            size="small"
+                            onClick={() => setSelectedRecipe(recipe)}
+                            >
+                              See more
+                            </Button>
+                          </Card>
+                        </Grid>
+                      ))}
+                    </Grid>
+                  )}
+                </div>
+                ) : (
+                  <p>Loading...</p>
+              )}
+            </>
+            </div>
+        </div>
+      </ThemeProvider>
     )
 }
