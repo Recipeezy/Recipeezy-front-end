@@ -81,6 +81,22 @@ function App() {
                       <Typography variant='h3'color="secondary">
                           Recipeezy
                       </Typography>
+                      {isLoggedIn ? (
+                        <>
+                        <Typography align='right'>
+                          <Link to="/" onClick={logOut} type="button">Log Out</Link>
+                        </Typography>
+                        </>  
+                        ) : (
+                        <>
+                          <Typography>
+                            <Link to="/registration" type="button">Register</Link>
+                          </Typography>
+                          <Typography>
+                            <Link to="/login" type="button">Log In</Link>
+                          </Typography>
+                        </>
+                        )}
                   </Toolbar>
               </AppBar>
 
