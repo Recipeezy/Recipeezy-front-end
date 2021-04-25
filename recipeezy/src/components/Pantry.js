@@ -67,8 +67,11 @@ export default function Pantry() {
 
 
         axios.get(`https://www.themealdb.com/api/json/v2/9973533/filter.php?i=${selectedIngredients.join()}`).then((response) => {
-            setSearchResults((response.data.meals && response.data.meals.length > 10) ? response.data.meals.slice(0, 10) : response.data.meals)
+            if (response.data.meals) {
+                setSearchResults((response.data.meals && response.data.meals.length > 10) ? response.data.meals.slice(0, 10).map((obj) => obj.idMeal) : response.data.meals.map((obj) => obj.idMeal))
 
+
+            }
             console.log('SEARCH', searchResults)
 
         })
@@ -90,21 +93,21 @@ export default function Pantry() {
             <button className='search-ingredients' onClick={handleSearch}>Search</button>
 
             <div>
-                {selectedIngredients.length > 0 && (
+                {(selectedIngredients && selectedIngredients.length > 0) && (
                     <h1>Results:</h1>
                 )}
-                {searchResults ? (
+                {searchResults && searchResults.length > 0 ? (
 
-                    searchResults.map((result) => (
-                        <>
-                            <img src={result.strMealThumb}></img>
-                            <h1>{result.strMeal}</h1>
-                        </>
-                    ))
+                    <Link to={{
+                        pathname: '/searchresults',
+                        state: {
+                            search: searchResults, item: selectedIngredients.join()
+                        }
+                    }} type='button'>Show {searchResults.length} Results</Link>
 
                 ) : (<h1>No results</h1>)}
 
             </div>
-        </div>
+        </div >
     )
 }
