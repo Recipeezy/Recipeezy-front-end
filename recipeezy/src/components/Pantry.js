@@ -6,7 +6,7 @@ import axios from 'axios'
 
 
 
-export default function Pantry({token}) {
+export default function Pantry({ token }) {
     const [foodList, setFoodList] = useState([])
     const [searchResults, setSearchResults] = useState([])
     const [selectedIngredients, setSelectedIngredients] = useState([])
@@ -18,7 +18,7 @@ export default function Pantry({token}) {
         axios
             .get('http://recipeezy-app.herokuapp.com/pantry/', {
                 headers: {
-                    Authorization: `Token ${token}` 
+                    Authorization: `Token ${token}`
                 },
             })
             .then((data) => {
@@ -33,10 +33,14 @@ export default function Pantry({token}) {
         setFoodList([...foodList, newItem])
     }
 
-    
+
     const handleSearch = () => {
         axios.get(`https://www.themealdb.com/api/json/v2/9973533/filter.php?i=${selectedIngredients.join()}`).then((response) => {
-            setSearchResults((response.data.meals && response.data.meals.length > 10) ? response.data.meals.slice(0, 10) : response.data.meals)
+            if (response.data.meals) {
+                setSearchResults((response.data.meals && response.data.meals.length > 10) ? response.data.meals.slice(0, 10).map((obj) => obj.idMeal) : response.data.meals.map((obj) => obj.idMeal))
+
+
+            }
             console.log('SEARCH', searchResults)
         })
     }
@@ -49,38 +53,31 @@ export default function Pantry({token}) {
             <h1>Pantry</h1>
             <Link to='/' type='button'>home</Link>
 
-            {foodList ? (
-            
-                <div>
-                {foodList.map((food) => (
-                    <FoodItem food={food} key={food.id} selectedIngredients={selectedIngredients} setSelectedIngredients={setSelectedIngredients} token={token} />
-                ))}
 
-                <FoodItemForm addFoodItem={addFoodItem} token={token} />
+            {foodList.map((food) => (
+                <FoodItem food={food} key={food.id} selectedIngredients={selectedIngredients} setSelectedIngredients={setSelectedIngredients} token={token} />
+            ))}
 
-                <button className='search-ingredients' onClick={handleSearch}>Search</button>
+            <FoodItemForm addFoodItem={addFoodItem} token={token} />
 
-                <div>
-                    {selectedIngredients.length > 0 && (
-                        <h1>Results:</h1>
-                    )}
-                    {searchResults ? (
+            <button className='search-ingredients' onClick={handleSearch}>Search</button>
 
-                        searchResults.map((result) => (
-                            <>
-                                <img src={result.strMealThumb}></img>
-                                <h1>{result.strMeal}</h1>
-                                <p>{result.idMeal}</p>
-                            </>
-                        ))
+            <div>
+                {(selectedIngredients && selectedIngredients.length > 0) && (
+                    <h1>Results:</h1>
+                )}
+                {searchResults && searchResults.length > 0 ? (
 
-                    ) : (<h1>No results</h1>)}
+                    <Link to={{
+                        pathname: '/searchresults',
+                        state: {
+                            search: searchResults, item: selectedIngredients.join()
+                        }
+                    }} type='button'>Show {searchResults.length} Results</Link>
 
-                </div>
+                ) : (<h1>No results</h1>)}
+
             </div>
-            ) : (
-                <p>Loading...</p>
-            )}
         </div>
     )
 }
