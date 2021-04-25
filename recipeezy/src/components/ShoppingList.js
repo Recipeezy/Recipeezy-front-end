@@ -10,14 +10,17 @@ function ShoppingList() {
     const token = '9600235d3622575ff38d185b19a319d8c288a59b'
 
     useEffect(() => {
-        axios.get('https://recipeezy-app.herokuapp.com/shopping_list/', { headers: { 'Authorization': `Token ${token}` }, })
-            .then((response) => {
-                console.log(typeof (response.data[0].shopping_list))
-                console.log(response.data[0])
-                setShopList(response.data[0].shopping_list.map((obj) => obj.name))
+        axios.get('https://recipeezy-app.herokuapp.com/shopping_list/', { 
+            headers: { 'Authorization': `Token ${token}` }, 
+        })
+            .then((data) => {
+                setShopList(data.data[0])
+                console.log(data.data[0])
+                
+                
+
             })
     }, [])
-
 
 
 
@@ -27,17 +30,49 @@ function ShoppingList() {
 
             <h1>SHOPPING LIST</h1>
             <div className="shopping-list-main-container">
+                {shopList ? (
+                    <div>
+                    {shopList.map((shopListItem) =>
+                    <li>
+                        <input 
+                            type='checkbox' 
+                            id={shopListItem.id} className="checkboxes" 
+                            value={shopListItem.name}>
 
-                {shopList && (
-                    shopList.map((e) => (
-                        <h1>{e}</h1>
-                    ))
-                )}
+                        </input>
+                    </li>
+                    )
+                    }
 
+                    {/* {shopList && (
+                        shopList.map((e) => (
+                            <h1>{e}</h1>
+                        ))
+                    )} */}
+                    </div>
+                    ) : (
+                        <p>Loading...</p>
+                    )}
             </div>
 
         </div>
+    
+
     )
 }
 
 export default ShoppingList
+
+
+// useEffect(() => {
+//     axios.get('https://recipeezy-app.herokuapp.com/shopping_list/', { 
+//         headers: { 'Authorization': `Token ${token}` }, 
+//     })
+//         .then((response) => {
+//             console.log(typeof (response.data[0].shopping_list))
+//             console.log(response.data[0])
+//             setShopList(response.data[0].shopping_list.map((obj) => obj.name))
+
+//         })
+// }, [])
+
