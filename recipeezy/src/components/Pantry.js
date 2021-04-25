@@ -29,49 +29,19 @@ export default function Pantry({token}) {
     }, [])
 
 
-
-
-
-
-    // post request to add an ingredient to the Pantry
-    // const handleSubmit = (e) => {
-    //     e.preventDefault()
-    //     axios
-    //         .post(
-    //             'http://recipeezy-app.herokuapp.com/ingredients/',
-    //             {
-    //                 name: name
-    //             },
-    //             {
-    //                 headers: { Authorization: `Token ${token}` },
-    //             },
-    //         )
-    //         .then((data) => {
-    //             // useEffect()
-    //             setFoodList([...foodList, data.data])
-    //         })
-    // }
-
-
-    // }
     const addFoodItem = (newItem) => {
         setFoodList([...foodList, newItem])
     }
 
-
-
+    
     const handleSearch = () => {
-
-
-
         axios.get(`https://www.themealdb.com/api/json/v2/9973533/filter.php?i=${selectedIngredients.join()}`).then((response) => {
             setSearchResults((response.data.meals && response.data.meals.length > 10) ? response.data.meals.slice(0, 10) : response.data.meals)
-
             console.log('SEARCH', searchResults)
-
         })
-
     }
+
+
 
 
     return (

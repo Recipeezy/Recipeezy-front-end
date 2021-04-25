@@ -37,7 +37,6 @@ function App() {
     <Router>
       <div>
         <h1>Recipeezy</h1>
-        {/* <RecipeResults /> */}
       </div>
 
 

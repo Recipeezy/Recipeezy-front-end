@@ -17,8 +17,8 @@ export default function FoodItemForm ({addFoodItem, token}) {
                 },
             )
             .then((data) => {
-                setName('')
                 addFoodItem(data.data)
+            setName('')
             })
     }
 
@@ -30,6 +30,7 @@ export default function FoodItemForm ({addFoodItem, token}) {
                     <input
                         id='ingredient-name'
                         type='text'
+                        value={name}
                         placeholder='Add Ingredient'
                         onChange={(event) => setName(event.target.value)}
                     ></input>
