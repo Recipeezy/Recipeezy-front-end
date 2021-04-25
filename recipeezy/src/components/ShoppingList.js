@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import FoodItem from './FoodItem.js'
+import ShopListItem from './ShopListItem.js'
 
 function ShoppingList() {
     const [shopList, setShopList] = useState([])
@@ -36,7 +36,7 @@ function ShoppingList() {
                 {shopList ? (
                     <div>
                     {shopList.map((food) => (
-                        <FoodItem 
+                        <ShopListItem 
                             food={food}
                             key={food.id}
                         />
