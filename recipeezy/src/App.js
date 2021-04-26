@@ -17,6 +17,8 @@ import Login from './components/Login';
 import Registration from './components/Registration';
 import SearchResults from './components/SearchResults'
 import theme from './theme'
+import { Button } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
 function App() {
   const [username, setUsername] = useLocalStorageState('username', '')
@@ -71,33 +73,38 @@ function App() {
                           onClose={handleClose}
                           >
                               <MenuItem onClick={handleClose}>
-                                  <Link to="/reciperesults" type='button'>Random 10 Recipes</Link>
+                                  <Link to="/reciperesults" type='button' style={{ textDecoration: 'none' }}>Random 10 Recipes</Link>
                               </MenuItem>
                               <MenuItem onClick={handleClose}>
-                                  <Link to="/pantry" type='button'>View pantry</Link>
+                                  <Link to="/pantry" type='button' style={{ textDecoration: 'none' }}>View pantry</Link>
                               </MenuItem>
                               <MenuItem onClick={handleClose}>
-                                  <Link to='/selectedrecipes' type='button'>Selected Recipes</Link>
+                                  <Link to='/selectedrecipes' type='button' style={{ textDecoration: 'none', textDecorationColor:'black' }}>Selected Recipes</Link>
                               </MenuItem>
                           </Menu>
                       <Typography variant='h3'color="secondary">
                           Recipeezy
                       </Typography>
                       {isLoggedIn ? (
-                        <>
-                        <Typography align='right'>
-                          <Link to="/" onClick={logOut} type="button">Log Out</Link>
-                        </Typography>
-                        </>  
+                          <Grid container justify='flex-end'>
+                            <Typography>
+                              <Link to="/" onClick={logOut} type="button">Log Out</Link>
+                            </Typography>
+                          </Grid>
                         ) : (
-                        <>
-                          <Typography>
-                            <Link to="/registration" type="button">Register</Link>
-                          </Typography>
-                          <Typography>
-                            <Link to="/login" type="button">Log In</Link>
-                          </Typography>
-                        </>
+                        <Grid container justify='flex-end'>
+                          <Button 
+                            color="secondary"
+                            size="small">
+                            <Link to="/registration" style={{ textDecoration: 'none' }} type="button">Register</Link>
+                          </Button>
+                          <Button
+                            color="secondary"
+                            size="small"
+                          >
+                            <Link to="/login" type="button" style={{ textDecoration: 'none' }}>Log In</Link>
+                          </Button>
+                        </Grid>
                         )}
                   </Toolbar>
               </AppBar>
@@ -121,8 +128,6 @@ function App() {
             <Route path='/registration'>
               <Registration setAuth={setAuth} isLoggedIn={isLoggedIn} />
             </Route>
-
-
             <Route path="/shoppinglist">
               <ShoppingList
                   setAuth={setAuth}
