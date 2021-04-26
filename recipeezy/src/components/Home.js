@@ -1,34 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import { CssBaseline, MenuItem } from '@material-ui/core'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Icons from '@material-ui/icons'
-import Menu from '@material-ui/core/Menu'
-import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography'
-import IconButton from '@material-ui/core/IconButton';
+
 
 export default function Home({ isLoggedIn, logOut }) {
-    // const [anchorEl, setAnchorEl] = useState(null)
-
-    // const handleClick = (event) => {
-    //     setAnchorEl(event.currentTarget);
-    // };
-
-    // const handleClose = () => {
-    //     setAnchorEl(null)
-    // }
-
     return (
         <div className='home-content'>
-            <div>
-                <AppBar>
-                    <Typography variant='h3'>
-                        Hello
-                    </Typography>
-                </AppBar>
-            </div>
+            <Typography variant='h3'>
+                Home Page
+            </Typography>
 
             <h1>Welcome Home</h1>
             {isLoggedIn ? (
@@ -44,12 +24,13 @@ export default function Home({ isLoggedIn, logOut }) {
             )}
             <br/>
             <Link to="/reciperesults" type='button'>Random 10 Recipes</Link>
-            <br/>
+            <br />
             <Link to="/pantry" type='button'>View pantry</Link>
-            <br/>
+            <br />
             <Link to='/selectedrecipes' type='button'>Selected Recipes</Link>
             <br />
             <Link to="/shoppinglist" type="button">Shopping List</Link>
         </div>
     )
 }
+
