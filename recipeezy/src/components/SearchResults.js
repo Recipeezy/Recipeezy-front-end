@@ -34,21 +34,6 @@ function SearchResults() {
             })
         }
 
-        // for (let id of location.state.search) {
-        //     console.log("ID", id)
-        //     axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
-        //         .then((res) => {
-        //             if (n.includes(res.data)) {
-        //                 n.splice(n.indexOf(res.data), 1)
-        //             } else {
-        //                 n.push(res.data)
-        //             }
-
-        //             setRecipes(n)
-        //         })
-
-        // }
-
         fetchData(location.state.search)
         // n.length = location.state.search.length
         // setRecipes(n)
@@ -59,7 +44,7 @@ function SearchResults() {
     return (
         <div>
             <Link to='/pantry' type='button'>Back to Pantry</Link>
-            <button onClick={() => window.location.reload(false)}>Click to Reload</button>
+            
 
             <h1>Search Results for {location.state.item}</h1>
             <h2>RECIPES: {recipes.length}</h2>
@@ -75,7 +60,7 @@ function SearchResults() {
                                         recipes.map((recipe) => (
                                             <li key={recipe.meals[0].idMeal}>
                                                 <div key={recipe.meals[0].idMeal} id={recipe.meals[0].idMeal}>
-                                                    {console.log(recipe.meals[0].strYoutube)}
+                                                    
                                                     <img src={recipe.meals[0].strMealThumb}></img>
                                                     <h4>{recipe.meals[0].strMeal}</h4>
                                                     <h1>{recipe.meals[0].idMeal}</h1>

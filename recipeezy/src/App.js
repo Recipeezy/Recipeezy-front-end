@@ -51,6 +51,8 @@ function App() {
 
   return (
     <Router>
+
+      
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Container maxWidth='md'>
@@ -108,35 +110,38 @@ function App() {
               </AppBar>
 
 
-            <div>
-              <Switch>
-              <Route path='/reciperesults'>
-                <RecipeResults isLoggedIn={isLoggedIn} token={token} />
-              </Route>
-              <Route exact path='/'>
-                <Home isLoggedIn={isLoggedIn} token={token} logOut={logOut} />
-              </Route>
-              <Route path='/pantry'>
-                <Pantry isLoggedIn={isLoggedIn} token={token} />
-              </Route>
-              <Route path='/login'>
-                <Login setAuth={setAuth} isLoggedIn={isLoggedIn} token={token} />
-              </Route>
-              <Route path='/registration'>
-                <Registration setAuth={setAuth} isLoggedIn={isLoggedIn} />
-              </Route>
+          <div>
+            <Switch>
+            <Route path='/reciperesults'>
+              <RecipeResults isLoggedIn={isLoggedIn} token={token} />
+            </Route>
+            <Route exact path='/'>
+              <Home isLoggedIn={isLoggedIn} token={token} logOut={logOut} />
+            </Route>
+            <Route path='/pantry'>
+              <Pantry isLoggedIn={isLoggedIn} token={token} />
+            </Route>
+            <Route path='/login'>
 
-              <Route path="/shoppinglist">
-                <ShoppingList />
-              </Route>
-              <Route path='/searchresults'>
-                <SearchResults />
-              </Route>
-              </Switch>
-            </div>
+              <Login setAuth={setAuth} isLoggedIn={isLoggedIn} token={token} />
+            </Route>
+            <Route path='/registration'>
+              <Registration setAuth={setAuth} isLoggedIn={isLoggedIn} />
+            </Route>
+            <Route path="/shoppinglist">
+              <ShoppingList
+                  setAuth={setAuth}
+                  isLoggedIn={isLoggedIn} token={token}/>
+            </Route>
+            <Route path='/searchresults'>
+              <SearchResults />
+            </Route>
+            </Switch>
+          </div>
           </Container>
         </ThemeProvider>
       </Router>
+
   );
 }
 

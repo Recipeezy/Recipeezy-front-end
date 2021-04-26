@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import ShopListItem from './ShopListItem.js'
+import ShopItemForm from './ShopItemForm.js'
 import { List, Card, Grid } from '@material-ui/core';
 import { ListItem, makeStyles, ListItemText } from '@material-ui/core';
 import { Container } from '@material-ui/core';
@@ -17,24 +19,28 @@ const useStyles = makeStyles((theme) => ({
     }));
 
 
-
-function ShoppingList() {
+function ShoppingList({token}) {
     const [shopList, setShopList] = useState([])
     const classes=useStyles();
 
 
-    // Hardcoded token for now
-    const token = '9600235d3622575ff38d185b19a319d8c288a59b'
-
     useEffect(() => {
-        axios.get('https://recipeezy-app.herokuapp.com/shopping_list/', { headers: { 'Authorization': `Token ${token}` }, })
-            .then((response) => {
-                console.log(typeof (response.data[0].shopping_list))
-                console.log(response.data[0])
-                setShopList(response.data[0].shopping_list.map((obj) => obj.name))
+        axios.get('https://recipeezy-app.herokuapp.com/shopping_list/', { 
+            headers: { 'Authorization': `Token ${token}` }, 
+        })
+            .then((data) => {
+                setShopList(data.data[0].shopping_list)
+                console.log(data.data[0].shopping_list)
+                
+                
+                
+
             })
     }, [])
 
+    const addShopItem = (newItem) => {
+        setShopList([...shopList, newItem])
+    }
 
 
 
@@ -43,20 +49,45 @@ function ShoppingList() {
             <Link to='/' type='button'>Home</Link>
             <Grid>
             <h1>SHOPPING LIST</h1>
-                <Container className={classes.root}>
-                    <Card className="shopping-list-main-container">
-                        <List>
-                            {shopList && (
-                                shopList.map((e) => (
-                                    <ListItem>{e}</ListItem>
-                                ))
-                            )}
-                        </List>
-                    </Card>
-                </Container>
-            </Grid>
+            <div className="shopping-list-main-container">
+                
+                {shopList ? (
+                    <div>
+                    {shopList.map((food) => (
+                        <ShopListItem
+                        food={food}
+                        key={food.id}
+                        token={token}
+                        setShopList={setShopList}
+                        shopList={shopList}
+                    />
+                    
+                    ))
+                    }
+                    <ShopItemForm addShopItem={addShopItem} token={token} />
+                    </div>
+                    ) : (
+                        <p>Loading...</p>
+                    )}
+            </div>
         </div>
+    
+
     )
 }
 
 export default ShoppingList
+
+
+// useEffect(() => {
+//     axios.get('https://recipeezy-app.herokuapp.com/shopping_list/', { 
+//         headers: { 'Authorization': `Token ${token}` }, 
+//     })
+//         .then((response) => {
+//             console.log(typeof (response.data[0].shopping_list))
+//             console.log(response.data[0])
+//             setShopList(response.data[0].shopping_list.map((obj) => obj.name))
+
+//         })
+// }, [])
+
