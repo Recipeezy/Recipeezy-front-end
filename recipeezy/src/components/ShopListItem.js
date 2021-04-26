@@ -37,18 +37,20 @@ export default function ShopListItem ({food, token, shopList, setShopList}) {
             },
             )
     }
+
+
     const swapItemToPantry = (event) => {
         console.log('token is ', token)
         event.preventDefault();
         axios.put(`https://recipeezy-app.herokuapp.com/ingredients/${food.id}/swap/`,
             {
+            },
+            {
                 headers: { Authorization: `Token ${token}` },
-            }
+            },
         )
             .then((response) => {
-                console.log('uhhh idk', response)
-                setShopList(shopList)
-                // not sure if this is needed or not
+                setIsDeleted(true)
             },
             )
     }
