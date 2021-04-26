@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
-export default function ShopListItem ({food, token}) {
+export default function ShopListItem ({food, token, shopList, setShopList}) {
     const [isDeleted, setIsDeleted] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [name, setName] = useState(food.name)
@@ -37,6 +37,21 @@ export default function ShopListItem ({food, token}) {
             },
             )
     }
+    const swapItemToPantry = (event) => {
+        console.log('token is ', token)
+        event.preventDefault();
+        axios.put(`https://recipeezy-app.herokuapp.com/ingredients/${food.id}/swap/`,
+            {
+                headers: { Authorization: `Token ${token}` },
+            }
+        )
+            .then((response) => {
+                console.log('uhhh idk', response)
+                setShopList(shopList)
+                // not sure if this is needed or not
+            },
+            )
+    }
     
     if (isDeleted) return false;
 
@@ -57,6 +72,10 @@ export default function ShopListItem ({food, token}) {
                         value={food.id}>Submit Edit</button>
                 </div>
                 : <label htmlFor={name}>{name}</label>}
+            
+            <button
+                onClick={(event) => swapItemToPantry(event)}>Add to Pantry
+            </button>
             <button 
                 onClick={(event) => deleteShopListItem(event)}>Delete Item
             </button>

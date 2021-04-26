@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ShopListItem from './ShopListItem.js'
+import ShopItemForm from './ShopItemForm.js'
 
 function ShoppingList({token}) {
     const [shopList, setShopList] = useState([])
@@ -21,6 +22,10 @@ function ShoppingList({token}) {
             })
     }, [])
 
+    const addShopItem = (newItem) => {
+        setShopList([...shopList, newItem])
+    }
+
 
 
     return (
@@ -33,15 +38,17 @@ function ShoppingList({token}) {
                 {shopList ? (
                     <div>
                     {shopList.map((food) => (
-                        <ShopListItem 
-                            food={food}
-                            key={food.id}
-                            token={token}
-                        />
+                        <ShopListItem
+                        food={food}
+                        key={food.id}
+                        token={token}
+                        setShopList={setShopList}
+                        shopList={shopList}
+                    />
                     
                     ))
                     }
-
+                    <ShopItemForm addShopItem={addShopItem} token={token} />
                     </div>
                     ) : (
                         <p>Loading...</p>

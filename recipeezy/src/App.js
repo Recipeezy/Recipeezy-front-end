@@ -49,7 +49,7 @@ function App() {
             <Home isLoggedIn={isLoggedIn} token={token} logOut={logOut} />
           </Route>
           <Route path='/pantry'>
-            <Pantry isLoggedIn={isLoggedIn} token={token}/>
+            <Pantry isLoggedIn={isLoggedIn} setAuth={setAuth} token={token}/>
           </Route>
           <Route path='/login'>
               <Login setAuth={setAuth} isLoggedIn={isLoggedIn} token={token} />
