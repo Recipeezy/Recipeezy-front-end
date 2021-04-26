@@ -24,7 +24,6 @@ export default function RecipeDetail({selectedRecipe, handleGoBack}) {
             variant='subtitle1'
             align="center"
             >Cuisine: {selectedRecipe.strArea}</Typography>
-            <Typography align='center' variant='subtitle1'>Category: {selectedRecipe.strCategory}</Typography>
             <Typography gutterBottom align='center' variant='subtitle1'>Youtube tutorial: <a href={selectedRecipe.strYoutube}>{selectedRecipe.strYoutube}</a></Typography>
             <Paper elevation={3} align='center'>
                 <ul className='ingredient-list'>

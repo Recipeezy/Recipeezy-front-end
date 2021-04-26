@@ -73,9 +73,6 @@ export default function RecipeResults() {
                             <Typography gutterBottom variant='h6' align='center'>
                               {recipe.strMeal}
                             </Typography>
-                            <Typography variant='subtitle1' align='center'>
-                              Category: {recipe.strCategory}
-                            </Typography>
                             <Typography gutterBottom variant='subtitle1'align='center'>
                               Cuisine: {recipe.strArea}
                             </Typography>
