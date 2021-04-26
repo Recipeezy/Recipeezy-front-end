@@ -49,6 +49,8 @@ function App() {
 
   return (
     <Router>
+
+      
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Container maxWidth='md'>
@@ -113,14 +115,18 @@ function App() {
               <Pantry isLoggedIn={isLoggedIn} token={token} />
             </Route>
             <Route path='/login'>
+
               <Login setAuth={setAuth} isLoggedIn={isLoggedIn} token={token} />
             </Route>
             <Route path='/registration'>
               <Registration setAuth={setAuth} isLoggedIn={isLoggedIn} />
             </Route>
 
+
             <Route path="/shoppinglist">
-              <ShoppingList />
+              <ShoppingList
+                  <ShoppingList setAuth={setAuth}
+                   isLoggedIn={isLoggedIn} token={token}/>/>
             </Route>
             <Route path='/searchresults'>
               <SearchResults />
@@ -130,6 +136,7 @@ function App() {
           </Container>
         </ThemeProvider>
       </Router>
+
   );
 }
 

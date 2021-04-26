@@ -1,23 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import ShopListItem from './ShopListItem.js'
+import ShopItemForm from './ShopItemForm.js'
 
-function ShoppingList() {
+function ShoppingList({token}) {
     const [shopList, setShopList] = useState([])
 
 
-    // Hardcoded token for now
-    const token = '9600235d3622575ff38d185b19a319d8c288a59b'
-
     useEffect(() => {
-        axios.get('https://recipeezy-app.herokuapp.com/shopping_list/', { headers: { 'Authorization': `Token ${token}` }, })
-            .then((response) => {
-                console.log(typeof (response.data[0].shopping_list))
-                console.log(response.data[0])
-                setShopList(response.data[0].shopping_list.map((obj) => obj.name))
+        axios.get('https://recipeezy-app.herokuapp.com/shopping_list/', { 
+            headers: { 'Authorization': `Token ${token}` }, 
+        })
+            .then((data) => {
+                setShopList(data.data[0].shopping_list)
+                console.log(data.data[0].shopping_list)
+                
+                
+                
+
             })
     }, [])
 
+    const addShopItem = (newItem) => {
+        setShopList([...shopList, newItem])
+    }
 
 
 
@@ -27,17 +34,45 @@ function ShoppingList() {
 
             <h1>SHOPPING LIST</h1>
             <div className="shopping-list-main-container">
-
-                {shopList && (
-                    shopList.map((e) => (
-                        <h1>{e}</h1>
+                
+                {shopList ? (
+                    <div>
+                    {shopList.map((food) => (
+                        <ShopListItem
+                        food={food}
+                        key={food.id}
+                        token={token}
+                        setShopList={setShopList}
+                        shopList={shopList}
+                    />
+                    
                     ))
-                )}
-
+                    }
+                    <ShopItemForm addShopItem={addShopItem} token={token} />
+                    </div>
+                    ) : (
+                        <p>Loading...</p>
+                    )}
             </div>
 
         </div>
+    
+
     )
 }
 
 export default ShoppingList
+
+
+// useEffect(() => {
+//     axios.get('https://recipeezy-app.herokuapp.com/shopping_list/', { 
+//         headers: { 'Authorization': `Token ${token}` }, 
+//     })
+//         .then((response) => {
+//             console.log(typeof (response.data[0].shopping_list))
+//             console.log(response.data[0])
+//             setShopList(response.data[0].shopping_list.map((obj) => obj.name))
+
+//         })
+// }, [])
+
