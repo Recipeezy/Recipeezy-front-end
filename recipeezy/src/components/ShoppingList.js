@@ -47,7 +47,6 @@ function ShoppingList({token}) {
     return (
         <div>
             <Link to='/' type='button'>Home</Link>
-            <Grid>
             <h1>SHOPPING LIST</h1>
             <div className="shopping-list-main-container">
                 

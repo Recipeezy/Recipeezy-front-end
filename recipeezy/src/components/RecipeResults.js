@@ -77,7 +77,7 @@ export default function RecipeResults() {
                               Category: {recipe.strCategory}
                             </Typography>
                             <Typography gutterBottom variant='subtitle1'align='center'>
-                              Origin: {recipe.strArea}
+                              Cuisine: {recipe.strArea}
                             </Typography>
                             <Button
                             color="secondary"
