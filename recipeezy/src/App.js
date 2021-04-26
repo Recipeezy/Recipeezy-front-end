@@ -125,8 +125,8 @@ function App() {
 
             <Route path="/shoppinglist">
               <ShoppingList
-                  <ShoppingList setAuth={setAuth}
-                   isLoggedIn={isLoggedIn} token={token}/>/>
+                  setAuth={setAuth}
+                  isLoggedIn={isLoggedIn} token={token}/>
             </Route>
             <Route path='/searchresults'>
               <SearchResults />
