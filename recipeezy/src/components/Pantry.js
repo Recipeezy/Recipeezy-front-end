@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import FoodItem from './FoodItem.js'
 import FoodItemForm from './FoodItemForm.js'
 import axios from 'axios'
@@ -14,18 +14,19 @@ export default function Pantry({ token }) {
     const [selectedIngredients, setSelectedIngredients] = useState([])
     const [isAtLimit, setIsAtLimit] = useState(false)
 
+    const history = useHistory()
 
 
     useEffect(() => {
         console.log('token is ', token)
         axios
-            .get('http://recipeezy-app.herokuapp.com/pantry/', {
+            .get('https://recipeezy-app.herokuapp.com/pantry/', {
                 headers: {
                     Authorization: `Token ${token}`
                 },
             })
             .then((data) => {
-                function setFood (data) {
+                function setFood(data) {
                     setFoodList(lodash.uniqBy(data, 'name'))
                 }
                 setFood(data.data[0].ingredients_list)
@@ -47,6 +48,11 @@ export default function Pantry({ token }) {
 
             }
             console.log('SEARCH', searchResults)
+            if (searchResults.length > 0) {
+                history.push('/searchresults', { search: searchResults, item: selectedIngredients.join() })
+            } else {
+                document.querySelector(".errorh2").innerHTML = "NO results"
+            }
         })
     }
 
@@ -60,40 +66,28 @@ export default function Pantry({ token }) {
 
             {foodList ? (
                 <div>
-                {foodList.map((food) => (
-                    <FoodItem food={food} key={food.id} selectedIngredients={selectedIngredients} setSelectedIngredients={setSelectedIngredients} token={token} isAtLimit={isAtLimit} setIsAtLimit={setIsAtLimit}/>
-                ))}
-                {isAtLimit ? (
-                <div><p>You may only select a maximum of 4 ingredients</p></div>
-                ) : (
-                    <p></p>
-                )}
-
-                <FoodItemForm addFoodItem={addFoodItem} token={token} />
-
-                <button className='search-ingredients' onClick={handleSearch}>Search</button>
-
-                <div>
-                    {(selectedIngredients && selectedIngredients.length > 0) && (
-                        <h1>Results:</h1>
+                    {foodList.map((food) => (
+                        <FoodItem food={food} key={food.id} selectedIngredients={selectedIngredients} setSelectedIngredients={setSelectedIngredients} token={token} isAtLimit={isAtLimit} setIsAtLimit={setIsAtLimit} />
+                    ))}
+                    {isAtLimit ? (
+                        <div><p>You may only select a maximum of 4 ingredients</p></div>
+                    ) : (
+                        <p></p>
                     )}
-                    {searchResults && searchResults.length > 0 ? (
 
-                        <Link to={{
-                            pathname: '/searchresults',
-                            state: {
-                                search: searchResults, item: selectedIngredients.join()
-                            }
-                        }} type='button'>Show {searchResults.length} Results</Link>
+                    <FoodItemForm addFoodItem={addFoodItem} token={token} />
 
-                    ) : (<h1>No results</h1>)}
+                    <button className='search-ingredients' onClick={handleSearch}>Search</button>
 
+                    <div>
+                        <h2 className="errorh2"></h2>
+
+                    </div>
                 </div>
-                </div>
-                ) : (
-                    <p>Loading...</p>
-                )} 
-            </div>
-            
+            ) : (
+                <p>Loading...</p>
+            )}
+        </div>
+
     )
 }

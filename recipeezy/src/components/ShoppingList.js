@@ -16,24 +16,24 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: 300,
         // backgroundColor: theme.palette.background.paper,
     },
-    }));
+}));
 
 
-function ShoppingList({token}) {
+function ShoppingList({ token }) {
     const [shopList, setShopList] = useState([])
-    const classes=useStyles();
+    const classes = useStyles();
 
 
     useEffect(() => {
-        axios.get('https://recipeezy-app.herokuapp.com/shopping_list/', { 
-            headers: { 'Authorization': `Token ${token}` }, 
+        axios.get('https://recipeezy-app.herokuapp.com/shopping_list/', {
+            headers: { 'Authorization': `Token ${token}` },
         })
             .then((data) => {
                 setShopList(data.data[0].shopping_list)
                 console.log(data.data[0].shopping_list)
-                
-                
-                
+
+
+
 
             })
     }, [])
@@ -49,28 +49,28 @@ function ShoppingList({token}) {
             <Link to='/' type='button'>Home</Link>
             <h1>SHOPPING LIST</h1>
             <div className="shopping-list-main-container">
-                
+
                 {shopList ? (
                     <div>
-                    {shopList.map((food) => (
-                        <ShopListItem
-                        food={food}
-                        key={food.id}
-                        token={token}
-                        setShopList={setShopList}
-                        shopList={shopList}
-                    />
-                    
-                    ))
-                    }
-                    <ShopItemForm addShopItem={addShopItem} token={token} />
+                        {shopList.map((food) => (
+                            <ShopListItem
+                                food={food}
+                                key={food.id}
+                                token={token}
+                                setShopList={setShopList}
+                                shopList={shopList}
+                            />
+
+                        ))
+                        }
+                        <ShopItemForm addShopItem={addShopItem} token={token} />
                     </div>
-                    ) : (
-                        <p>Loading...</p>
-                    )}
+                ) : (
+                    <p>Loading...</p>
+                )}
             </div>
         </div>
-    
+
 
     )
 }

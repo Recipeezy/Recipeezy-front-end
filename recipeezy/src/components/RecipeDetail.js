@@ -5,15 +5,15 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Paper, Card } from '@material-ui/core';
 import { CardMedia } from '@material-ui/core';
 
-export default function RecipeDetail({selectedRecipe, handleGoBack}) {
+export default function RecipeDetail({ selectedRecipe, handleGoBack }) {
     console.log('selected recipe ', selectedRecipe)
     console.log(selectedRecipe.strYoutube.replace('watch?', 'embed/'))
     return (
         <div>
             <IconButton>
                 <ArrowBackIcon
-                gutterBottom
-                onClick={handleGoBack}
+                    gutterBottom
+                    onClick={handleGoBack}
                 >Go back</ArrowBackIcon>
             </IconButton>
             <Typography gutterBottom variant='h4' align='center'>
@@ -22,8 +22,8 @@ export default function RecipeDetail({selectedRecipe, handleGoBack}) {
             <Paper align='center' maxWidth={300}>
                 <img align='center' alt="recipe-pic" src={selectedRecipe.strMealThumb} />
                 <Typography
-                variant='subtitle1'
-                align="center"
+                    variant='subtitle1'
+                    align="center"
                 >Cuisine: {selectedRecipe.strArea}</Typography>
             </Paper>
 
@@ -50,17 +50,20 @@ export default function RecipeDetail({selectedRecipe, handleGoBack}) {
                     <li>{selectedRecipe.strIngredient19}</li>
                     <li>{selectedRecipe.strIngredient20}</li>
                 </ul>
+                <div className="add-all-ingredients">
+                    <button>Add all Ingredients to Shopping List</button>
+                </div>
             </div>
             <div>
                 <Typography variant='body1'> Instructions: {selectedRecipe.strInstructions}</Typography>
             </div>
-                <Card>
-                    <CardMedia 
+            <Card>
+                <CardMedia
                     src={selectedRecipe.strYoutube.replace('watch?v=', 'embed/')}
                     component='iframe'
                     height='400'
-                    />
-                </Card>
+                />
+            </Card>
         </div>
     )
 }

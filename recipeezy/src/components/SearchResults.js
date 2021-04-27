@@ -35,8 +35,6 @@ function SearchResults() {
         }
 
         fetchData(location.state.search)
-        // n.length = location.state.search.length
-        // setRecipes(n)
 
     }, [])
 
@@ -44,7 +42,7 @@ function SearchResults() {
     return (
         <div>
             <Link to='/pantry' type='button'>Back to Pantry</Link>
-            
+
 
             <h1>Search Results for {location.state.item}</h1>
             <h2>RECIPES: {recipes.length}</h2>
@@ -60,7 +58,7 @@ function SearchResults() {
                                         recipes.map((recipe) => (
                                             <li key={recipe.meals[0].idMeal}>
                                                 <div key={recipe.meals[0].idMeal} id={recipe.meals[0].idMeal}>
-                                                    
+
                                                     <img src={recipe.meals[0].strMealThumb}></img>
                                                     <h4>{recipe.meals[0].strMeal}</h4>
                                                     <h1>{recipe.meals[0].idMeal}</h1>
