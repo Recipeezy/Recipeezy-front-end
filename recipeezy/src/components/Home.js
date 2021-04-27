@@ -6,11 +6,10 @@ import Typography from '@material-ui/core/Typography'
 export default function Home({ isLoggedIn, logOut }) {
     return (
         <div className='home-content'>
-            <Typography variant='h3'>
+            <Typography variant='h4'>
                 Home Page
             </Typography>
-
-            <h1>Welcome Home</h1>
+            
             {isLoggedIn ? (
                 <>
                 <Link to="/" onClick={logOut} type="button">Log Out</Link>

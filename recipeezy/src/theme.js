@@ -18,6 +18,7 @@ const theme = createMuiTheme({
             wordWrap:'break-word',
         },
         h3: {
+            fontFamily:'libre baskerville',
             color:'#011936'
         },
         body1: {

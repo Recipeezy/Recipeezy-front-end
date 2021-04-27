@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import FoodItem from './FoodItem.js'
 import FoodItemForm from './FoodItemForm.js'
 import axios from 'axios'
+import HomeIcon from '@material-ui/icons/Home';
+import { IconButton } from '@material-ui/core';
 
 
 
@@ -51,7 +53,11 @@ export default function Pantry({ token }) {
     return (
         <div className='pantry-wrapper'>
             <h1>Pantry</h1>
-            <Link to='/' type='button'>home</Link>
+            <IconButton component={Link} to='/'>
+                <HomeIcon>
+                    Home
+                </HomeIcon>
+            </IconButton>
 
 
             {foodList.map((food) => (
