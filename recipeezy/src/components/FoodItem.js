@@ -5,6 +5,7 @@ export default function FoodItem({ food, setSelectedIngredients, selectedIngredi
     const [isDeleted, setIsDeleted] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [name, setName] = useState(food.name)
+    const [disabledCheck, setDisabledCheck] = useState(false)
 
 
     const updateFoodItem = (event) => {
@@ -39,18 +40,6 @@ export default function FoodItem({ food, setSelectedIngredients, selectedIngredi
     }
 
     const checkBoxClick = (e) => {
-        let checkedTotal = 0
-        let checkboxes = document.querySelectorAll('.checkboxes')
-        for (let c of checkboxes) {
-            if (c.checked === true) {
-                checkedTotal++
-            }
-        }
-        if (checkedTotal > 4) {
-            alert('only 4 at a time')
-            e.target.checked = false
-        }
-
         if (!selectedIngredients.includes(e.target.value)) {
             setSelectedIngredients([...selectedIngredients, e.target.value])
         } else {
@@ -65,7 +54,8 @@ export default function FoodItem({ food, setSelectedIngredients, selectedIngredi
 
     return (
         <li>
-            <input onChange={checkBoxClick} type='checkbox' id={food.name} className="checkboxes" value={food.name}></input>
+            <input onChange={checkBoxClick} type='checkbox' id={food.name} className="checkboxes" value={food.name}
+            disabled={(selectedIngredients.length > 3)}></input>
             {isEditing ?
                 <div>
                     <input onChange={(event) => setName(event.target.value)} value={name}></input>
