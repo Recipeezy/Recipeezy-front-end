@@ -77,16 +77,3 @@ function ShoppingList({token}) {
 
 export default ShoppingList
 
-
-// useEffect(() => {
-//     axios.get('https://recipeezy-app.herokuapp.com/shopping_list/', { 
-//         headers: { 'Authorization': `Token ${token}` }, 
-//     })
-//         .then((response) => {
-//             console.log(typeof (response.data[0].shopping_list))
-//             console.log(response.data[0])
-//             setShopList(response.data[0].shopping_list.map((obj) => obj.name))
-
-//         })
-// }, [])
-
