@@ -13,7 +13,6 @@ export default function Pantry({ token }) {
     const [searchResults, setSearchResults] = useState([])
     const [selectedIngredients, setSelectedIngredients] = useState([])
     const [isAtLimit, setIsAtLimit] = useState(false)
-    const [firstList, setFirstList] = useState([])
 
 
 
@@ -26,12 +25,12 @@ export default function Pantry({ token }) {
                 },
             })
             .then((data) => {
-                console.log('data.data is ', data.data)
-                setFirstList(data.data[0].ingredients_list)
-                console.log('firstList is ', firstList)
-                setFoodList(lodash.uniqBy(firstList, "name"))                
-                console.log('foodList', foodList)
+                function setFood (data) {
+                    setFoodList(lodash.uniqBy(data, 'name'))
+                }
+                setFood(data.data[0].ingredients_list)
             })
+
     }, [])
 
 
