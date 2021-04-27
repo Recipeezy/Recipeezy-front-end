@@ -25,7 +25,6 @@ export default function RecipeDetail({selectedRecipe, handleGoBack}) {
                 variant='subtitle1'
                 align="center"
                 >Cuisine: {selectedRecipe.strArea}</Typography>
-                <Typography align='center' variant='subtitle1'>Category: {selectedRecipe.strCategory}</Typography>
             </Paper>
 
             <div>
