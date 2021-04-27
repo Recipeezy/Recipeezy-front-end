@@ -2,10 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Typography, IconButton, Button } from '@material-ui/core'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { Paper } from '@material-ui/core';
+import { Paper, Card } from '@material-ui/core';
+import { CardMedia } from '@material-ui/core';
 
 export default function RecipeDetail({selectedRecipe, handleGoBack}) {
     console.log('selected recipe ', selectedRecipe)
+    console.log(selectedRecipe.strYoutube.replace('watch?', 'embed/'))
     return (
         <div>
             <IconButton>
@@ -19,14 +21,14 @@ export default function RecipeDetail({selectedRecipe, handleGoBack}) {
             </Typography>
             <Paper align='center' maxWidth={300}>
                 <img align='center' alt="recipe-pic" src={selectedRecipe.strMealThumb} />
+                <Typography
+                variant='subtitle1'
+                align="center"
+                >Cuisine: {selectedRecipe.strArea}</Typography>
+                <Typography align='center' variant='subtitle1'>Category: {selectedRecipe.strCategory}</Typography>
             </Paper>
-            <Typography
-            variant='subtitle1'
-            align="center"
-            >Cuisine: {selectedRecipe.strArea}</Typography>
-            <Typography align='center' variant='subtitle1'>Category: {selectedRecipe.strCategory}</Typography>
-            <Typography gutterBottom align='center' variant='subtitle1'>Youtube tutorial: <a href={selectedRecipe.strYoutube}>{selectedRecipe.strYoutube}</a></Typography>
-            <Paper elevation={3} align='center'>
+
+            <div>
                 <ul className='ingredient-list'>
                     <li>{selectedRecipe.strIngredient1}</li>
                     <li>{selectedRecipe.strIngredient2}</li>
@@ -49,10 +51,18 @@ export default function RecipeDetail({selectedRecipe, handleGoBack}) {
                     <li>{selectedRecipe.strIngredient19}</li>
                     <li>{selectedRecipe.strIngredient20}</li>
                 </ul>
-            </Paper>
-            <Paper elevation={3}>
+            </div>
+            <div>
                 <Typography variant='body1'> Instructions: {selectedRecipe.strInstructions}</Typography>
-            </Paper>
+            </div>
+                <Card>
+                    <CardMedia 
+                    src={selectedRecipe.strYoutube.replace('watch?v=', 'embed/')}
+                    component='iframe'
+                    height='400'
+                    />
+                </Card>
         </div>
     )
 }
+

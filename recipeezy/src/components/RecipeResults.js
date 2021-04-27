@@ -66,7 +66,7 @@ export default function RecipeResults() {
                     <Grid container justify='center' spacing={2} className='recipe-list' >
                       {recipes.meals.map((recipe) => (
                         <Grid item wrap="wrap" id={recipe.idMeal} maxWidth={300}>
-                          <Card height={800} maxWidth={300} className="recipe-card" elevation={3} padding={5}>
+                          <Card variant='outlined' height={800} maxWidth={300} className="recipe-card" elevation={3} padding={5}>
                             <img 
                               alt="recipe-pic" 
                               src={recipe.strMealThumb} />
@@ -80,8 +80,9 @@ export default function RecipeResults() {
                               Cuisine: {recipe.strArea}
                             </Typography>
                             <Button
+                            // variant='contained'
                             color="secondary"
-                            size="small"
+                            // size="small"
                             onClick={() => setSelectedRecipe(recipe)}
                             >
                               See more
