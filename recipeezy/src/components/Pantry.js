@@ -75,7 +75,7 @@ export default function Pantry({ token }) {
                         }
                     }} type='button'>Show {searchResults.length} Results</Link>
 
-                ) : (<h1>No results</h1>)}
+                ) : (<h1>{selectedIngredients.length} Selected, there are no results</h1>)}
 
             </div>
         </div>
