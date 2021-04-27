@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
-export default function FoodItem({ food, setSelectedIngredients, selectedIngredients, token }) {
+export default function FoodItem({ food, setSelectedIngredients, selectedIngredients, isAtLimit, setIsAtLimit, token }) {
     const [isDeleted, setIsDeleted] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [name, setName] = useState(food.name)
@@ -47,8 +47,12 @@ export default function FoodItem({ food, setSelectedIngredients, selectedIngredi
             }
         }
         if (checkedTotal > 4) {
-            alert('only 4 at a time')
+            setIsAtLimit(true)
             e.target.checked = false
+        }
+        
+        if (checkedTotal < 4) {
+            setIsAtLimit(false)
         }
 
         if (!selectedIngredients.includes(e.target.value)) {

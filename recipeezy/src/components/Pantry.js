@@ -10,6 +10,7 @@ export default function Pantry({ token }) {
     const [foodList, setFoodList] = useState([])
     const [searchResults, setSearchResults] = useState([])
     const [selectedIngredients, setSelectedIngredients] = useState([])
+    const [isAtLimit, setIsAtLimit] = useState(false)
 
 
 
@@ -55,8 +56,13 @@ export default function Pantry({ token }) {
 
 
             {foodList.map((food) => (
-                <FoodItem food={food} key={food.id} selectedIngredients={selectedIngredients} setSelectedIngredients={setSelectedIngredients} token={token} />
+                <FoodItem food={food} key={food.id} selectedIngredients={selectedIngredients} setSelectedIngredients={setSelectedIngredients} token={token} isAtLimit={isAtLimit} setIsAtLimit={setIsAtLimit}/>
             ))}
+            {isAtLimit ? (
+            <div><p>You may only select a maximum of 4 ingredients</p></div>
+            ) : (
+                <p></p>
+            )}
 
             <FoodItemForm addFoodItem={addFoodItem} token={token} />
 
