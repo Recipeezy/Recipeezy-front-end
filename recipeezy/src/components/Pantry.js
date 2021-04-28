@@ -6,6 +6,7 @@ import axios from 'axios'
 import HomeIcon from '@material-ui/icons/Home';
 import { IconButton } from '@material-ui/core';
 import lodash from 'lodash'
+import { Button } from '@material-ui/core'
 
 
 export default function Pantry({ token }) {
@@ -70,7 +71,7 @@ export default function Pantry({ token }) {
     return (
         <div className='pantry-wrapper'>
             <h1>Pantry</h1>
-            <IconButton component={Link} to='/'>
+            <IconButton size='small'component={Link} to='/'>
                 <HomeIcon>
                     Home
                 </HomeIcon>
@@ -89,7 +90,10 @@ export default function Pantry({ token }) {
 
                     <FoodItemForm addFoodItem={addFoodItem} token={token} getPantry={getPantry} />
 
-                    <button className='search-ingredients' onClick={handleSearch}>Search</button>
+                    <Button
+                    style={{ marginTop: '30px'}}
+                    variant='contained'
+                    className='search-ingredients' onClick={handleSearch}>Search</Button>
 
                     <div>
                         <h2 className="errorh2"></h2>

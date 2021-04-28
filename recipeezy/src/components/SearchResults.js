@@ -1,13 +1,23 @@
+import { Button, IconButton } from '@material-ui/core'
+import { Card, Grid, makeStyles, Typography } from '@material-ui/core'
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { useLocation, Link } from 'react-router-dom'
-
 import RecipeDetail from './RecipeDetail'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+
+
+const useStyles = makeStyles({
+    cardStyle: {
+        maxWidth:'300px'
+    }
+    })
 
 
 function SearchResults() {
     const [recipes, setRecipes] = useState([])
     const [mealIds, setMealIds] = useState([])
+    const classes = useStyles()
     const [selectedRecipe, setSelectedRecipe] = useState(null)
     let location = useLocation()
     let n = []
@@ -41,35 +51,53 @@ function SearchResults() {
 
     return (
         <div>
-            <Link to='/pantry' type='button'>Back to Pantry</Link>
+            <IconButton component={Link} to='/pantry'>
+                <ArrowBackIcon>Back to Pantry</ArrowBackIcon>
+            </IconButton>
 
-
-            <h1>Search Results for {location.state.item}</h1>
-            <h2>RECIPES: {recipes.length}</h2>
+            <Typography variant='subtitle2' align='center'>
+                <h1>Search({recipes.length}) Results for: {location.state.item}</h1>
+            </Typography>
+            <Typography variant='subtitle1' align='center' gutterBottom>
+                RECIPES: {recipes.length}
+            </Typography>
             <div>
                 {(recipes && recipes.length > 0) ? (
                     <div>
                         {selectedRecipe ? (
                             <RecipeDetail selectedRecipe={selectedRecipe} handleGoBack={() => setSelectedRecipe(null)} />
                         ) : (
-                            <div>
-                                <ul>
+                            <Grid container justify='center' spacing={2}>
+                                
                                     {
                                         recipes.map((recipe) => (
-                                            <li key={recipe.meals[0].idMeal}>
+                                        <Grid item wrap='wrap' id={recipe.idMeal} className={classes.cardStyle}>
+                                            <Card key={recipe.meals[0].idMeal}>
                                                 <div key={recipe.meals[0].idMeal} id={recipe.meals[0].idMeal}>
-
-                                                    <img src={recipe.meals[0].strMealThumb}></img>
-                                                    <h4>{recipe.meals[0].strMeal}</h4>
-                                                    <h1>{recipe.meals[0].idMeal}</h1>
-                                                    <p>Cuisine: {recipe.meals[0].strArea}</p>
-                                                    <button onClick={() => setSelectedRecipe(recipe.meals[0])}>See More</button>
+                                                    <img alt='recipe-pic' src={recipe.meals[0].strMealThumb}></img>
+                                                    <Typography variant='h6' align='center' gutterBottom>
+                                                        {recipe.meals[0].strMeal}
+                                                    </Typography>
+                                                    {/* <Typography variant='caption'>
+                                                        {recipe.meals[0].idMeal}    
+                                                    </Typography>     */}
+                                                    <Typography variant='subtitle1' align='center'>
+                                                        Cuisine: {recipe.meals[0].strArea}
+                                                    </Typography>
+                                                    <Button
+                                                    fullWidth
+                                                    variant='contained'
+                                                    color='primary'
+                                                    onClick={() => setSelectedRecipe(recipe.meals[0])}>
+                                                        See More
+                                                    </Button>
                                                 </div>
-                                            </li>
+                                            </Card>
+                                        </Grid>
                                         ))
                                     }
-                                </ul>
-                            </div>
+                                
+                            </Grid>
                         )}
                     </div>
                 ) : (

@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { TextField, Button } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 export default function ShopItemForm({ addShopItem, token, getShopList }) {
     const [name, setName] = useState('')
     const handleSubmit = (e) => {
@@ -23,22 +25,21 @@ export default function ShopItemForm({ addShopItem, token, getShopList }) {
     }
     return (
         <form onSubmit={handleSubmit}>
-            <div>
+            <Grid align='center' container style={{ marginBottom: '30px'}} spacing={2}>
                 <label htmlFor='item-name'></label>
-                <input
+                <TextField
                     id='item-name'
                     type='text'
                     value={name}
                     placeholder='Add Item'
                     onChange={(event) => setName(event.target.value)}
-                ></input>
-            </div>
-            <div className='btn'>
-                <button
+                ></TextField>
+                <Button
+                    variant='contained'
                     className='submit-btn'
                     type="submit"
-                >Add</button>
-            </div>
+                >Add</Button>
+            </Grid>
         </form>
     )
 }
