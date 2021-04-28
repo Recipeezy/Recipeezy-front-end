@@ -17,7 +17,7 @@ const theme = createMuiTheme({
         h6: {
             wordWrap:'break-word',
         },
-        h3: {
+        h4: {
             fontFamily:'kalam',
             color:'#011936'
         },
@@ -28,7 +28,8 @@ const theme = createMuiTheme({
     overrides: {
         MuiButton: {
             root: {
-                marginTop:"10px"
+                marginTop:"10px",
+                padding:'2px 7px',
             }
         },
     }

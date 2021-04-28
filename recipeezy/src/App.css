@@ -25,3 +25,7 @@ img {
 .MuiTypography-h6 {
     overflow-wrap:break-word;
 }
+
+a {
+    font-size: 10px;
+}

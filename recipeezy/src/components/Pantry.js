@@ -56,7 +56,7 @@ export default function Pantry({ token }) {
     return (
         <div className='pantry-wrapper'>
             <h1>Pantry</h1>
-            <IconButton component={Link} to='/'>
+            <IconButton size='small'component={Link} to='/'>
                 <HomeIcon>
                     Home
                 </HomeIcon>

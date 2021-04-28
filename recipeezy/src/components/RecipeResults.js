@@ -22,15 +22,6 @@ const useStyles = makeStyles({
   }
   })
 
-  function ButtonStyled() {
-    const classes = useStyles();
-    return <Button
-    color="primary"
-    size="small"
-    className={classes.buttonRoot}>See More +</Button>
-    }
-
-
 
 export default function RecipeResults() {
   const [recipes, setRecipes] = useState([])
@@ -54,7 +45,7 @@ export default function RecipeResults() {
     return (
       <ThemeProvider theme={theme}>
         <div>
-          <Typography align='center' variant='h3'color='secondary' gutterBottom>
+          <Typography align='center' variant='h5'color='secondary' gutterBottom>
             Recipe Results
           </Typography>
             <div className='recipe-list'>

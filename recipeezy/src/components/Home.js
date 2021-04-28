@@ -1,35 +1,55 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Typography from '@material-ui/core/Typography'
+import {Typography, Paper, makeStyles, Button, Container} from '@material-ui/core/'
+import { Grid } from '@material-ui/core';
+
+const useStyles = makeStyles({
+        pantryPaper: {
+            width: '100%',
+            height: '350px'
+        },
+        container: {
+            justifyItems: 'center'
+        },
+        header: {
+            margin: '0 auto'
+        }
+    })
+
 
 
 export default function Home({ isLoggedIn, logOut }) {
+    const classes=useStyles();
+
     return (
-        <div className='home-content'>
-            <Typography variant='h4'>
-                Home Page
+    <Grid 
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+        className={classes.container}>
+
+        <Typography className={classes.header} variant='h5'>
+            Home Page
+        </Typography>
+
+        <Paper style={{maxHeight: 350, overflow: 'auto' }} className={classes.pantryPaper}>
+            <Typography>
+                Pantry
             </Typography>
-            
-            {isLoggedIn ? (
-                <>
-                <Link to="/" onClick={logOut} type="button">Log Out</Link>
-                </>  
-            ) : (
-                <>
-                    <Link to="/registration" type="button">Register</Link>
-                    <br/>
-                    <Link to="/login" type="button">Log In</Link>
-                </>
-            )}
-            <br/>
-            <Link to="/reciperesults" type='button'>Random 10 Recipes</Link>
-            <br />
-            <Link to="/pantry" type='button'>View pantry</Link>
-            <br />
-            <Link to='/selectedrecipes' type='button'>Selected Recipes</Link>
-            <br />
-            <Link to="/shoppinglist" type="button">Shopping List</Link>
-        </div>
+        </Paper>
+
+            <Button
+            variant='contained'
+            > Start Meal Plan</Button>
+            <Typography variant='h6'>
+                Selected Recipes
+            </Typography>
+            <Typography variant='h6'>
+                Past Meals
+            </Typography>
+        </Grid>
     )
 }
 

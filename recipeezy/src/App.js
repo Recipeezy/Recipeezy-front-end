@@ -7,7 +7,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import { Container, Typography, Menu, AppBar, Toolbar, IconButton, MenuItem, CssBaseline, makeStyles, ThemeProvider } from '@material-ui/core'
+import { Button, Grid, Container, Typography, Menu, AppBar, Toolbar, IconButton, MenuItem, CssBaseline, makeStyles, ThemeProvider } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu';
 import RecipeResults from './components/RecipeResults'
 import Pantry from './components/Pantry'
@@ -17,8 +17,8 @@ import Login from './components/Login';
 import Registration from './components/Registration';
 import SearchResults from './components/SearchResults'
 import theme from './theme'
-import { Button } from '@material-ui/core';
-import { Grid } from '@material-ui/core';
+import HomeIcon from '@material-ui/icons/Home'
+
 
 
 const useStyles = makeStyles(() => ({
@@ -81,6 +81,9 @@ function App() {
                           onClose={handleClose}
                           >
                               <MenuItem onClick={handleClose}>
+                                  <Link to='/' type='button' style={{ textDecoration: 'none', textDecorationColor:'black' }}>Home</Link>
+                              </MenuItem>
+                              <MenuItem onClick={handleClose}>
                                   <Link to="/reciperesults" type='button' style={{ textDecoration: 'none' }}>Random 10 Recipes</Link>
                               </MenuItem>
                               <MenuItem onClick={handleClose}>
@@ -93,7 +96,7 @@ function App() {
                                   <Link to='/shoppinglist' type='button' style={{ textDecoration: 'none', textDecorationColor:'black' }}>Shopping List</Link>
                               </MenuItem>
                           </Menu>
-                      <Typography variant='h3'color="secondary">
+                      <Typography variant='h4'color="secondary">
                           Recipeezy
                       </Typography>
                       {isLoggedIn ? (
@@ -118,12 +121,17 @@ function App() {
                           <Button
                             variant='contained'
                             color="primary"
-                            size="small"
+                            size='small'
                           >
                             <Link to="/login" type="button" style={{ textDecoration: 'none' }}>Log In</Link>
                           </Button>
                         </Grid>
                         )}
+                        {/* <IconButton size='small' component={Link} to='/'>
+                          <HomeIcon>
+                              Home
+                          </HomeIcon>
+                        </IconButton> */}
                   </Toolbar>
               </AppBar>
 
