@@ -9,6 +9,7 @@ import { Grid } from '@material-ui/core';
 import { CardContent } from '@material-ui/core';
 import { List } from '@material-ui/core';
 import { ListItem } from '@material-ui/core';
+import axios from 'axios';
 
 const useStyles = makeStyles({
     videoCard: {
@@ -36,11 +37,11 @@ const useStyles = makeStyles({
     }
 });
 
-import axios from 'axios';
 
 export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
     console.log('selected recipe ', selectedRecipe)
     console.log(selectedRecipe.strYoutube.replace('watch?', 'embed/'))
+    const classes = useStyles()
 
     const [ingredients, setIngredients] = useState([])
 
@@ -129,13 +130,6 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
                     </Grid>
                 </div>
             </Grid>
-            <Paper align='center' maxWidth={300}>
-                <img align='center' alt="recipe-pic" src={selectedRecipe.strMealThumb} />
-                <Typography
-                    variant='subtitle1'
-                    align="center"
-                >Cuisine: {selectedRecipe.strArea}</Typography>
-            </Paper>
 
             <div>
                 <ul className='ingredient-list'>
