@@ -5,13 +5,14 @@ import FoodItemForm from './FoodItemForm.js'
 import axios from 'axios'
 import HomeIcon from '@material-ui/icons/Home';
 import { IconButton } from '@material-ui/core';
-
+import lodash from 'lodash'
 
 
 export default function Pantry({ token }) {
     const [foodList, setFoodList] = useState([])
     const [searchResults, setSearchResults] = useState([])
     const [selectedIngredients, setSelectedIngredients] = useState([])
+    const [isAtLimit, setIsAtLimit] = useState(false)
 
 
 
@@ -24,10 +25,12 @@ export default function Pantry({ token }) {
                 },
             })
             .then((data) => {
-                console.log('data.data is ', data.data)
-                setFoodList(data.data[0].ingredients_list)
-                console.log('foodList', foodList)
+                function setFood (data) {
+                    setFoodList(lodash.uniqBy(data, 'name'))
+                }
+                setFood(data.data[0].ingredients_list)
             })
+
     }, [])
 
 
@@ -59,31 +62,42 @@ export default function Pantry({ token }) {
                 </HomeIcon>
             </IconButton>
 
-
-            {foodList.map((food) => (
-                <FoodItem food={food} key={food.id} selectedIngredients={selectedIngredients} setSelectedIngredients={setSelectedIngredients} token={token} />
-            ))}
-
-            <FoodItemForm addFoodItem={addFoodItem} token={token} />
-
-            <button className='search-ingredients' onClick={handleSearch}>Search</button>
-
-            <div>
-                {(selectedIngredients && selectedIngredients.length > 0) && (
-                    <h1>Results:</h1>
+            {foodList ? (
+                <div>
+                {foodList.map((food) => (
+                    <FoodItem food={food} key={food.id} selectedIngredients={selectedIngredients} setSelectedIngredients={setSelectedIngredients} token={token} isAtLimit={isAtLimit} setIsAtLimit={setIsAtLimit}/>
+                ))}
+                {isAtLimit ? (
+                <div><p>You may only select a maximum of 4 ingredients</p></div>
+                ) : (
+                    <p></p>
                 )}
-                {searchResults && searchResults.length > 0 ? (
 
-                    <Link to={{
-                        pathname: '/searchresults',
-                        state: {
-                            search: searchResults, item: selectedIngredients.join()
-                        }
-                    }} type='button'>Show {searchResults.length} Results</Link>
+                <FoodItemForm addFoodItem={addFoodItem} token={token} />
 
-                ) : (<h1>No results</h1>)}
+                <button className='search-ingredients' onClick={handleSearch}>Search</button>
 
+                <div>
+                    {(selectedIngredients && selectedIngredients.length > 0) && (
+                        <h1>Results:</h1>
+                    )}
+                    {searchResults && searchResults.length > 0 ? (
+
+                        <Link to={{
+                            pathname: '/searchresults',
+                            state: {
+                                search: searchResults, item: selectedIngredients.join()
+                            }
+                        }} type='button'>Show {searchResults.length} Results</Link>
+
+                    ) : (<h1>No results</h1>)}
+
+                </div>
+                </div>
+                ) : (
+                    <p>Loading...</p>
+                )} 
             </div>
-        </div>
+            
     )
 }

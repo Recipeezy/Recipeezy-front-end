@@ -25,7 +25,7 @@ const useStyles = makeStyles(() => ({
     
 }));
 
-export default function ShopListItem ({food, token, shopList, setShopList}) {
+export default function ShopListItem ({food, token}) {
     const [isDeleted, setIsDeleted] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [name, setName] = useState(food.name)

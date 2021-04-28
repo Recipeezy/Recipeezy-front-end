@@ -51,6 +51,7 @@ export default function RecipeDetail({selectedRecipe, handleGoBack}) {
             <Typography className={classes.mealTitle} variant='h4' align='center'>
                 {selectedRecipe.strMeal}
             </Typography>
+
             <Grid
                 className={classes.root}
                 spacing={0}

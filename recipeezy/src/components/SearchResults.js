@@ -64,8 +64,7 @@ function SearchResults() {
                                                     <img src={recipe.meals[0].strMealThumb}></img>
                                                     <h4>{recipe.meals[0].strMeal}</h4>
                                                     <h1>{recipe.meals[0].idMeal}</h1>
-                                                    <p>Category: {recipe.meals[0].strCategory}</p>
-                                                    <p>Origin: {recipe.meals[0].strArea}</p>
+                                                    <p>Cuisine: {recipe.meals[0].strArea}</p>
                                                     <button onClick={() => setSelectedRecipe(recipe.meals[0])}>See More</button>
                                                 </div>
                                             </li>
