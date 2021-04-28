@@ -16,9 +16,8 @@ export default function Pantry({ token }) {
 
     const history = useHistory()
 
+    const getPantry = () => {
 
-    useEffect(() => {
-        console.log('token is ', token)
         axios
             .get('https://recipeezy-app.herokuapp.com/pantry/', {
                 headers: {
@@ -29,9 +28,15 @@ export default function Pantry({ token }) {
                 function setFood(data) {
                     setFoodList(lodash.uniqBy(data, 'name'))
                 }
-                setFood(data.data[0].ingredients_list)
+                setFood(data.data[0].ingredients)
             })
+    }
+
+    useEffect(() => {
+        console.log('token is ', token)
+        getPantry()
         getSearch()
+        console.log(foodList)
 
     }, [])
 
@@ -54,6 +59,7 @@ export default function Pantry({ token }) {
     }
 
     const handleSearch = () => {
+        getSearch()
         if (searchResults.length > 0) {
             history.push('/searchresults', { search: searchResults, item: selectedIngredients.join() })
         }
@@ -77,7 +83,7 @@ export default function Pantry({ token }) {
                         <p></p>
                     )}
 
-                    <FoodItemForm addFoodItem={addFoodItem} token={token} />
+                    <FoodItemForm addFoodItem={addFoodItem} token={token} getPantry={getPantry} />
 
                     <button className='search-ingredients' onClick={handleSearch}>Search</button>
 

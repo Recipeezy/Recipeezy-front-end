@@ -50,7 +50,7 @@ export default function FoodItem({ food, setSelectedIngredients, selectedIngredi
             setIsAtLimit(true)
             e.target.checked = false
         }
-        
+
         if (checkedTotal < 4) {
             setIsAtLimit(false)
         }
@@ -76,7 +76,7 @@ export default function FoodItem({ food, setSelectedIngredients, selectedIngredi
                     <button onClick={(event) => updateFoodItem(event)}
                         value={food.id}>Submit Edit</button>
                 </div>
-                : <label htmlFor={name}>{name}</label>}
+                : <label htmlFor={name}>{food.name}</label>}
 
             <button onClick={(event) => deleteIngredient(event)}>Delete Item</button>
             <button onClick={() => setIsEditing(true)}>Edit Item</button>

@@ -41,7 +41,7 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
         return listObjects
 
     }
-    // listToObjects(["Minced Beef", "Olive Oil", "Sesame Seed Burger Buns", "Onion", "Iceberg Lettuce", "Cheese", "Dill Pickles", "Mayonnaise", "White Wine Vinegar", "Pepper", "Mustard", "Onion Salt", "Garlic Powder", "Paprika"])
+
 
 
 

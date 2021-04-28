@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
-export default function FoodItemForm({ addFoodItem, token }) {
+export default function FoodItemForm({ addFoodItem, token, getPantry }) {
     const [name, setName] = useState('')
 
     const handleSubmit = (e) => {
@@ -21,6 +21,7 @@ export default function FoodItemForm({ addFoodItem, token }) {
             .then((data) => {
                 addFoodItem(data.data)
                 setName('')
+                getPantry()
             })
     }
 

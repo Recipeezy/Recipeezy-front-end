@@ -19,23 +19,28 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+
 function ShoppingList({ token }) {
     const [shopList, setShopList] = useState([])
     const classes = useStyles();
+    const getShopList = () => {
 
-
-    useEffect(() => {
         axios.get('https://recipeezy-app.herokuapp.com/shopping_list/', {
             headers: { 'Authorization': `Token ${token}` },
         })
             .then((data) => {
-                setShopList(data.data[0].shopping_list)
-                console.log(data.data[0].shopping_list)
+                setShopList(data.data[0].ingredients)
+                console.log(data.data[0].ingredients)
 
 
 
 
             })
+    }
+
+
+    useEffect(() => {
+        getShopList()
     }, [])
 
     const addShopItem = (newItem) => {
@@ -63,7 +68,7 @@ function ShoppingList({ token }) {
 
                         ))
                         }
-                        <ShopItemForm addShopItem={addShopItem} token={token} />
+                        <ShopItemForm addShopItem={addShopItem} token={token} getShopList={getShopList} />
                     </div>
                 ) : (
                     <p>Loading...</p>
