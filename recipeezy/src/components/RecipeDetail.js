@@ -29,6 +29,7 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
 
     }
 
+    // Turns list into a list of objects
     const listToObjects = (list) => {
         let listObjects = list.map(x => {
             let properties = {
@@ -36,14 +37,17 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
             }
             return properties
         })
+        console.log("LIST", listObjects)
         return listObjects
 
     }
     // listToObjects(["Minced Beef", "Olive Oil", "Sesame Seed Burger Buns", "Onion", "Iceberg Lettuce", "Cheese", "Dill Pickles", "Mayonnaise", "White Wine Vinegar", "Pepper", "Mustard", "Onion Salt", "Garlic Powder", "Paprika"])
 
 
+
     //sends request to shoppinglist to add all ingredients
     const addAllIngredients = () => {
+        listIngredients()
         if (ingredients) {
             let ingList = listToObjects(ingredients)
             axios.post(
@@ -53,7 +57,9 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
                 {
                     headers: { Authorization: `Token ${token}` },
                 },
-            ).then(console.log('done'))
+            ).then(() => {
+                console.log('done')
+            })
         }
     }
 
