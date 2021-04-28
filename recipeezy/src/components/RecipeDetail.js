@@ -1,13 +1,64 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Typography, IconButton, Button } from '@material-ui/core'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Paper, Card } from '@material-ui/core';
 import { CardMedia } from '@material-ui/core';
+import axios from 'axios';
 
-export default function RecipeDetail({ selectedRecipe, handleGoBack }) {
+export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
     console.log('selected recipe ', selectedRecipe)
     console.log(selectedRecipe.strYoutube.replace('watch?', 'embed/'))
+
+    const [ingredients, setIngredients] = useState([])
+
+
+    // gets all ingredients and puts in list
+    // deletes empty strings to avoid 400 error
+    const listIngredients = () => {
+        let ingredientsList = []
+        for (let i = 1; i < 21; i++) {
+            eval('ingredientsList.push(selectedRecipe.strIngredient' + i + ')')
+        }
+        ingredientsList = ingredientsList.filter(function (ingredient) {
+            return ingredient.length > 0
+        })
+        setIngredients(ingredientsList)
+
+        console.log(ingredientsList)
+
+    }
+
+    const listToObjects = (list) => {
+        let listObjects = list.map(x => {
+            let properties = {
+                "name": x
+            }
+            return properties
+        })
+        return listObjects
+
+    }
+    // listToObjects(["Minced Beef", "Olive Oil", "Sesame Seed Burger Buns", "Onion", "Iceberg Lettuce", "Cheese", "Dill Pickles", "Mayonnaise", "White Wine Vinegar", "Pepper", "Mustard", "Onion Salt", "Garlic Powder", "Paprika"])
+
+
+    //sends request to shoppinglist to add all ingredients
+    const addAllIngredients = () => {
+        if (ingredients) {
+            let ingList = listToObjects(ingredients)
+            axios.post(
+                'https://recipeezy-app.herokuapp.com/shopping_list/add/', {
+                ingredients: ingList
+            },
+                {
+                    headers: { Authorization: `Token ${token}` },
+                },
+            ).then(console.log('done'))
+        }
+    }
+
+
+
     return (
         <div>
             <IconButton>
@@ -51,7 +102,7 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack }) {
                     <li>{selectedRecipe.strIngredient20}</li>
                 </ul>
                 <div className="add-all-ingredients">
-                    <button>Add all Ingredients to Shopping List</button>
+                    <button onClick={addAllIngredients}>Add all Ingredients to Shopping List</button>
                 </div>
             </div>
             <div>

@@ -10,7 +10,9 @@ export default function FoodItemForm({ addFoodItem, token }) {
             .post(
                 'https://recipeezy-app.herokuapp.com/pantry/add/',
                 {
-                    name: name
+                    ingredients: [
+                        { name: name }
+                    ]
                 },
                 {
                     headers: { Authorization: `Token ${token}` },

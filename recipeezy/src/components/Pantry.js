@@ -31,6 +31,7 @@ export default function Pantry({ token }) {
                 }
                 setFood(data.data[0].ingredients_list)
             })
+        getSearch()
 
     }, [])
 
@@ -40,7 +41,7 @@ export default function Pantry({ token }) {
     }
 
 
-    const handleSearch = () => {
+    const getSearch = () => {
         axios.get(`https://www.themealdb.com/api/json/v2/9973533/filter.php?i=${selectedIngredients.join()}`).then((response) => {
             if (response.data.meals) {
                 setSearchResults((response.data.meals && response.data.meals.length > 10) ? response.data.meals.slice(0, 10).map((obj) => obj.idMeal) : response.data.meals.map((obj) => obj.idMeal))
@@ -48,14 +49,15 @@ export default function Pantry({ token }) {
 
             }
             console.log('SEARCH', searchResults)
-            if (searchResults.length > 0) {
-                history.push('/searchresults', { search: searchResults, item: selectedIngredients.join() })
-            } else {
-                document.querySelector(".errorh2").innerHTML = "NO results"
-            }
+
         })
     }
 
+    const handleSearch = () => {
+        if (searchResults.length > 0) {
+            history.push('/searchresults', { search: searchResults, item: selectedIngredients.join() })
+        }
+    }
 
 
 
