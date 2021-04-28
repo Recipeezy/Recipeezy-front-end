@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Typography, IconButton, Button, makeStyles } from '@material-ui/core'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -12,7 +12,7 @@ import { ListItem } from '@material-ui/core';
 
 const useStyles = makeStyles({
     videoCard: {
-        minWidth:'150px'
+        minWidth: '150px'
     },
     mealTitle: {
         marginBottom: '50px'
@@ -21,11 +21,11 @@ const useStyles = makeStyles({
         display: 'flex',
     },
     textContainer: {
-        justifyContent:'center',
-        width:'50%'
+        justifyContent: 'center',
+        width: '50%'
     },
     img: {
-        width:'50%'
+        width: '50%'
     },
     list: {
         alignItems: 'center'
@@ -36,16 +36,73 @@ const useStyles = makeStyles({
     }
 });
 
-export default function RecipeDetail({selectedRecipe, handleGoBack}) {
-    const classes = useStyles()
+import axios from 'axios';
+
+export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
     console.log('selected recipe ', selectedRecipe)
+    console.log(selectedRecipe.strYoutube.replace('watch?', 'embed/'))
+
+    const [ingredients, setIngredients] = useState([])
+
+
+    // gets all ingredients and puts in list
+    // deletes empty strings to avoid 400 error
+    const listIngredients = () => {
+        let ingredientsList = []
+        for (let i = 1; i < 21; i++) {
+            eval('ingredientsList.push(selectedRecipe.strIngredient' + i + ')')
+        }
+        ingredientsList = ingredientsList.filter(function (ingredient) {
+            return ingredient.length > 0
+        })
+        setIngredients(ingredientsList)
+
+        console.log(ingredientsList)
+
+    }
+
+    // Turns list into a list of objects
+    const listToObjects = (list) => {
+        let listObjects = list.map(x => {
+            let properties = {
+                "name": x
+            }
+            return properties
+        })
+        console.log("LIST", listObjects)
+        return listObjects
+
+    }
+
+
+
+
+    //sends request to shoppinglist to add all ingredients
+    const addAllIngredients = () => {
+        listIngredients()
+        if (ingredients) {
+            let ingList = listToObjects(ingredients)
+            axios.post(
+                'https://recipeezy-app.herokuapp.com/shopping_list/add/', {
+                ingredients: ingList
+            },
+                {
+                    headers: { Authorization: `Token ${token}` },
+                },
+            ).then(() => {
+                console.log('done')
+            })
+        }
+    }
+
+
 
     return (
         <Container>
             <IconButton>
                 <ArrowBackIcon
-                gutterBottom
-                onClick={handleGoBack}
+                    gutterBottom
+                    onClick={handleGoBack}
                 >Go back</ArrowBackIcon>
             </IconButton>
             <Typography className={classes.mealTitle} variant='h4' align='center'>
@@ -65,13 +122,20 @@ export default function RecipeDetail({selectedRecipe, handleGoBack}) {
                     </Grid>
                     <Grid item component={Paper} className={classes.textContainer}>
                         <Typography
-                        variant='subtitle1'
-                        align="center"
+                            variant='subtitle1'
+                            align="center"
                         >Cuisine: {selectedRecipe.strArea}</Typography>
                         <Typography align='center' variant='subtitle1'>Category: {selectedRecipe.strCategory}</Typography>
                     </Grid>
                 </div>
             </Grid>
+            <Paper align='center' maxWidth={300}>
+                <img align='center' alt="recipe-pic" src={selectedRecipe.strMealThumb} />
+                <Typography
+                    variant='subtitle1'
+                    align="center"
+                >Cuisine: {selectedRecipe.strArea}</Typography>
+            </Paper>
 
             <div>
                 <ul className='ingredient-list'>
@@ -96,6 +160,9 @@ export default function RecipeDetail({selectedRecipe, handleGoBack}) {
                     <li>{selectedRecipe.strIngredient19}</li>
                     <li>{selectedRecipe.strIngredient20}</li>
                 </ul>
+                <div className="add-all-ingredients">
+                    <button onClick={addAllIngredients}>Add all Ingredients to Shopping List</button>
+                </div>
             </div>
             <div>
                 <Typography className={classes.subHeader} variant='h5'>
@@ -103,14 +170,15 @@ export default function RecipeDetail({selectedRecipe, handleGoBack}) {
                 </Typography>
                 <Typography variant='body1'>{selectedRecipe.strInstructions}</Typography>
             </div>
-                    <Card className={classes.videoCard}>
-                        <CardMedia 
-                        // width="100%"
-                        src={selectedRecipe.strYoutube.replace('watch?v=', 'embed/')}
-                        component='iframe'
-                        height='400'
-                        />
-                    </Card>
-        </Container>
+            <Card className={classes.videoCard}>
+                <CardMedia
+                    // width="100%"
+                    src={selectedRecipe.strYoutube.replace('watch?v=', 'embed/')}
+                    component='iframe'
+                    height='400'
+                />
+            </Card>
+        </Container >
+
     )
 }

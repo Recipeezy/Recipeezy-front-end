@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
-export default function FoodItemForm ({addFoodItem, token}) {
+export default function FoodItemForm({ addFoodItem, token, getPantry }) {
     const [name, setName] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault()
         axios
             .post(
-                'http://recipeezy-app.herokuapp.com/pantry/add/',
+                'https://recipeezy-app.herokuapp.com/pantry/add/',
                 {
-                    name: name
+                    ingredients: [
+                        { name: name }
+                    ]
                 },
                 {
                     headers: { Authorization: `Token ${token}` },
@@ -18,33 +20,34 @@ export default function FoodItemForm ({addFoodItem, token}) {
             )
             .then((data) => {
                 addFoodItem(data.data)
-            setName('')
+                setName('')
+                getPantry()
             })
     }
 
 
-    return(
+    return (
         <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor='ingredient-name'></label>
-                    <input
-                        id='ingredient-name'
-                        type='text'
-                        value={name}
-                        placeholder='Add Ingredient'
-                        onChange={(event) => setName(event.target.value)}
-                    ></input>
+            <div>
+                <label htmlFor='ingredient-name'></label>
+                <input
+                    id='ingredient-name'
+                    type='text'
+                    value={name}
+                    placeholder='Add Ingredient'
+                    onChange={(event) => setName(event.target.value)}
+                ></input>
 
-                </div>  
-                <div className='btn'>
+            </div>
+            <div className='btn'>
 
                 <button
                     className='submit-btn'
                     type="submit"
                 >Add</button>
-                </div>
-                
-                </form>
+            </div>
+
+        </form>
     )
 
 }
