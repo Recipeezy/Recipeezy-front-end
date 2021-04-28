@@ -5,6 +5,9 @@ img {
 
 .ingredient-list {
     list-style: none;
+    margin: 0 auto;
+    display: table;
+    margin-top: 40px;
 }
 
 .recipe-card {

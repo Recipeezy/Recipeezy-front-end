@@ -18,7 +18,7 @@ const theme = createMuiTheme({
             wordWrap:'break-word',
         },
         h3: {
-            fontFamily:'libre baskerville',
+            fontFamily:'kalam',
             color:'#011936'
         },
         body1: {
@@ -31,16 +31,6 @@ const theme = createMuiTheme({
                 marginTop:"10px"
             }
         },
-        // // MuiSvgIcon: {
-        // //     root:{
-        // //         marginRight:"10px"
-        // //     }
-        // },
-        MuiCard: {
-            root:{
-                maxWidth:'300px'
-            }
-        }
     }
 });
 

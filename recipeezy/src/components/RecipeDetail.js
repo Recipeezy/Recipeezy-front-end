@@ -11,24 +11,28 @@ import { List } from '@material-ui/core';
 import { ListItem } from '@material-ui/core';
 
 const useStyles = makeStyles({
-    root: {
-        width: '100%',
+    videoCard: {
+        minWidth:'150px'
     },
     mealTitle: {
-        marginBottom: '60px'
+        marginBottom: '50px'
     },
     cardDetails: {
         display: 'flex',
     },
     textContainer: {
         justifyContent:'center',
-        width:'300px'
+        width:'50%'
     },
     img: {
         width:'50%'
     },
     list: {
         alignItems: 'center'
+    },
+    subHeader: {
+        paddingLeft: '15px',
+        marginTop: '30px'
     }
 });
 
@@ -58,7 +62,7 @@ export default function RecipeDetail({selectedRecipe, handleGoBack}) {
                     <Grid item>
                         <img align='center' alt="recipe-pic" src={selectedRecipe.strMealThumb} />
                     </Grid>
-                    <Grid item className={classes.textContainer}>
+                    <Grid item component={Paper} className={classes.textContainer}>
                         <Typography
                         variant='subtitle1'
                         align="center"
@@ -68,36 +72,39 @@ export default function RecipeDetail({selectedRecipe, handleGoBack}) {
                 </div>
             </Grid>
 
-            <div >
-                <List className={classes.list}>
-                    <ListItem alignItems='center'>{selectedRecipe.strIngredient1}</ListItem>
-                    <ListItem>{selectedRecipe.strIngredient2}</ListItem>
-                    <ListItem>{selectedRecipe.strIngredient3}</ListItem>
-                    <ListItem>{selectedRecipe.strIngredient4}</ListItem>
-                    <ListItem>{selectedRecipe.strIngredient5}</ListItem>
-                    <ListItem>{selectedRecipe.strIngredient6}</ListItem>
-                    <ListItem>{selectedRecipe.strIngredient7}</ListItem>
-                    <ListItem>{selectedRecipe.strIngredient8}</ListItem>
-                    <ListItem>{selectedRecipe.strIngredient9}</ListItem>
-                    <ListItem>{selectedRecipe.strIngredient10}</ListItem>
-                    <ListItem>{selectedRecipe.strIngredient11}</ListItem>
-                    <ListItem>{selectedRecipe.strIngredient12}</ListItem>
-                    <ListItem>{selectedRecipe.strIngredient13}</ListItem>
-                    <ListItem>{selectedRecipe.strIngredient14}</ListItem>
-                    <ListItem>{selectedRecipe.strIngredient15}</ListItem>
-                    <ListItem>{selectedRecipe.strIngredient16}</ListItem>
-                    <ListItem>{selectedRecipe.strIngredient17}</ListItem>
-                    <ListItem>{selectedRecipe.strIngredient18}</ListItem>
-                    <ListItem>{selectedRecipe.strIngredient19}</ListItem>
-                    <ListItem>{selectedRecipe.strIngredient20}</ListItem>
-                </List>
+            <div>
+                <ul className='ingredient-list'>
+                    <li>{selectedRecipe.strIngredient1}</li>
+                    <li>{selectedRecipe.strIngredient2}</li>
+                    <li>{selectedRecipe.strIngredient3}</li>
+                    <li>{selectedRecipe.strIngredient4}</li>
+                    <li>{selectedRecipe.strIngredient5}</li>
+                    <li>{selectedRecipe.strIngredient6}</li>
+                    <li>{selectedRecipe.strIngredient7}</li>
+                    <li>{selectedRecipe.strIngredient8}</li>
+                    <li>{selectedRecipe.strIngredient9}</li>
+                    <li>{selectedRecipe.strIngredient10}</li>
+                    <li>{selectedRecipe.strIngredient11}</li>
+                    <li>{selectedRecipe.strIngredient12}</li>
+                    <li>{selectedRecipe.strIngredient13}</li>
+                    <li>{selectedRecipe.strIngredient14}</li>
+                    <li>{selectedRecipe.strIngredient15}</li>
+                    <li>{selectedRecipe.strIngredient16}</li>
+                    <li>{selectedRecipe.strIngredient17}</li>
+                    <li>{selectedRecipe.strIngredient18}</li>
+                    <li>{selectedRecipe.strIngredient19}</li>
+                    <li>{selectedRecipe.strIngredient20}</li>
+                </ul>
             </div>
             <div>
-                <Typography variant='body1'> Instructions: {selectedRecipe.strInstructions}</Typography>
+                <Typography className={classes.subHeader} variant='h5'>
+                    Instructions:
+                </Typography>
+                <Typography variant='body1'>{selectedRecipe.strInstructions}</Typography>
             </div>
-                    <Card>
+                    <Card className={classes.videoCard}>
                         <CardMedia 
-                        width='400px'
+                        // width="100%"
                         src={selectedRecipe.strYoutube.replace('watch?v=', 'embed/')}
                         component='iframe'
                         height='400'
@@ -106,4 +113,3 @@ export default function RecipeDetail({selectedRecipe, handleGoBack}) {
         </Container>
     )
 }
-
