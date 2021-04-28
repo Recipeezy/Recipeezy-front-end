@@ -1,16 +1,22 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { Input } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
+import { TextField } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 
-export default function FoodItemForm ({addFoodItem, token}) {
+export default function FoodItemForm({ addFoodItem, token, getPantry }) {
     const [name, setName] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault()
         axios
             .post(
-                'http://recipeezy-app.herokuapp.com/pantry/add/',
+                'https://recipeezy-app.herokuapp.com/pantry/add/',
                 {
-                    name: name
+                    ingredients: [
+                        { name: name }
+                    ]
                 },
                 {
                     headers: { Authorization: `Token ${token}` },
@@ -18,33 +24,31 @@ export default function FoodItemForm ({addFoodItem, token}) {
             )
             .then((data) => {
                 addFoodItem(data.data)
-            setName('')
+                setName('')
+                getPantry()
             })
     }
 
 
-    return(
+    return (
         <form onSubmit={handleSubmit}>
-                <div>
+            <Grid container spacing={2}>
                     <label htmlFor='ingredient-name'></label>
-                    <input
+                    <TextField
                         id='ingredient-name'
                         type='text'
                         value={name}
                         placeholder='Add Ingredient'
                         onChange={(event) => setName(event.target.value)}
-                    ></input>
-
-                </div>  
-                <div className='btn'>
-
-                <button
+                    ></TextField>
+                <Button
+                    variant='contained'
+                    // fullWidth
                     className='submit-btn'
                     type="submit"
-                >Add</button>
-                </div>
-                
-                </form>
+                >Add</Button>
+            </Grid>
+        </form>
     )
 
 }

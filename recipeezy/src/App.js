@@ -63,7 +63,7 @@ function App() {
       
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Container maxWidth='md'>
+        <Container maxWidth='sm'>
           <div>
             <h1>Hello</h1>
             {/* <RecipeResults /> */}
