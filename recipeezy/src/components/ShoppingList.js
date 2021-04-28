@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ShopListItem from './ShopListItem.js'
 import ShopItemForm from './ShopItemForm.js'
-import { List, Card, Grid } from '@material-ui/core';
-import { ListItem, makeStyles, ListItemText } from '@material-ui/core';
+import { List, Card, Grid, Paper } from '@material-ui/core';
+import { ListItem, makeStyles, ListItemText, Button } from '@material-ui/core';
 import { Container } from '@material-ui/core';
+import HomeIcon from '@material-ui/icons/Home';
+import { IconButton } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -46,29 +48,33 @@ function ShoppingList({token}) {
 
     return (
         <div>
-            <Link to='/' type='button'>Home</Link>
+            <IconButton component={Link} to='/'>
+                <HomeIcon>
+                    Home
+                </HomeIcon>
+            </IconButton>
             <h1>SHOPPING LIST</h1>
-            <div className="shopping-list-main-container">
+            <Paper width='500px' height='700px' className="shopping-list-main-container">
                 
                 {shopList ? (
-                    <div>
-                    {shopList.map((food) => (
-                        <ShopListItem
-                        food={food}
-                        key={food.id}
-                        token={token}
-                        setShopList={setShopList}
-                        shopList={shopList}
-                    />
-                    
-                    ))
-                    }
+                    <List component='nav'>
+                        {shopList.map((food) => (
+                            <ShopListItem
+                            food={food}
+                            key={food.id}
+                            token={token}
+                            setShopList={setShopList}
+                            shopList={shopList}
+                        />
+                        
+                        ))
+                        }
                     <ShopItemForm addShopItem={addShopItem} token={token} />
-                    </div>
+                    </List>
                     ) : (
                         <p>Loading...</p>
                     )}
-            </div>
+            </Paper>
         </div>
     
 

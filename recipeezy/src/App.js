@@ -20,9 +20,17 @@ import theme from './theme'
 import { Button } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
 
+
+const useStyles = makeStyles(() => ({
+  root: {
+      marginRight: '10px',
+  },
+  }));
+
 function App() {
   const [username, setUsername] = useLocalStorageState('username', '')
   const [token, setToken] = useLocalStorageState('token', '')
+  const classes = useStyles();
 
   function setAuth(username, token) {
     setUsername(username)
@@ -81,25 +89,35 @@ function App() {
                               <MenuItem onClick={handleClose}>
                                   <Link to='/selectedrecipes' type='button' style={{ textDecoration: 'none', textDecorationColor:'black' }}>Selected Recipes</Link>
                               </MenuItem>
+                              <MenuItem onClick={handleClose}>
+                                  <Link to='/shoppinglist' type='button' style={{ textDecoration: 'none', textDecorationColor:'black' }}>Shopping List</Link>
+                              </MenuItem>
                           </Menu>
                       <Typography variant='h3'color="secondary">
                           Recipeezy
                       </Typography>
                       {isLoggedIn ? (
                           <Grid container justify='flex-end'>
-                            <Typography>
-                              <Link to="/" onClick={logOut} type="button">Log Out</Link>
-                            </Typography>
+                            <Button
+                            variant='contained'
+                            color="primary"
+                            size="small"
+                            >
+                              <Link to="/" onClick={logOut} style={{ textDecoration: 'none' }}  type="button">Log Out</Link>
+                            </Button>
                           </Grid>
                         ) : (
                         <Grid container justify='flex-end'>
-                          <Button 
-                            color="secondary"
+                          <Button
+                            className={classes.root}
+                            variant='contained'
+                            color="primary"
                             size="small">
                             <Link to="/registration" style={{ textDecoration: 'none' }} type="button">Register</Link>
                           </Button>
                           <Button
-                            color="secondary"
+                            variant='contained'
+                            color="primary"
                             size="small"
                           >
                             <Link to="/login" type="button" style={{ textDecoration: 'none' }}>Log In</Link>

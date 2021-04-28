@@ -1,10 +1,35 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { ListItem } from '@material-ui/core'
+import { ListItemIcon } from '@material-ui/core'
+import DeleteIcon from '@material-ui/icons/Delete'
+import { Button, makeStyles, Checkbox } from '@material-ui/core'
+import EditIcon from '@material-ui/icons/Edit'
+import AddIcon from '@material-ui/icons/Add';
+import { Typography } from '@material-ui/core'
+import { BorderRightRounded } from '@material-ui/icons'
+
+
+const useStyles = makeStyles(() => ({
+    label: {
+        marginRight:'75px'
+    },
+    listItem: {
+        '&:hover': {
+            background: '#c0dfa1',
+        },
+        marginTop: '15px',
+        marginBotton: '15px',
+        borderRadius:'15px'
+    },
+    
+}));
 
 export default function ShopListItem ({food, token}) {
     const [isDeleted, setIsDeleted] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [name, setName] = useState(food.name)
+    const classes = useStyles()
 
     const updateShopListItem = (event) => {
 
@@ -58,30 +83,39 @@ export default function ShopListItem ({food, token}) {
     if (isDeleted) return false;
 
     return (
-        <li>
-            <input
+        <ListItem className={classes.listItem}>
+            <Checkbox
                 type='checkbox'
                 id={food.id}
                 className='checkboxes'
                 value={food.name}
                 
                 >
-            </input>
+            </Checkbox>
             {isEditing ?
                 <div>
                     <input onChange={(event) => setName(event.target.value)} value={name}></input>
                     <button onClick={(event) => updateShopListItem(event)}
                         value={food.id}>Submit Edit</button>
                 </div>
-                : <label htmlFor={name}>{name}</label>}
-            
-            <button
-                onClick={(event) => swapItemToPantry(event)}>Add to Pantry
-            </button>
-            <button 
-                onClick={(event) => deleteShopListItem(event)}>Delete Item
-            </button>
-            <button onClick={() => setIsEditing(true)}>Edit Item</button>
-        </li>
+                : 
+                <Typography className={classes.label}>
+                    <label htmlFor={name}>{name}</label>
+                </Typography>
+                }
+            <ListItemIcon>
+                <AddIcon
+                    onClick={(event) => swapItemToPantry(event)}>Add to Pantry
+                </AddIcon>
+            </ListItemIcon>
+            <ListItemIcon>
+                <DeleteIcon 
+                    onClick={(event) => deleteShopListItem(event)}>Delete Item
+                </DeleteIcon>
+            </ListItemIcon>
+            <ListItemIcon>
+                <EditIcon onClick={() => setIsEditing(true)}>Edit Item</EditIcon>
+            </ListItemIcon>
+        </ListItem>
     )
 }
