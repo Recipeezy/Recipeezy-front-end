@@ -14,7 +14,9 @@ const useStyles = makeStyles({
 })
 
 
+
 function SearchResults({ token }) {
+
     const [recipes, setRecipes] = useState([])
     const [mealIds, setMealIds] = useState([])
     const classes = useStyles()

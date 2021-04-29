@@ -45,6 +45,12 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
 
     const [ingredients, setIngredients] = useState([])
 
+    const recipeTitle = selectedRecipe.strMeal 
+    const recipeImg = selectedRecipe.strMealThumb
+    const recipeCuisine = selectedRecipe.strArea
+    const recipeInstruc = selectedRecipe.strInstructions
+    const recipeVideo = selectedRecipe.strYoutube
+
 
     // gets all ingredients and puts in list
     // deletes empty strings to avoid 400 error
@@ -79,6 +85,30 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
     }
 
 
+
+    const addSelectedRecipe = () => {
+        console.log('token is ', token)
+        listIngredients()
+        if(ingredients) {
+            let ingList = listToObjects(ingredients)
+            axios.post(
+                'https://recipeezy-app.herokuapp.com/recipes/',
+                {
+                    title: recipeTitle,
+                    origin: recipeCuisine,
+                    instructions: recipeInstruc,
+                    img_id: recipeImg,
+                    video_id: recipeVideo,
+                    ingredients: ingList
+                },
+                    {
+                        headers: { Authorization: `Token ${token}` },
+                    },
+                ).then(() => {
+                    console.log('done')
+                })
+        }        
+    }
 
 
     //sends request to shoppinglist to add all ingredients
@@ -162,7 +192,11 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
                     <li>{selectedRecipe.strIngredient20}</li>
                 </ul>
                 <div className="add-all-ingredients">
+
+                    <button onClick={addSelectedRecipe}>Select Recipe</button>
+                    
                     <button className="add-ing-button" onClick={addAllIngredients}>Add all Ingredients to Shopping List</button>
+
                 </div>
             </div>
             <div>
