@@ -64,7 +64,7 @@ function App() {
 
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Container maxWidth='sm'>
+        <Container maxWidth='md'>
           <div>
             <h1>Hello</h1>
             {/* <RecipeResults /> */}
@@ -100,39 +100,36 @@ function App() {
               <Typography variant='h4' color="secondary">
                 Recipeezy
                       </Typography>
-              {isLoggedIn ? (
-                <Grid container justify='flex-end'>
-                  <Button
-                    variant='contained'
-                    color="primary"
-                    size="small"
-                  >
-                    <Link to="/" onClick={logOut} style={{ textDecoration: 'none' }} type="button">Log Out</Link>
-                  </Button>
-                </Grid>
-              ) : (
-                <Grid container justify='flex-end'>
-                  <Button
-                    className={classes.root}
-                    variant='contained'
-                    color="primary"
-                    size="small">
-                    <Link to="/registration" style={{ textDecoration: 'none' }} type="button">Register</Link>
-                  </Button>
-                  <Button
-                    variant='contained'
-                    color="primary"
-                    size='small'
-                  >
-                    <Link to="/login" type="button" style={{ textDecoration: 'none' }}>Log In</Link>
-                  </Button>
-                </Grid>
-              )}
-              {/* <IconButton size='small' component={Link} to='/'>
-                          <HomeIcon>
-                              Home
-                          </HomeIcon>
-                        </IconButton> */}
+                      {isLoggedIn ? (
+                          <Grid container justify='flex-end'>
+                            <Button
+                            variant='contained'
+                            color="secondary"
+                            size="small"
+                            >
+                              <Link to="/" onClick={logOut} style={{ textDecoration: 'none' }}  type="button">Log Out</Link>
+                            </Button>
+                          </Grid>
+                        ) : (
+                        <Grid container justify='flex-end'>
+                          <Button
+                            className={classes.root}
+                            variant='contained'
+                            color="primary"
+                            size="small">
+                            <Link to="/registration" style={{ textDecoration: 'none' }} type="button">Register</Link>
+                          </Button>
+                          <Button
+                            variant='contained'
+                            color="primary"
+                            size='small'
+                          >
+                            <Link to="/login" type="button" style={{ textDecoration: 'none' }}>Log In</Link>
+                          </Button>
+                        </Grid>
+                        )}
+                        {/* <IconButton size='small' component={Link} to='/'>
+
             </Toolbar>
           </AppBar>
 

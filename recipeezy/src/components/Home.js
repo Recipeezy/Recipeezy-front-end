@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import {Typography, Paper, makeStyles, Button, Container} from '@material-ui/core/'
 import { Grid } from '@material-ui/core';
+import Pantry from './Pantry';
 
 const useStyles = makeStyles({
         pantryPaper: {
@@ -18,7 +19,7 @@ const useStyles = makeStyles({
 
 
 
-export default function Home({ isLoggedIn, logOut }) {
+export default function Home({ isLoggedIn, logOut, token }) {
     const classes=useStyles();
 
     return (
@@ -30,14 +31,12 @@ export default function Home({ isLoggedIn, logOut }) {
         justify="center"
         className={classes.container}>
 
-        <Typography className={classes.header} variant='h5'>
+        {/* <Typography className={classes.header} variant='h5'>
             Home Page
-        </Typography>
+        </Typography> */}
 
         <Paper style={{maxHeight: 350, overflow: 'auto' }} className={classes.pantryPaper}>
-            <Typography>
-                Pantry
-            </Typography>
+            <Pantry isLoggedIn={isLoggedIn} token={token}/>
         </Paper>
 
             <Button

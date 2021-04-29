@@ -19,11 +19,12 @@ const useStyles = makeStyles({
         marginBottom: '50px'
     },
     cardDetails: {
-        display: 'flex',
+        width: '300px',
+        alignItems: 'center'
     },
     textContainer: {
         justifyContent: 'center',
-        width: '50%'
+        margin: '0 auto'
     },
     img: {
         width: '50%'
@@ -155,7 +156,7 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
                 justify="center"
                 container>
                 <div className={classes.cardDetails}>
-                    <Grid item>
+                    <Grid item >
                         <img align='center' alt="recipe-pic" src={selectedRecipe.strMealThumb} />
                     </Grid>
                     <Grid item component={Paper} className={classes.textContainer}>
@@ -191,6 +192,9 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
                     <li>{selectedRecipe.strIngredient19}</li>
                     <li>{selectedRecipe.strIngredient20}</li>
                 </ul>
+
+                    <Button style={{marginTop:'15px', marginBottom: '15px'}} variant='contained' color='primary' onClick={addAllIngredients}>Add all Ingredients to Shopping List</Button>
+
                 <div className="add-all-ingredients">
 
                     <button onClick={addSelectedRecipe}>Select Recipe</button>
@@ -198,6 +202,7 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
                     <button className="add-ing-button" onClick={addAllIngredients}>Add all Ingredients to Shopping List</button>
 
                 </div>
+
             </div>
             <div>
                 <Typography className={classes.subHeader} variant='h5'>

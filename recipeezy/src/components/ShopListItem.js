@@ -1,26 +1,42 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { ListItemIcon, ListItem, Button, makeStyles, Checkbox } from '@material-ui/core'
+import { ListItemIcon, ListItem, Button, makeStyles, Checkbox, Grid } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
 import AddIcon from '@material-ui/icons/Add';
 import { Typography } from '@material-ui/core'
 import { BorderRightRounded } from '@material-ui/icons'
+import { TextField } from '@material-ui/core'
 
 
 const useStyles = makeStyles(() => ({
     label: {
-        marginRight:'50px'
+        padding:'0'
     },
     listItem: {
         '&:hover': {
             background: '#c0dfa1',
         },
-        // marginTop: '15px',
-        // marginBotton: '15px',
-        borderRadius:'15px'
+        display: 'flex',
+        borderRadius:'15px',
+        justifyContent:'space-between',
+        padding:'8px 0px'
     },
-    
+    listIcons: {
+        margin:'0',
+        minWidth: '30px',
+        height: '24px'
+    },
+    container: {
+        justifyContent:'center',
+    },
+    submitButton: {
+        marginLeft: '15px',
+        marginTop: '0px',
+        padding: '0',
+        height: '50px',
+        width: '70px'
+    },
 }));
 
 export default function ShopListItem ({food, token}) {
@@ -81,39 +97,48 @@ export default function ShopListItem ({food, token}) {
     if (isDeleted) return false;
 
     return (
-        <ListItem className={classes.listItem}>
-            <Checkbox
-                type='checkbox'
-                id={food.id}
-                className='checkboxes'
-                value={food.name}
-                
-                >
-            </Checkbox>
-            {isEditing ?
-                <div>
-                    <input onChange={(event) => setName(event.target.value)} value={name}></input>
-                    <button onClick={(event) => updateShopListItem(event)}
-                        value={food.id}>Submit Edit</button>
-                </div>
-                : 
-                <Typography className={classes.label}>
-                    <label htmlFor={name}>{name}</label>
-                </Typography>
-                }
-            <ListItemIcon>
-                <AddIcon
-                    onClick={(event) => swapItemToPantry(event)}>Add to Pantry
-                </AddIcon>
-            </ListItemIcon>
-            <ListItemIcon>
-                <DeleteIcon 
-                    onClick={(event) => deleteShopListItem(event)}>Delete Item
-                </DeleteIcon>
-            </ListItemIcon>
-            <ListItemIcon>
-                <EditIcon onClick={() => setIsEditing(true)}>Edit Item</EditIcon>
-            </ListItemIcon>
-        </ListItem>
+        <Grid>
+            <ListItem className={classes.listItem}>
+                <Checkbox
+                    type='checkbox'
+                    id={food.id}
+                    className='checkboxes'
+                    value={food.name}
+                    
+                    >
+                </Checkbox>
+                {isEditing ?
+                    <Grid container direction='row' alignItems='center'>
+                        <TextField onChange={(event) => setName(event.target.value)} value={name}></TextField>
+                        <Button
+                        size='small'
+                        variant='contained'
+                        onClick={(event) => updateShopListItem(event)}
+                            value={food.id}>Submit</Button>
+                    </Grid>
+                    : 
+                    <>
+                        <Typography className={classes.label}>
+                            <label htmlFor={name}>{name}</label>
+                        </Typography>
+                        
+                        <Grid spacing={0} item alignContent='flex-end'>
+                            <ListItemIcon className={classes.listIcons}>
+                                <AddIcon
+                                    onClick={(event) => swapItemToPantry(event)}>Add to Pantry
+                                </AddIcon>
+                            </ListItemIcon>
+                            <ListItemIcon className={classes.listIcons}>
+                                <EditIcon onClick={() => setIsEditing(true)}>Edit Item</EditIcon>
+                            </ListItemIcon>
+                            <ListItemIcon className={classes.listIcons}>
+                                <DeleteIcon 
+                                    onClick={(event) => deleteShopListItem(event)}>Delete Item
+                                </DeleteIcon>
+                            </ListItemIcon>
+                        </Grid>
+                    </>}     
+            </ListItem>
+        </Grid>
     )
 }
