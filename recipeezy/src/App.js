@@ -11,6 +11,7 @@ import { Container, Typography, Menu, AppBar, Toolbar, IconButton, MenuItem, Css
 import MenuIcon from '@material-ui/icons/Menu';
 import RecipeResults from './components/RecipeResults'
 import Pantry from './components/Pantry'
+import SelectedRecipes from './components/SelectedRecipes'
 import ShoppingList from './components/ShoppingList'
 import useLocalStorageState from 'use-local-storage-state'
 import Login from './components/Login';
@@ -152,7 +153,10 @@ function App() {
                   isLoggedIn={isLoggedIn} token={token}/>
             </Route>
             <Route path='/searchresults'>
-              <SearchResults />
+              <SearchResults token={token}/>
+            </Route>
+            <Route path='/selectedrecipes'>
+              <SelectedRecipes isLoggedIn={isLoggedIn} token={token} />
             </Route>
             </Switch>
           </div>

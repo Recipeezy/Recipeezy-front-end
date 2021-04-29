@@ -5,7 +5,7 @@ import { useLocation, Link } from 'react-router-dom'
 import RecipeDetail from './RecipeDetail'
 
 
-function SearchResults() {
+function SearchResults({token}) {
     const [recipes, setRecipes] = useState([])
     const [mealIds, setMealIds] = useState([])
     const [selectedRecipe, setSelectedRecipe] = useState(null)
@@ -50,7 +50,7 @@ function SearchResults() {
                 {(recipes && recipes.length > 0) ? (
                     <div>
                         {selectedRecipe ? (
-                            <RecipeDetail selectedRecipe={selectedRecipe} handleGoBack={() => setSelectedRecipe(null)} />
+                            <RecipeDetail selectedRecipe={selectedRecipe} handleGoBack={() => setSelectedRecipe(null)} token={token} />
                         ) : (
                             <div>
                                 <ul>
