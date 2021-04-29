@@ -5,7 +5,7 @@ import RecipeDetail from './RecipeDetail';
 
 export default function SelectedRecipes({ token }) {
     const [selectedRecipes, setSelectedRecipes] = useState([])
-    const [chosenRecipe, setSelectedRecipe] = useState(false)
+    const [chosenRecipe, setChosenRecipe] = useState(false)
     
         // map over each recipe for preview
         // then do a show more like we have for search results

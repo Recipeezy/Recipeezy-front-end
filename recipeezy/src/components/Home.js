@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import {Typography, Paper, makeStyles, Button, Container} from '@material-ui/core/'
 import { Grid } from '@material-ui/core';
+import Pantry from './Pantry.js'
 
 const useStyles = makeStyles({
         pantryPaper: {
@@ -42,7 +43,7 @@ export default function Home({ isLoggedIn, logOut }) {
 
             <Button
             variant='contained'
-            > Start Meal Plan</Button>
+            > Search Recipes</Button>
             <Typography variant='h6'>
                 Selected Recipes
             </Typography>
