@@ -1,12 +1,24 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { Input } from '@material-ui/core'
-import { Grid } from '@material-ui/core'
+import { Grid, Input, makeStyles } from '@material-ui/core'
 import { TextField } from '@material-ui/core'
 import { Button } from '@material-ui/core'
+import { ButtonBase } from '@material-ui/core'
+
+const useStyles = makeStyles({
+    addButton: {
+        maxHeight:'50px',
+        maxWidth: '40px',
+        padding: '0px 0px 0px 0px'
+    },
+    container: {
+        justifyContent:'center',
+    }
+})
 
 export default function FoodItemForm({ addFoodItem, token, getPantry }) {
     const [name, setName] = useState('')
+    const classes= useStyles()
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -32,7 +44,7 @@ export default function FoodItemForm({ addFoodItem, token, getPantry }) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <Grid container spacing={2}>
+            <Grid container spacing={2} alignItems='center' className={classes.container}>
                     <label htmlFor='ingredient-name'></label>
                     <TextField
                         id='ingredient-name'
@@ -42,9 +54,11 @@ export default function FoodItemForm({ addFoodItem, token, getPantry }) {
                         onChange={(event) => setName(event.target.value)}
                     ></TextField>
                 <Button
+                    size='small'
+                    color='secondary'
                     variant='contained'
-                    // fullWidth
-                    className='submit-btn'
+                    // style={{ padding: '0', height: '50px', width:'40px'}}
+                    className={classes.addButton}
                     type="submit"
                 >Add</Button>
             </Grid>

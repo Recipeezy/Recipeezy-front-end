@@ -7,10 +7,10 @@ import { orange } from "@material-ui/core/colors";
 const theme = createMuiTheme({
     palette: {
         primary:{
-            main:'#82a3a1'
+            main:'#fcf5c7'
         },
         secondary: {
-            main: '#011936'
+            main: '#de1616'
         }
     },
     typography: {

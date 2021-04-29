@@ -6,19 +6,39 @@ import EditIcon from '@material-ui/icons/Edit'
 import AddIcon from '@material-ui/icons/Add';
 import { Typography } from '@material-ui/core'
 import { InputLabel } from '@material-ui/core'
+import { TextField } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
+import { Card } from '@material-ui/core'
+import { Box } from '@material-ui/core'
 
 
 const useStyles = makeStyles(() => ({
-    label: {
-        marginRight:'50px'
-    },
+    // label: {
+    //     marginRight:'50px'
+    // },
     listItem: {
         '&:hover': {
-            background: '#c0dfa1',
+            background: '#fcf5c7',
         },
-        // marginTop: '15px',
-        // marginBotton: '15px',
-        borderRadius:'15px'
+        borderRadius:'15px',
+        justifyContent: 'space-between'
+        
+    },
+    submitButton: {
+        marginLeft: '15px',
+        marginTop: '0px',
+        padding: '0',
+        height: '50px',
+        width: '70px'
+        
+    },
+    inputField: {
+        padding: '10px'
+    },
+    listIcons: {
+        margin:'0',
+        minWidth: '30px',
+        height: '24px'
     },
     
 }));
@@ -91,27 +111,32 @@ export default function FoodItem({ food, setSelectedIngredients, selectedIngredi
     if (isDeleted) return false;
 
     return (
-        <ListItem className={classes.listItem}>
-            <Checkbox onChange={checkBoxClick} type='checkbox' id={food.name} className="checkboxes" value={food.name}></Checkbox>
-            {isEditing ?
-                <div>
-                    <input onChange={(event) => setName(event.target.value)} value={name}></input>
-                    <button onClick={(event) => updateFoodItem(event)}
-                        value={food.id}>Submit Edit</button>
-                </div>
-                :
-                // <Typography variant='body1' >
-                <InputLabel htmlFor={name} className={classes.label}>{food.name}</InputLabel>
-                // </Typography>
-                }
-            <ListItemIcon>
-                <DeleteIcon 
-                    onClick={(event) => deleteIngredient(event)}>Delete Item
-                </DeleteIcon>
-            </ListItemIcon>
-            <ListItemIcon>
-                <EditIcon onClick={() => setIsEditing(true)}>Edit Item</EditIcon>
-            </ListItemIcon>
-        </ListItem>
+        <Grid container alignItems='center'>
+            <ListItem className={classes.listItem}>
+                <Checkbox onChange={checkBoxClick} type='checkbox' id={food.name} className="checkboxes" value={food.name} color='secondary'></Checkbox>
+                {isEditing ?
+                    <Grid container direction='row' alignItems='center'>
+                        <TextField margin='dense' onChange={(event) => setName(event.target.value)} value={name}></TextField>
+                        <Button color='primary' size='small' variant='contained' onClick={(event) => updateFoodItem(event)}
+                            value={food.id}>Submit</Button>
+                    </Grid>
+                    :
+                    <>
+                    <InputLabel htmlFor={name} className={classes.label}>{food.name}</InputLabel>
+                    
+                    <Grid display='flex'>
+                        <ListItemIcon className={classes.listIcons}>
+                            <EditIcon color='secondary' onClick={() => setIsEditing(true)}>Edit Item</EditIcon>
+                        </ListItemIcon>
+                        <ListItemIcon className={classes.listIcons}>
+                            <DeleteIcon color='secondary'
+                                onClick={(event) => deleteIngredient(event)}>Delete Item
+                            </DeleteIcon>
+                        </ListItemIcon>
+                    </Grid>
+                    </>
+                    }
+            </ListItem>
+        </Grid>
     )
 }

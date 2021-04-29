@@ -51,9 +51,9 @@ function SearchResults() {
 
     return (
         <div>
-            <IconButton component={Link} to='/pantry'>
+            {/* <IconButton component={Link} to='/pantry'>
                 <ArrowBackIcon>Back to Pantry</ArrowBackIcon>
-            </IconButton>
+            </IconButton> */}
 
             <Typography variant='subtitle2' align='center'>
                 <h1>Search({recipes.length}) Results for: {location.state.item}</h1>

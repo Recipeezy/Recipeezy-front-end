@@ -5,7 +5,7 @@ import axios from 'axios';
 import ShopListItem from './ShopListItem.js'
 import ShopItemForm from './ShopItemForm.js'
 import { List, Card, Grid, Paper } from '@material-ui/core';
-import { ListItem, makeStyles, ListItemText, Button } from '@material-ui/core';
+import { makeStyles, Typography  } from '@material-ui/core';
 import { Container } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import { IconButton } from '@material-ui/core';
@@ -50,12 +50,9 @@ function ShoppingList({ token }) {
 
     return (
         <div>
-            <IconButton component={Link} to='/'>
-                <HomeIcon>
-                    Home
-                </HomeIcon>
-            </IconButton>
-            <h1>SHOPPING LIST</h1>
+            <Typography variant='h4' align='center' gutterBottom>
+                Shopping List
+            </Typography>
             <div className="shopping-list-main-container">
 
                 {shopList ? (

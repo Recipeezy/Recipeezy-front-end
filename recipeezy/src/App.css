@@ -26,6 +26,10 @@ img {
     overflow-wrap:break-word;
 }
 
+.MuiFilledInput{
+    padding: 15px 10px 10px;
+}
+
 a {
     font-size: 10px;
 }

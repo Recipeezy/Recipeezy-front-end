@@ -25,7 +25,7 @@ export default function ShopItemForm({ addShopItem, token, getShopList }) {
     }
     return (
         <form onSubmit={handleSubmit}>
-            <Grid align='center' container style={{ marginBottom: '30px'}} spacing={2}>
+            <Grid alignItems='center' container style={{ justifyContent: 'center'}} spacing={2}>
                 <label htmlFor='item-name'></label>
                 <TextField
                     id='item-name'
@@ -35,6 +35,7 @@ export default function ShopItemForm({ addShopItem, token, getShopList }) {
                     onChange={(event) => setName(event.target.value)}
                 ></TextField>
                 <Button
+                    size='small'
                     variant='contained'
                     className='submit-btn'
                     type="submit"

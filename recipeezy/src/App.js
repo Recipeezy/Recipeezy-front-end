@@ -63,7 +63,7 @@ function App() {
       
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Container maxWidth='sm'>
+        <Container maxWidth='md'>
           <div>
             <h1>Hello</h1>
             {/* <RecipeResults /> */}
@@ -103,7 +103,7 @@ function App() {
                           <Grid container justify='flex-end'>
                             <Button
                             variant='contained'
-                            color="primary"
+                            color="secondary"
                             size="small"
                             >
                               <Link to="/" onClick={logOut} style={{ textDecoration: 'none' }}  type="button">Log Out</Link>

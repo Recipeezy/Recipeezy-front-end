@@ -4,9 +4,16 @@ import FoodItem from './FoodItem.js'
 import FoodItemForm from './FoodItemForm.js'
 import axios from 'axios'
 import HomeIcon from '@material-ui/icons/Home';
-import { IconButton } from '@material-ui/core';
+import { IconButton, makeStyles } from '@material-ui/core';
 import lodash from 'lodash'
 import { Button } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
+
+const useStyles = makeStyles({
+    search: {
+        margin: '0 auto'
+    }
+})
 
 
 export default function Pantry({ token }) {
@@ -14,6 +21,7 @@ export default function Pantry({ token }) {
     const [searchResults, setSearchResults] = useState([])
     const [selectedIngredients, setSelectedIngredients] = useState([])
     const [isAtLimit, setIsAtLimit] = useState(false)
+    const classes=useStyles()
 
     const history = useHistory()
 
@@ -70,13 +78,9 @@ export default function Pantry({ token }) {
 
     return (
         <div className='pantry-wrapper'>
-            <h1>Pantry</h1>
-            <IconButton size='small'component={Link} to='/'>
-                <HomeIcon>
-                    Home
-                </HomeIcon>
-            </IconButton>
-
+            <Typography variant='h4' align='center' gutterBottom>
+                Pantry
+            </Typography>
             {foodList ? (
                 <div>
                     {foodList.map((food) => (
@@ -91,9 +95,10 @@ export default function Pantry({ token }) {
                     <FoodItemForm addFoodItem={addFoodItem} token={token} getPantry={getPantry} />
 
                     <Button
+                    fullWidth
                     style={{ marginTop: '30px'}}
                     variant='contained'
-                    className='search-ingredients' onClick={handleSearch}>Search</Button>
+                    className={classes.search} onClick={handleSearch}>Search</Button>
 
                     <div>
                         <h2 className="errorh2"></h2>
