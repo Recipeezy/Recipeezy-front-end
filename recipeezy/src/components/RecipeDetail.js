@@ -81,12 +81,6 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
 
     }
 
-    const recipeTitleFunction = (recipeName) => {
-        let recipePostTitle = 'title: '+ recipeTitle
-        console.log(recipePostTitle)
-        return recipePostTitle
-    }
-
 
 
     const addSelectedRecipe = () => {
