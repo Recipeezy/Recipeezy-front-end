@@ -23,9 +23,12 @@ import HomeIcon from '@material-ui/icons/Home'
 
 
 const useStyles = makeStyles(() => ({
-  root: {
-    marginRight: '10px',
-  },
+  navButtons: {
+    marginTop:'0px',
+    color: '#de1616',
+    backgroundColor: '#FFFFFF'
+    
+  }
 }));
 
 function App() {
@@ -103,23 +106,26 @@ function App() {
                       {isLoggedIn ? (
                           <Grid container justify='flex-end'>
                             <Button
+                            className={classes.navButtons}
                             variant='contained'
-                            color="secondary"
+                            color="primary"
                             size="small"
                             >
                               <Link to="/" onClick={logOut} style={{ textDecoration: 'none' }}  type="button">Log Out</Link>
                             </Button>
                           </Grid>
                         ) : (
-                        <Grid container justify='flex-end'>
+                        <Grid container alignItems='center' justify='flex-end'>
                           <Button
-                            className={classes.root}
+                            style={{marginRight: '10px', backgroundColor:"#FFFFFF"}}
+                            className={classes.navButtons}
                             variant='contained'
                             color="primary"
                             size="small">
                             <Link to="/registration" style={{ textDecoration: 'none' }} type="button">Register</Link>
                           </Button>
                           <Button
+                            className={classes.navButtons}
                             variant='contained'
                             color="primary"
                             size='small'
