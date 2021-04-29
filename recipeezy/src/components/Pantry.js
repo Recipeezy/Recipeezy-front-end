@@ -44,7 +44,6 @@ export default function Pantry({ token }) {
     useEffect(() => {
         console.log('token is ', token)
         getPantry()
-        getSearch()
         console.log(foodList)
 
     }, [])
@@ -71,6 +70,8 @@ export default function Pantry({ token }) {
         getSearch()
         if (searchResults.length > 0) {
             history.push('/searchresults', { search: searchResults, item: selectedIngredients.join() })
+        } else {
+            console.log("AHAHHAH")
         }
     }
 
@@ -99,10 +100,8 @@ export default function Pantry({ token }) {
                     style={{ marginTop: '30px'}}
                     variant='contained'
                     className={classes.search} onClick={handleSearch}>Search</Button>
-
                     <div>
                         <h2 className="errorh2"></h2>
-
                     </div>
                 </div>
             ) : (

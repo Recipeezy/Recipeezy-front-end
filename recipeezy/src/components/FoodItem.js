@@ -13,9 +13,6 @@ import { Box } from '@material-ui/core'
 
 
 const useStyles = makeStyles(() => ({
-    // label: {
-    //     marginRight:'50px'
-    // },
     listItem: {
         '&:hover': {
             background: '#fcf5c7',
@@ -40,7 +37,7 @@ const useStyles = makeStyles(() => ({
         minWidth: '30px',
         height: '24px'
     },
-    
+
 }));
 
 export default function FoodItem({ food, setSelectedIngredients, selectedIngredients, isAtLimit, setIsAtLimit, token }) {
@@ -54,7 +51,7 @@ export default function FoodItem({ food, setSelectedIngredients, selectedIngredi
 
         event.preventDefault()
         axios.put(
-            `http://recipeezy-app.herokuapp.com/ingredients/${food.id}/`,
+            `https://recipeezy-app.herokuapp.com/ingredients/${food.id}/`,
             {
                 name: name
             },
@@ -105,6 +102,7 @@ export default function FoodItem({ food, setSelectedIngredients, selectedIngredi
             n.splice(n.indexOf(e.target.value), 1)
             setSelectedIngredients(n)
         }
+        console.log("AFTER CHECKCLICK", selectedIngredients)
     }
 
 

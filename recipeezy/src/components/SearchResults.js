@@ -9,12 +9,14 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 const useStyles = makeStyles({
     cardStyle: {
-        maxWidth:'300px'
+        maxWidth: '300px'
     }
-    })
+})
 
 
-function SearchResults() {
+
+function SearchResults({ token }) {
+
     const [recipes, setRecipes] = useState([])
     const [mealIds, setMealIds] = useState([])
     const classes = useStyles()
@@ -25,6 +27,7 @@ function SearchResults() {
 
     useEffect(() => {
         console.log("LOCATION STATE", location.state.search)
+        console.log("token is", token)
         setMealIds(location.state.search)
 
         const fetchData = (idList) => {
@@ -65,12 +68,12 @@ function SearchResults() {
                 {(recipes && recipes.length > 0) ? (
                     <div>
                         {selectedRecipe ? (
-                            <RecipeDetail selectedRecipe={selectedRecipe} handleGoBack={() => setSelectedRecipe(null)} />
+                            <RecipeDetail selectedRecipe={selectedRecipe} handleGoBack={() => setSelectedRecipe(null)} token={token} />
                         ) : (
                             <Grid container justify='center' spacing={2}>
-                                
-                                    {
-                                        recipes.map((recipe) => (
+
+                                {
+                                    recipes.map((recipe) => (
                                         <Grid item wrap='wrap' id={recipe.idMeal} className={classes.cardStyle}>
                                             <Card key={recipe.meals[0].idMeal}>
                                                 <div key={recipe.meals[0].idMeal} id={recipe.meals[0].idMeal}>
@@ -85,18 +88,18 @@ function SearchResults() {
                                                         Cuisine: {recipe.meals[0].strArea}
                                                     </Typography>
                                                     <Button
-                                                    fullWidth
-                                                    variant='contained'
-                                                    color='primary'
-                                                    onClick={() => setSelectedRecipe(recipe.meals[0])}>
+                                                        fullWidth
+                                                        variant='contained'
+                                                        color='primary'
+                                                        onClick={() => setSelectedRecipe(recipe.meals[0])}>
                                                         See More
                                                     </Button>
                                                 </div>
                                             </Card>
                                         </Grid>
-                                        ))
-                                    }
-                                
+                                    ))
+                                }
+
                             </Grid>
                         )}
                     </div>
