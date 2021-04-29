@@ -23,9 +23,9 @@ import HomeIcon from '@material-ui/icons/Home'
 
 const useStyles = makeStyles(() => ({
   root: {
-      marginRight: '10px',
+    marginRight: '10px',
   },
-  }));
+}));
 
 function App() {
   const [username, setUsername] = useLocalStorageState('username', '')
@@ -47,11 +47,11 @@ function App() {
   const [anchorEl, setAnchorEl] = useState(null)
 
   const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
+    setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
-      setAnchorEl(null)
+    setAnchorEl(null)
   }
 
   const isLoggedIn = username && token
@@ -60,7 +60,7 @@ function App() {
   return (
     <Router>
 
-      
+
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Container maxWidth='sm'>
@@ -69,104 +69,104 @@ function App() {
             {/* <RecipeResults /> */}
           </div>
           <AppBar color='primary'>
-                  <Toolbar>
-                      <IconButton edge='start'>
-                          <MenuIcon color='secondary' aria-controls='simple-menu' aria-haspopup='true' onClick={handleClick}/>
-                      </IconButton>
-                          <Menu
-                          id='simple-menu'
-                          anchorEl={anchorEl}
-                          keepMounted
-                          open={Boolean(anchorEl)}
-                          onClose={handleClose}
-                          >
-                              <MenuItem onClick={handleClose}>
-                                  <Link to='/' type='button' style={{ textDecoration: 'none', textDecorationColor:'black' }}>Home</Link>
-                              </MenuItem>
-                              <MenuItem onClick={handleClose}>
-                                  <Link to="/reciperesults" type='button' style={{ textDecoration: 'none' }}>Random 10 Recipes</Link>
-                              </MenuItem>
-                              <MenuItem onClick={handleClose}>
-                                  <Link to="/pantry" type='button' style={{ textDecoration: 'none' }}>View pantry</Link>
-                              </MenuItem>
-                              <MenuItem onClick={handleClose}>
-                                  <Link to='/selectedrecipes' type='button' style={{ textDecoration: 'none', textDecorationColor:'black' }}>Selected Recipes</Link>
-                              </MenuItem>
-                              <MenuItem onClick={handleClose}>
-                                  <Link to='/shoppinglist' type='button' style={{ textDecoration: 'none', textDecorationColor:'black' }}>Shopping List</Link>
-                              </MenuItem>
-                          </Menu>
-                      <Typography variant='h4'color="secondary">
-                          Recipeezy
+            <Toolbar>
+              <IconButton edge='start'>
+                <MenuIcon color='secondary' aria-controls='simple-menu' aria-haspopup='true' onClick={handleClick} />
+              </IconButton>
+              <Menu
+                id='simple-menu'
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>
+                  <Link to='/' type='button' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>Home</Link>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Link to="/reciperesults" type='button' style={{ textDecoration: 'none' }}>Random 10 Recipes</Link>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Link to="/pantry" type='button' style={{ textDecoration: 'none' }}>View pantry</Link>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Link to='/selectedrecipes' type='button' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>Selected Recipes</Link>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Link to='/shoppinglist' type='button' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>Shopping List</Link>
+                </MenuItem>
+              </Menu>
+              <Typography variant='h4' color="secondary">
+                Recipeezy
                       </Typography>
-                      {isLoggedIn ? (
-                          <Grid container justify='flex-end'>
-                            <Button
-                            variant='contained'
-                            color="primary"
-                            size="small"
-                            >
-                              <Link to="/" onClick={logOut} style={{ textDecoration: 'none' }}  type="button">Log Out</Link>
-                            </Button>
-                          </Grid>
-                        ) : (
-                        <Grid container justify='flex-end'>
-                          <Button
-                            className={classes.root}
-                            variant='contained'
-                            color="primary"
-                            size="small">
-                            <Link to="/registration" style={{ textDecoration: 'none' }} type="button">Register</Link>
-                          </Button>
-                          <Button
-                            variant='contained'
-                            color="primary"
-                            size='small'
-                          >
-                            <Link to="/login" type="button" style={{ textDecoration: 'none' }}>Log In</Link>
-                          </Button>
-                        </Grid>
-                        )}
-                        {/* <IconButton size='small' component={Link} to='/'>
+              {isLoggedIn ? (
+                <Grid container justify='flex-end'>
+                  <Button
+                    variant='contained'
+                    color="primary"
+                    size="small"
+                  >
+                    <Link to="/" onClick={logOut} style={{ textDecoration: 'none' }} type="button">Log Out</Link>
+                  </Button>
+                </Grid>
+              ) : (
+                <Grid container justify='flex-end'>
+                  <Button
+                    className={classes.root}
+                    variant='contained'
+                    color="primary"
+                    size="small">
+                    <Link to="/registration" style={{ textDecoration: 'none' }} type="button">Register</Link>
+                  </Button>
+                  <Button
+                    variant='contained'
+                    color="primary"
+                    size='small'
+                  >
+                    <Link to="/login" type="button" style={{ textDecoration: 'none' }}>Log In</Link>
+                  </Button>
+                </Grid>
+              )}
+              {/* <IconButton size='small' component={Link} to='/'>
                           <HomeIcon>
                               Home
                           </HomeIcon>
                         </IconButton> */}
-                  </Toolbar>
-              </AppBar>
+            </Toolbar>
+          </AppBar>
 
 
           <div>
             <Switch>
-            <Route path='/reciperesults'>
-              <RecipeResults isLoggedIn={isLoggedIn} token={token} />
-            </Route>
-            <Route exact path='/'>
-              <Home isLoggedIn={isLoggedIn} token={token} logOut={logOut} />
-            </Route>
-            <Route path='/pantry'>
-              <Pantry isLoggedIn={isLoggedIn} token={token} />
-            </Route>
-            <Route path='/login'>
+              <Route path='/reciperesults'>
+                <RecipeResults isLoggedIn={isLoggedIn} token={token} />
+              </Route>
+              <Route exact path='/'>
+                <Home isLoggedIn={isLoggedIn} token={token} logOut={logOut} />
+              </Route>
+              <Route path='/pantry'>
+                <Pantry isLoggedIn={isLoggedIn} token={token} />
+              </Route>
+              <Route path='/login'>
 
-              <Login setAuth={setAuth} isLoggedIn={isLoggedIn} token={token} />
-            </Route>
-            <Route path='/registration'>
-              <Registration setAuth={setAuth} isLoggedIn={isLoggedIn} />
-            </Route>
-            <Route path="/shoppinglist">
-              <ShoppingList
+                <Login setAuth={setAuth} isLoggedIn={isLoggedIn} token={token} />
+              </Route>
+              <Route path='/registration'>
+                <Registration setAuth={setAuth} isLoggedIn={isLoggedIn} />
+              </Route>
+              <Route path="/shoppinglist">
+                <ShoppingList
                   setAuth={setAuth}
-                  isLoggedIn={isLoggedIn} token={token}/>
-            </Route>
-            <Route path='/searchresults'>
-              <SearchResults />
-            </Route>
+                  isLoggedIn={isLoggedIn} token={token} />
+              </Route>
+              <Route path='/searchresults'>
+                <SearchResults token={token} />
+              </Route>
             </Switch>
           </div>
-          </Container>
-        </ThemeProvider>
-      </Router>
+        </Container>
+      </ThemeProvider>
+    </Router>
 
   );
 }
