@@ -27,15 +27,20 @@ export default function SelectedRecipes({ token }) {
     return (        
         <div>
             <h3>Selected recipes</h3>
-            {selectedRecipes.map((recipe) => (
-                <li key={recipe.id}>
-                    <div key={recipe.id}>
-                        <img src={recipe.img_id}></img>
-                        <h4>{recipe.title}</h4>
-                        <p>{recipe.origin}</p>
-                    </div>
-                </li>
-            ))}
+            <div>
+                {selectedRecipe ? (
+                    <RecipeDetail selectedRecipe={selectedRecipe} handleGoBack={() => setSelectedRecipe(null)} token={token} />
+                    ) : (
+                    {selectedRecipes.map((recipe) => (
+                        <li key={recipe.id}>
+                            <div key={recipe.id}>
+                                <img src={recipe.img_id}></img>
+                                <h4>{recipe.title}</h4>
+                                <p>{recipe.origin}</p>
+                            </div>
+                        </li>
+                    )))}
+                </div>    
         </div>
     )
 }
