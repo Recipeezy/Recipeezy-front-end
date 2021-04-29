@@ -10,7 +10,7 @@ import { InputLabel } from '@material-ui/core'
 
 const useStyles = makeStyles(() => ({
     label: {
-        marginRight:'50px'
+        marginRight: '50px'
     },
     listItem: {
         '&:hover': {
@@ -18,9 +18,9 @@ const useStyles = makeStyles(() => ({
         },
         // marginTop: '15px',
         // marginBotton: '15px',
-        borderRadius:'15px'
+        borderRadius: '15px'
     },
-    
+
 }));
 
 export default function FoodItem({ food, setSelectedIngredients, selectedIngredients, isAtLimit, setIsAtLimit, token }) {
@@ -34,7 +34,7 @@ export default function FoodItem({ food, setSelectedIngredients, selectedIngredi
 
         event.preventDefault()
         axios.put(
-            `http://recipeezy-app.herokuapp.com/ingredients/${food.id}/`,
+            `https://recipeezy-app.herokuapp.com/ingredients/${food.id}/`,
             {
                 name: name
             },
@@ -85,33 +85,35 @@ export default function FoodItem({ food, setSelectedIngredients, selectedIngredi
             n.splice(n.indexOf(e.target.value), 1)
             setSelectedIngredients(n)
         }
+        console.log("AFTER CHECKCLICK", selectedIngredients)
     }
 
 
     if (isDeleted) return false;
 
     return (
-        <ListItem className={classes.listItem}>
+        <ListItem className={`${classes.listItem} checkboxes`} >
             <Checkbox onChange={checkBoxClick} type='checkbox' id={food.name} className="checkboxes" value={food.name}></Checkbox>
-            {isEditing ?
-                <div>
-                    <input onChange={(event) => setName(event.target.value)} value={name}></input>
-                    <button onClick={(event) => updateFoodItem(event)}
-                        value={food.id}>Submit Edit</button>
-                </div>
-                :
-                // <Typography variant='body1' >
-                <InputLabel htmlFor={name} className={classes.label}>{food.name}</InputLabel>
+            {
+                isEditing ?
+                    <div>
+                        <input onChange={(event) => setName(event.target.value)} value={name}></input>
+                        <button onClick={(event) => updateFoodItem(event)}
+                            value={food.id}>Submit Edit</button>
+                    </div>
+                    :
+                    // <Typography variant='body1' >
+                    <InputLabel htmlFor={name} className={classes.label}>{food.name}</InputLabel>
                 // </Typography>
-                }
+            }
             <ListItemIcon>
-                <DeleteIcon 
+                <DeleteIcon
                     onClick={(event) => deleteIngredient(event)}>Delete Item
                 </DeleteIcon>
             </ListItemIcon>
             <ListItemIcon>
                 <EditIcon onClick={() => setIsEditing(true)}>Edit Item</EditIcon>
             </ListItemIcon>
-        </ListItem>
+        </ListItem >
     )
 }

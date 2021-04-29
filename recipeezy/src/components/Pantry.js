@@ -36,7 +36,6 @@ export default function Pantry({ token }) {
     useEffect(() => {
         console.log('token is ', token)
         getPantry()
-        getSearch()
         console.log(foodList)
 
     }, [])
@@ -71,7 +70,7 @@ export default function Pantry({ token }) {
     return (
         <div className='pantry-wrapper'>
             <h1>Pantry</h1>
-            <IconButton size='small'component={Link} to='/'>
+            <IconButton size='small' component={Link} to='/'>
                 <HomeIcon>
                     Home
                 </HomeIcon>
@@ -91,9 +90,9 @@ export default function Pantry({ token }) {
                     <FoodItemForm addFoodItem={addFoodItem} token={token} getPantry={getPantry} />
 
                     <Button
-                    style={{ marginTop: '30px'}}
-                    variant='contained'
-                    className='search-ingredients' onClick={handleSearch}>Search</Button>
+                        style={{ marginTop: '30px' }}
+                        variant='contained'
+                        className='search-ingredients' onClick={handleSearch}>Search</Button>
 
                     <div>
                         <h2 className="errorh2"></h2>

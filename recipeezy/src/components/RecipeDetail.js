@@ -81,7 +81,7 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
     //sends request to shoppinglist to add all ingredients
     const addAllIngredients = () => {
         listIngredients()
-        if (ingredients) {
+        if (ingredients.length > 0) {
             let ingList = listToObjects(ingredients)
             axios.post(
                 'https://recipeezy-app.herokuapp.com/shopping_list/add/', {
@@ -91,7 +91,7 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
                     headers: { Authorization: `Token ${token}` },
                 },
             ).then(() => {
-                console.log('done')
+                alert("Ingredients added to shopping list!")
             })
         }
     }
