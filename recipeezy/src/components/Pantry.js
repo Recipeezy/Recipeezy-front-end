@@ -62,6 +62,8 @@ export default function Pantry({ token }) {
         getSearch()
         if (searchResults.length > 0) {
             history.push('/searchresults', { search: searchResults, item: selectedIngredients.join() })
+        } else {
+            console.log("AHAHHAH")
         }
     }
 
@@ -69,7 +71,7 @@ export default function Pantry({ token }) {
 
     return (
         <div className='pantry-wrapper'>
-            <h1>Pantry</h1>
+            <h1 className="pantry-title">Pantry</h1>
             <IconButton size='small' component={Link} to='/'>
                 <HomeIcon>
                     Home
