@@ -45,11 +45,11 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
 
     const [ingredients, setIngredients] = useState([])
 
-    const [recipeTitle, setRecipeTitle] = useState(selectedRecipe.strMeal)
-    const [recipeImg, setRecipeImg] = useState(selectedRecipe.strMealThumb)
-    const [recipeCuisine, setRecipeCuisine] = useState(selectedRecipe.strArea)
-    const [recipeInstruc, setRecipeInstruc] = useState(selectedRecipe.strInstructions)
-    const [recipeVideo, setRecipeVideo] = useState(selectedRecipe.strYoutube)
+    const recipeTitle = selectedRecipe.strMeal 
+    const recipeImg = selectedRecipe.strMealThumb
+    const recipeCuisine = selectedRecipe.strArea
+    const recipeInstruc = selectedRecipe.strInstructions
+    const recipeVideo = selectedRecipe.strYoutube
 
 
     // gets all ingredients and puts in list
