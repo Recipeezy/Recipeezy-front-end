@@ -16,18 +16,11 @@ const useStyles = makeStyles({
   buttonRoot: {
     marginTop: '30px',
     color: '#333',
+  },
+  cardStyle: {
+    maxWidth:'300px'
   }
 })
-
-function ButtonStyled() {
-  const classes = useStyles();
-  return <Button
-    color="primary"
-    size="small"
-    className={classes.buttonRoot}>See More +</Button>
-}
-
-
 
 export default function RecipeResults({ token }) {
   const [recipes, setRecipes] = useState([])
@@ -67,7 +60,7 @@ export default function RecipeResults({ token }) {
                 ) : (
                   <Grid container justify='center' spacing={2} className='recipe-list' >
                     {recipes.meals.map((recipe) => (
-                      <Grid item wrap="wrap" id={recipe.idMeal} maxWidth={300}>
+                      <Grid item wrap="wrap" id={recipe.idMeal} className={classes.cardStyle}>
                         <Card variant='outlined' height={800} maxWidth={300} className="recipe-card" elevation={3} padding={5}>
                           <img
                             alt="recipe-pic"
@@ -79,9 +72,10 @@ export default function RecipeResults({ token }) {
                             Cuisine: {recipe.strArea}
                           </Typography>
                           <Button
-                            // variant='contained'
-                            color="secondary"
-                            // size="small"
+                            fullWidth
+                            variant='contained'
+                            color="primary"
+                            size="small"
                             onClick={() => setSelectedRecipe(recipe)}
                           >
                             See more

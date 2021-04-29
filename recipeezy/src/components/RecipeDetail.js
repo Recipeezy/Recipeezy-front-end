@@ -59,10 +59,13 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
         for (let i = 1; i < 21; i++) {
             eval('ingredientsList.push(selectedRecipe.strIngredient' + i + ')')
         }
-        ingredientsList = ingredientsList.filter(function (ingredient) {
-            return ingredient.length > 0
-        })
-        setIngredients(ingredientsList)
+        if (ingredientsList.length > 0) {
+            let newingredientsList = ingredientsList.filter(function (ingredient) {
+                return (ingredient.length > 0)
+            })
+            setIngredients(newingredientsList)
+
+        }
 
         console.log(ingredientsList)
 
@@ -111,7 +114,8 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
     //sends request to shoppinglist to add all ingredients
     const addAllIngredients = () => {
         listIngredients()
-        if (ingredients) {
+        console.log('toke', token)
+        if (ingredients.length > 0) {
             let ingList = listToObjects(ingredients)
             axios.post(
                 'https://recipeezy-app.herokuapp.com/shopping_list/add/', {
@@ -121,7 +125,10 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
                     headers: { Authorization: `Token ${token}` },
                 },
             ).then(() => {
-                console.log('done')
+                document.querySelector('.add-ing-button').innerHTML = "ADDED SUCCESSFULLY"
+                setTimeout(() => {
+                    document.querySelector('.add-ing-button').innerHTML = "Add All Ingredients to Shopping List"
+                }, 1500)
             })
         }
     }
@@ -185,8 +192,11 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
                     <li>{selectedRecipe.strIngredient20}</li>
                 </ul>
                 <div className="add-all-ingredients">
+
                     <button onClick={addSelectedRecipe}>Select Recipe</button>
-                    <button onClick={addAllIngredients}>Add all Ingredients to Shopping List</button>
+                    
+                    <button className="add-ing-button" onClick={addAllIngredients}>Add all Ingredients to Shopping List</button>
+
                 </div>
             </div>
             <div>

@@ -34,9 +34,6 @@ function ShoppingList({ token }) {
                 setShopList(data.data[0].ingredients)
                 console.log(data.data[0].ingredients)
 
-
-
-
             })
     }
 

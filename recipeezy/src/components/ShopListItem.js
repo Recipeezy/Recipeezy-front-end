@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { ListItem } from '@material-ui/core'
-import { ListItemIcon } from '@material-ui/core'
+import { ListItemIcon, ListItem, Button, makeStyles, Checkbox } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
-import { Button, makeStyles, Checkbox } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit'
 import AddIcon from '@material-ui/icons/Add';
 import { Typography } from '@material-ui/core'
@@ -12,14 +10,14 @@ import { BorderRightRounded } from '@material-ui/icons'
 
 const useStyles = makeStyles(() => ({
     label: {
-        marginRight:'75px'
+        marginRight:'50px'
     },
     listItem: {
         '&:hover': {
             background: '#c0dfa1',
         },
-        marginTop: '15px',
-        marginBotton: '15px',
+        // marginTop: '15px',
+        // marginBotton: '15px',
         borderRadius:'15px'
     },
     
