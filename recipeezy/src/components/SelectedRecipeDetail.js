@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Typography, IconButton, Button, makeStyles } from '@material-ui/core'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -10,6 +10,7 @@ import { CardContent } from '@material-ui/core';
 import { List } from '@material-ui/core';
 import { ListItem } from '@material-ui/core';
 import axios from 'axios';
+import Confetti from 'react-confetti'
 
 const useStyles = makeStyles({
     videoCard: {
@@ -40,7 +41,8 @@ const useStyles = makeStyles({
 
 export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
     console.log('recipe is stupid', recipe)
-    const classes = useStyles()
+    const classes = useStyles()    
+    const [cooked, setCooked] = useState(null)
 
 
     const swapToRecipeHistory = () => {
@@ -76,10 +78,14 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
             <p>{recipe.instructions}</p>
             <p>{recipe.video_id}</p>
         </div>
-        <button
-            onClick={() => swapToRecipeHistory(recipe.id)}
-                            >Cooked! (sends to Recipe History)
+        <button onClick={() => { swapToRecipeHistory(recipe.id); setCooked(true)}}>
+                            Cooked! (send to Recipe History)
                             </button>
+        {cooked ? (
+            <Confetti />
+            ) : (
+                <p></p>
+            )}
     </>
     
         )
