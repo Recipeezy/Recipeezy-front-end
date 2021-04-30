@@ -24,6 +24,7 @@ export default function Pantry({ token }) {
     const classes=useStyles()
 
     const history = useHistory()
+    let clicks = 0
 
     const getPantry = () => {
 
@@ -49,8 +50,7 @@ export default function Pantry({ token }) {
     }, [])
 
 
-    const addFoodItem = (newItem) => {
-        setFoodList([...foodList, newItem])
+    const addFoodItem = (newItem) => { setFoodList([...foodList, newItem])
     }
 
 
@@ -63,11 +63,19 @@ export default function Pantry({ token }) {
             }
             console.log('SEARCH', searchResults)
 
-        })
-    }
+        }) } 
 
     const handleSearch = () => {
         getSearch()
+        clicks++
+        if (clicks > 1) {
+            document.querySelector("#search-button").innerHTML = "Couldn't Find Results..."
+            setTimeout(() => {
+                document.querySelector("#search-button").innerHTML = "Search"
+            },1250)
+
+        }
+
         if (searchResults.length > 0) {
             history.push('/searchresults', { search: searchResults, item: selectedIngredients.join() })
         } else {
@@ -99,7 +107,7 @@ export default function Pantry({ token }) {
                     fullWidth
                     style={{ marginTop: '30px'}}
                     variant='contained'
-                    className={classes.search} onClick={handleSearch}>Search</Button>
+                    className={classes.search} id="search-button" onClick={handleSearch}>Search</Button>
                     <div>
                         <h2 className="errorh2"></h2>
                     </div>
