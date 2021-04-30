@@ -24,7 +24,7 @@ export default function FoodItemForm({ addFoodItem, token, getPantry }) {
         e.preventDefault()
         axios
             .post(
-                'https://recipeezy-app.herokuapp.com/pantry/add/',
+                'https://recipeezy-app.herokuapp.com/pantry/',
                 {
                     ingredients: [
                         { name: name }

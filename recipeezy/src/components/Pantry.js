@@ -21,9 +21,10 @@ export default function Pantry({ token }) {
     const [searchResults, setSearchResults] = useState([])
     const [selectedIngredients, setSelectedIngredients] = useState([])
     const [isAtLimit, setIsAtLimit] = useState(false)
-    const classes=useStyles()
+    const classes = useStyles()
 
     const history = useHistory()
+    let clicks = 0
 
     const getPantry = () => {
 
@@ -55,7 +56,14 @@ export default function Pantry({ token }) {
 
 
     const getSearch = () => {
-        axios.get(`https://www.themealdb.com/api/json/v2/9973533/filter.php?i=${selectedIngredients.join()}`).then((response) => {
+        let templist = []
+        let checkedValues = document.querySelectorAll("input[type='checkbox']:checked")
+        for (let c of checkedValues) {
+            templist.push(c.id)
+        }
+        console.log('checked values', checkedValues)
+        console.log("TMEPLIST", templist)
+        axios.get(`https://www.themealdb.com/api/json/v2/9973533/filter.php?i=${templist.join()}`).then((response) => {
             if (response.data.meals) {
                 setSearchResults((response.data.meals && response.data.meals.length > 10) ? response.data.meals.slice(0, 10).map((obj) => obj.idMeal) : response.data.meals.map((obj) => obj.idMeal))
 
@@ -68,6 +76,16 @@ export default function Pantry({ token }) {
 
     const handleSearch = () => {
         getSearch()
+        clicks++
+        if (clicks > 1) {
+            document.querySelector("#search-button").innerHTML = "Couldn't Find Results..."
+            setTimeout(() => {
+                document.querySelector("#search-button").innerHTML = "Search"
+            }, 1250)
+            clicks = 0
+
+        }
+
         if (searchResults.length > 0) {
             history.push('/searchresults', { search: searchResults, item: selectedIngredients.join() })
         } else {
@@ -85,7 +103,7 @@ export default function Pantry({ token }) {
             {foodList ? (
                 <div>
                     {foodList.map((food) => (
-                        <FoodItem food={food} key={food.id} selectedIngredients={selectedIngredients} setSelectedIngredients={setSelectedIngredients} token={token} isAtLimit={isAtLimit} setIsAtLimit={setIsAtLimit} />
+                        <FoodItem food={food} key={food.id} selectedIngredients={selectedIngredients} setSelectedIngredients={setSelectedIngredients} token={token} isAtLimit={isAtLimit} setIsAtLimit={setIsAtLimit} getSearch={getSearch} />
                     ))}
                     {isAtLimit ? (
                         <div><p>You may only select a maximum of 4 ingredients</p></div>
@@ -96,10 +114,10 @@ export default function Pantry({ token }) {
                     <FoodItemForm addFoodItem={addFoodItem} token={token} getPantry={getPantry} />
 
                     <Button
-                    fullWidth
-                    style={{ marginTop: '30px'}}
-                    variant='contained'
-                    className={classes.search} onClick={handleSearch}>Search</Button>
+                        fullWidth
+                        style={{ marginTop: '30px' }}
+                        variant='contained'
+                        className={classes.search} id="search-button" onClick={handleSearch}>Search</Button>
                     <div>
                         <h2 className="errorh2"></h2>
                     </div>
