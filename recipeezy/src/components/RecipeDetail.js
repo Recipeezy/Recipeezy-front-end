@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Typography, IconButton, Button, makeStyles } from '@material-ui/core'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -61,7 +61,7 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
         }
         if (ingredientsList.length > 0) {
             let newingredientsList = ingredientsList.filter(function (ingredient) {
-                return (ingredient.length > 0)
+                return (ingredient && ingredient.length > 0)
             })
             setIngredients(newingredientsList)
 
@@ -131,6 +131,9 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
         }
     }
 
+    useEffect(() => {
+        listIngredients()
+    }, [])
 
 
     return (
