@@ -43,8 +43,8 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
     const classes = useStyles()
 
 
-    const swapToRecipeHistory = () => {
-        axios.put(`https://recipeezy-app.herokuapp.com/recipe_history/${recipe.id}/`,
+    const swapToSelectedRecipes = () => {
+        axios.put(`https://recipeezy-app.herokuapp.com/selected_recipes/${recipe.id}/`,
         {
         },
         {
@@ -77,10 +77,7 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
             <p>{recipe.instructions}</p>
             <p>{recipe.video_id}</p>
         </div>
-        <button
-            onClick={() => swapToRecipeHistory(recipe.id)}
-                            >Cooked! (sends to Recipe History)
-                            </button>
+        <button onClick={() => swapToSelectedRecipes(recipe.id)}>Cook it again! (sends back to Selected Recipes) </button>
     </>
     
         )
