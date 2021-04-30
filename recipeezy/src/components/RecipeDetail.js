@@ -88,9 +88,8 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
 
 
     const addSelectedRecipe = () => {
-        console.log('token is ', token)
         listIngredients()
-        if(ingredients) {
+        if(ingredients.length > 0) {
             let ingList = listToObjects(ingredients)
             axios.post(
                 'https://recipeezy-app.herokuapp.com/recipes/',

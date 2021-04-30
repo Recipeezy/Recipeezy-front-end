@@ -19,6 +19,7 @@ import Registration from './components/Registration';
 import SearchResults from './components/SearchResults'
 import theme from './theme'
 import HomeIcon from '@material-ui/icons/Home'
+import RecipeHistory from './components/RecipeHistory'
 
 
 
@@ -166,6 +167,9 @@ function App() {
             </Route>
             <Route path='/selectedrecipes'>
               <SelectedRecipes isLoggedIn={isLoggedIn} token={token} />
+            </Route>
+            <Route path='/recipehistory'>
+              <RecipeHistory isLoggedIn={isLoggedIn} token={token} />
             </Route>
             </Switch>
           </div>

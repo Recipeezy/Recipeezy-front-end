@@ -74,6 +74,9 @@ export default function SelectedRecipes({ token }) {
                             align='center'
                             >{recipe.origin}</Typography>
                             <button onClick={() => setSelectedRecipeDetail(recipe)}>See More</button>
+                            <button 
+                            // onClick={() => setSelectedRecipeDetail(recipe)}
+                            >Cooked! (sends to Recipe History)</button>
                         </div>
                     </Card>
                 </Grid>

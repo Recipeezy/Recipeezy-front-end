@@ -64,6 +64,10 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack }) {
             <p>{recipe.instructions}</p>
             <p>{recipe.video_id}</p>
         </div>
+        <button
+            // onClick={() => setSelectedRecipeDetail(recipe)}
+                            >Cooked! (sends to Recipe History)
+                            </button>
     </>
     
         )
