@@ -72,7 +72,11 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
         </div>
         <div>
             <ul>
-                <li>{recipe.recipe_ingredients}</li>
+                {console.log('stupid shit', recipe.recipe_ingredients)}
+                {recipe.recipe_ingredients.map((item) => (
+                    <li>{item.ingredient}</li>
+                ))}
+                
                 
             </ul>
             <p>{recipe.instructions}</p>
