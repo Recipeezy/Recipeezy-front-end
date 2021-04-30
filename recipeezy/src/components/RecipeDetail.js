@@ -10,7 +10,6 @@ import { CardContent } from '@material-ui/core';
 import { List } from '@material-ui/core';
 import { ListItem } from '@material-ui/core';
 import axios from 'axios';
-
 const useStyles = makeStyles({
     videoCard: {
         minWidth: '150px'
@@ -115,10 +114,10 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
     const addAllIngredients = () => {
         listIngredients()
         console.log('toke', token)
-        if (ingredients.length > 0) {
+        if (ingredients && ingredients.length > 0) {
             let ingList = listToObjects(ingredients)
             axios.post(
-                'https://recipeezy-app.herokuapp.com/shopping_list/add/', {
+                'https://recipeezy-app.herokuapp.com/shopping_list/', {
                 ingredients: ingList
             },
                 {
@@ -128,8 +127,7 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
                 document.querySelector('.add-ing-button').innerHTML = "ADDED SUCCESSFULLY"
                 setTimeout(() => {
                     document.querySelector('.add-ing-button').innerHTML = "Add All Ingredients to Shopping List"
-                }, 1500)
-            })
+                }, 1500) })
         }
     }
 
@@ -192,13 +190,12 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
                     <li>{selectedRecipe.strIngredient20}</li>
                 </ul>
 
-                    <Button style={{marginTop:'15px', marginBottom: '15px'}} variant='contained' color='primary' onClick={addAllIngredients}>Add all Ingredients to Shopping List</Button>
+                    <Button className="add-ing-button" style={{marginTop:'15px', marginBottom: '15px'}} variant='contained' color='primary' onClick={addAllIngredients}>Add all Ingredients to Shopping List</Button>
 
                 <div className="add-all-ingredients">
 
                     <button onClick={addSelectedRecipe}>Select Recipe</button>
                     
-                    <button className="add-ing-button" onClick={addAllIngredients}>Add all Ingredients to Shopping List</button>
 
                 </div>
 
