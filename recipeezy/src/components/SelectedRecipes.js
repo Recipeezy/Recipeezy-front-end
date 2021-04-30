@@ -25,13 +25,17 @@ export default function SelectedRecipes({ token }) {
     useEffect(() => {
         getSelectedRecipesList()
     }, [])
+
+    
     
     return (        
         <div>
             <h3>Selected recipes</h3>
                 
             {selectedRecipeDetail ? ( 
-                <SelectedRecipeDetail recipe={selectedRecipeDetail} />
+                <SelectedRecipeDetail recipe={selectedRecipeDetail} 
+                handleGoBack={() => setSelectedRecipeDetail(null)} token={token}
+                />
             ) :
                 selectedRecipes.map((recipe) => (
                     <li key={recipe.id}>

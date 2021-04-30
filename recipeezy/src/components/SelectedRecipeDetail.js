@@ -38,85 +38,33 @@ const useStyles = makeStyles({
     }
 });
 
-export default function SelectedRecipeDetail ({ recipe }) {
+export default function SelectedRecipeDetail ({ recipe, handleGoBack }) {
+    console.log('recipe is stupid', recipe)
     const classes = useStyles()
 
     return (
-            <Container>
-                <IconButton>
-                    {/* <ArrowBackIcon
-                        gutterBottom
-                        onClick={handleGoBack}
-                    >Go back</ArrowBackIcon> */}
-                </IconButton>
-                <Typography className={classes.mealTitle} variant='h4' align='center'>
-                    test title
-                </Typography>
-    
-                <Grid
-                    className={classes.root}
-                    spacing={0}
-                    direction="row"
-                    alignItems="center"
-                    justify="center"
-                    container>
-                    <div className={classes.cardDetails}>
-                        <Grid item >
-                            {/* <img align='center' alt="recipe-pic" src={selectedRecipe.strMealThumb} /> */}
-                        </Grid>
-                        <Grid item component={Paper} className={classes.textContainer}>
-                            <Typography
-                                variant='subtitle1'
-                                align="center"
-                            >Cuisine: seelected recipe</Typography>
-                            <Typography align='center' variant='subtitle1'>Category: category </Typography>
-                        </Grid>
-                    </div>
-                </Grid>
-    
-                <div>
-                    <ul className='ingredient-list'>
-                        <li>in gred</li>
-                        <li>in gred</li>
-                        <li>in gred</li>
-                        <li>in gred</li>
-                        <li>in gred</li>
-                        <li>in gred</li>
-                        <li>in gred</li>
-                        <li>in gred</li>
-                        <li>in gred</li>
-                        <li>in gred</li>
-                        <li>in gred</li>
-                        <li>in gred</li>
-                        <li>in gred</li>
-                        <li>in gred</li>
-                        <li>in gred</li>
-                        <li>in gred</li>
-                        <li>in gred</li>
-                        <li>in gred</li>
-                        <li>in gred</li>
-                        <li>in gred</li>
-                    </ul>
-    
-                        
-                    
-    
-                </div>
-                <div>
-                    <Typography className={classes.subHeader} variant='h5'>
-                        Instructions:
-                    </Typography>
-                    <Typography variant='body1'>Instructions</Typography>
-                </div>
-                {/* <Card className={classes.videoCard}> */}
-                    {/* <CardMedia
-                        // width="100%"
-                        src={selectedRecipe.strYoutube.replace('watch?v=', 'embed/')}
-                        component='iframe'
-                        height='400'
-                    />
-                </Card> */}
-            </Container >
+    <>
+    <IconButton>
+                <ArrowBackIcon
+                    gutterBottom
+                    onClick={handleGoBack}
+                >Go back</ArrowBackIcon>
+            </IconButton>
+        <div>
+            <img src={recipe.img_id}></img>
+            <h1>{recipe.title}</h1>
+            <p>Cuisine: {recipe.origin}</p>
+
+        </div>
+        <div>
+            <ul>
+                <li>{recipe.recipe_ingredients}</li>
+                
+            </ul>
+            <p>{recipe.instructions}</p>
+            <p>{recipe.video_id}</p>
+        </div>
+    </>
     
         )
     }
