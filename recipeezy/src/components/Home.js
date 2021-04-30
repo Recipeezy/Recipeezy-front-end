@@ -15,7 +15,7 @@ const useStyles = makeStyles({
         },
         header: {
             margin: '0 auto'
-        }
+        },
     })
 
 

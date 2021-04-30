@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Typography, IconButton, Button, makeStyles } from '@material-ui/core'
+import { Typography, IconButton, Button, makeStyles, Divider } from '@material-ui/core'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Paper, Card } from '@material-ui/core';
 import { CardMedia } from '@material-ui/core';
@@ -10,6 +10,7 @@ import { CardContent } from '@material-ui/core';
 import { List } from '@material-ui/core';
 import { ListItem } from '@material-ui/core';
 import axios from 'axios';
+// import { FixedSizeList } from 'react-window'
 
 const useStyles = makeStyles({
     videoCard: {
@@ -35,6 +36,17 @@ const useStyles = makeStyles({
     subHeader: {
         paddingLeft: '15px',
         marginTop: '30px'
+    },
+    gridListContainer: {
+        // display:'flex',
+        // flexWrap:'wrap',
+        overflow: 'auto',
+        // justifyContent:'center'
+    },
+    gridList: {
+        width:'300px',
+        height: '200px',
+        margin: '0 auto'
     }
 });
 
@@ -163,46 +175,53 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
                             variant='subtitle1'
                             align="center"
                         >Cuisine: {selectedRecipe.strArea}</Typography>
-                        <Typography align='center' variant='subtitle1'>Category: {selectedRecipe.strCategory}</Typography>
+                        <Typography gutterBottom align='center' variant='subtitle1'>Category: {selectedRecipe.strCategory}</Typography>
                     </Grid>
                 </div>
             </Grid>
 
-            <div>
-                <ul className='ingredient-list'>
-                    <li>{selectedRecipe.strIngredient1}</li>
-                    <li>{selectedRecipe.strIngredient2}</li>
-                    <li>{selectedRecipe.strIngredient3}</li>
-                    <li>{selectedRecipe.strIngredient4}</li>
-                    <li>{selectedRecipe.strIngredient5}</li>
-                    <li>{selectedRecipe.strIngredient6}</li>
-                    <li>{selectedRecipe.strIngredient7}</li>
-                    <li>{selectedRecipe.strIngredient8}</li>
-                    <li>{selectedRecipe.strIngredient9}</li>
-                    <li>{selectedRecipe.strIngredient10}</li>
-                    <li>{selectedRecipe.strIngredient11}</li>
-                    <li>{selectedRecipe.strIngredient12}</li>
-                    <li>{selectedRecipe.strIngredient13}</li>
-                    <li>{selectedRecipe.strIngredient14}</li>
-                    <li>{selectedRecipe.strIngredient15}</li>
-                    <li>{selectedRecipe.strIngredient16}</li>
-                    <li>{selectedRecipe.strIngredient17}</li>
-                    <li>{selectedRecipe.strIngredient18}</li>
-                    <li>{selectedRecipe.strIngredient19}</li>
-                    <li>{selectedRecipe.strIngredient20}</li>
-                </ul>
+            <Grid container className={classes.gridListContainer} align='center'>
+                <List className={classes.gridList}>
+                    <li>{selectedRecipe.strIngredient1}</li><Divider style={selectedRecipe.strIngredient1 ? {} : {display:'none'} } variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strIngredient2}</li><Divider style={selectedRecipe.strIngredient2 ? {} : {display:'none'} } variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strIngredient3}</li><Divider style={selectedRecipe.strIngredient3 ? {} : {display:'none'} } variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strIngredient4}</li><Divider style={selectedRecipe.strIngredient4 ? {} : {display:'none'} } variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strIngredient5}</li><Divider style={selectedRecipe.strIngredient5 ? {} : {display:'none'} } variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strIngredient6}</li><Divider style={selectedRecipe.strIngredient6 ? {} : {display:'none'} } variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strIngredient7}</li><Divider style={selectedRecipe.strIngredient7 ? {} : {display:'none'} } variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strIngredient8}</li><Divider style={selectedRecipe.strIngredient8 ? {} : {display:'none'} } variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strIngredient9}</li><Divider style={selectedRecipe.strIngredient9 ? {} : {display:'none'} } variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strIngredient10}</li><Divider style={selectedRecipe.strIngredient10 ? {} : {display:'none'} }  variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strIngredient11}</li><Divider style={selectedRecipe.strIngredient11 ? {} : {display:'none'} } variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strIngredient12}</li><Divider style={selectedRecipe.strIngredient12 ? {} : {display:'none'} } variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strIngredient13}</li><Divider style={selectedRecipe.strIngredient13 ? {} : {display:'none'} } variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strIngredient14}</li><Divider style={selectedRecipe.strIngredient14 ? {} : {display:'none'} } variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strIngredient15}</li><Divider style={selectedRecipe.strIngredient15 ? {} : {display:'none'} } variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strIngredient16}</li><Divider style={selectedRecipe.strIngredient16 ? {} : {display:'none'} } variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strIngredient17}</li><Divider style={selectedRecipe.strIngredient17 ? {} : {display:'none'} } variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strIngredient18}</li><Divider style={selectedRecipe.strIngredient18 ? {} : {display:'none'} } variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strIngredient19}</li><Divider style={selectedRecipe.strIngredient19 ? {} : {display:'none'} } variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strIngredient20}</li><Divider style={selectedRecipe.strIngredient20 ? {} : {display:'none'} } variant='fullWidth' component="li" />
+                </List>
+            </Grid>
+                <Grid align='center' className="add-all-ingredients">
+                    <Button 
+                    style={{marginTop:'15px', marginBottom: '15px'}} 
+                    variant='contained' 
+                    color='primary' 
+                    onClick={addAllIngredients}>
+                        Add all Ingredients to Shopping List
+                    </Button>
 
-                    <Button style={{marginTop:'15px', marginBottom: '15px'}} variant='contained' color='primary' onClick={addAllIngredients}>Add all Ingredients to Shopping List</Button>
+                    <Button
+                    className="add-ing-button"
+                    variant='contained' color='primary'
+                    onClick={addSelectedRecipe}>
+                        Select Recipe
+                    </Button>
+                </Grid>
 
-                <div className="add-all-ingredients">
 
-                    <button onClick={addSelectedRecipe}>Select Recipe</button>
-                    
-                    <button className="add-ing-button" onClick={addAllIngredients}>Add all Ingredients to Shopping List</button>
-
-                </div>
-
-            </div>
             <div>
                 <Typography className={classes.subHeader} variant='h5'>
                     Instructions:
