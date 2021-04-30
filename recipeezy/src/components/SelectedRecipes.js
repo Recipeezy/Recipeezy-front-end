@@ -23,12 +23,12 @@ export default function SelectedRecipes({ token }) {
     const classes = useStyles()
 
     const getSelectedRecipesList = () => {
-        axios.get('https://recipeezy-app.herokuapp.com/recipes/', {
+        axios.get('https://recipeezy-app.herokuapp.com/selected_recipes/', {
             headers: { 'Authorization': `Token ${token}` },
         })
             .then((data) => {
-                console.log(data.data)
-                setSelectedRecipes(data.data)
+                console.log('SR data', data.data[0])
+                setSelectedRecipes(data.data[0].selected_recipes)
                 
             })
     }
@@ -37,6 +37,8 @@ export default function SelectedRecipes({ token }) {
     }, [])
 
     
+    // if (!selectedRecipes.length) return "nothing";
+
     return (        
 
 
@@ -45,32 +47,34 @@ export default function SelectedRecipes({ token }) {
                 Selected Recipes
             </Typography>
             <Grid container justify='center' spacing={2}>
-            {selectedRecipeDetail ? ( 
-                <SelectedRecipeDetail recipe={selectedRecipeDetail} 
-                handleGoBack={() => setSelectedRecipeDetail(null)} token={token}
-                />
-            ) :
-                selectedRecipes.map((recipe) => (
-            <Grid item wrap='wrap' className={classes.cardStyle}>
-                <Card variant='outlined' key={recipe.id}>
-                    <div key={recipe.id}>
-                        <img alt='recipe-pic' src={recipe.img_id}></img>
-                        <Typography
-                        variant='h6'
-                        gutterBottom
-                        align='center'
-                        >{recipe.title}</Typography>
-                        <Typography
-                        variant='subtitle1'
-                        gutterBottom
-                        align='center'
-                        >{recipe.origin}</Typography>
-                        <button onClick={() => setSelectedRecipeDetail(recipe)}>See More</button>
-                    </div>
-                </Card>
-            </Grid>
-                ))
-            }
+            {(selectedRecipes && selectedRecipes.length > 0)  ? (  
+                selectedRecipeDetail ? ( 
+                    <SelectedRecipeDetail 
+                        recipe={selectedRecipeDetail} 
+                        handleGoBack={() => setSelectedRecipeDetail(null)} 
+                        token={token}
+                    />
+                ) : (
+                    selectedRecipes.map((recipe) => (
+                <Grid item wrap='wrap' className={classes.cardStyle}>
+                    <Card variant='outlined' key={recipe.id}>
+                        <div key={recipe.id}>
+                            <img alt='recipe-pic' src={recipe.img_id}></img>
+                                <Typography variant='h6'gutterBottom align='center'>
+                                    {recipe.title}
+                                </Typography>
+                                <Typography variant='subtitle1' gutterBottom align='center'>
+                                    {recipe.origin}
+                                </Typography>
+                            <button onClick={() => setSelectedRecipeDetail(recipe)}>See More</button>
+                        </div>
+                    </Card>
+                </Grid>
+                    ))
+                )
+                ) : (
+                    <p>Loading...</p>
+                )}
             </Grid>
         </>
 
