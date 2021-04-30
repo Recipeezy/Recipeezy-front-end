@@ -19,6 +19,7 @@ import Registration from './components/Registration';
 import SearchResults from './components/SearchResults'
 import theme from './theme'
 import HomeIcon from '@material-ui/icons/Home'
+import RecipeHistory from './components/RecipeHistory'
 
 
 
@@ -99,6 +100,9 @@ function App() {
                 <MenuItem onClick={handleClose}>
                   <Link to='/shoppinglist' type='button' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>Shopping List</Link>
                 </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Link to='/recipehistory' type='button' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>Recipe History</Link>
+                </MenuItem>
               </Menu>
               <Typography variant='h4' color="secondary">
                 Recipeezy
@@ -166,6 +170,9 @@ function App() {
             </Route>
             <Route path='/selectedrecipes'>
               <SelectedRecipes isLoggedIn={isLoggedIn} token={token} />
+            </Route>
+            <Route path='/recipehistory'>
+              <RecipeHistory isLoggedIn={isLoggedIn} token={token} />
             </Route>
             </Switch>
           </div>

@@ -18,16 +18,9 @@ const useStyles = makeStyles({
 
 export default function SelectedRecipes({ token }) {
     const [selectedRecipes, setSelectedRecipes] = useState([])
-
     const [selectedRecipeDetail, setSelectedRecipeDetail] = useState(false)
 
     const classes = useStyles()
-
-    
-        // map over each recipe for preview
-        // then do a show more like we have for search results
-        // use amy's covid data for reference
-
 
     const getSelectedRecipesList = () => {
         axios.get('https://recipeezy-app.herokuapp.com/recipes/', {
@@ -43,7 +36,6 @@ export default function SelectedRecipes({ token }) {
         getSelectedRecipesList()
     }, [])
 
-    
     
     return (        
 

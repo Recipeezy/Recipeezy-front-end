@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { Typography, IconButton, Button, makeStyles } from '@material-ui/core'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -10,7 +10,6 @@ import { CardContent } from '@material-ui/core';
 import { List } from '@material-ui/core';
 import { ListItem } from '@material-ui/core';
 import axios from 'axios';
-import Confetti from 'react-confetti'
 
 const useStyles = makeStyles({
     videoCard: {
@@ -41,12 +40,11 @@ const useStyles = makeStyles({
 
 export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
     console.log('recipe is stupid', recipe)
-    const classes = useStyles()    
-    const [cooked, setCooked] = useState(null)
+    const classes = useStyles()
 
 
-    const swapToRecipeHistory = () => {
-        axios.put(`https://recipeezy-app.herokuapp.com/recipe_history/${recipe.id}/`,
+    const swapToSelectedRecipes = () => {
+        axios.put(`https://recipeezy-app.herokuapp.com/selected_recipes/${recipe.id}/`,
         {
         },
         {
@@ -54,6 +52,7 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
         },
     )
 }
+
 
 
     return (
@@ -78,14 +77,7 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
             <p>{recipe.instructions}</p>
             <p>{recipe.video_id}</p>
         </div>
-        <button onClick={() => { swapToRecipeHistory(recipe.id); setCooked(true)}}>
-                            Cooked! (send to Recipe History)
-                            </button>
-        {cooked ? (
-            <Confetti />
-            ) : (
-                <p></p>
-            )}
+        <button onClick={() => swapToSelectedRecipes(recipe.id)}>Cook it again! (send back to Selected Recipes) </button>
     </>
     
         )
