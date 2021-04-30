@@ -71,11 +71,10 @@ function SearchResults({ token }) {
                             <RecipeDetail selectedRecipe={selectedRecipe} handleGoBack={() => setSelectedRecipe(null)} token={token} />
                         ) : (
                             <Grid container justify='center' spacing={2}>
-
                                 {
                                     recipes.map((recipe) => (
                                         <Grid item wrap='wrap' id={recipe.idMeal} className={classes.cardStyle}>
-                                            <Card key={recipe.meals[0].idMeal}>
+                                            <Card variant='outlined' key={recipe.meals[0].idMeal}>
                                                 <div key={recipe.meals[0].idMeal} id={recipe.meals[0].idMeal}>
                                                     <img alt='recipe-pic' src={recipe.meals[0].strMealThumb}></img>
                                                     <Typography variant='h6' align='center' gutterBottom>
