@@ -51,24 +51,24 @@ export default function SelectedRecipes({ token }) {
                 />
             ) :
                 selectedRecipes.map((recipe) => (
-                <Grid item wrap='wrap' className={classes.cardStyle}>
-                    <Card variant='outlined' key={recipe.id}>
-                        <div key={recipe.id}>
-                            <img alt='recipe-pic' src={recipe.img_id}></img>
-                            <Typography
-                            variant='h6'
-                            gutterBottom
-                            align='center'
-                            >{recipe.title}</Typography>
-                            <Typography
-                            variant='subtitle1'
-                            gutterBottom
-                            align='center'
-                            >{recipe.origin}</Typography>
-                            <button onClick={() => setSelectedRecipeDetail(recipe)}>See More</button>
-                        </div>
-                    </Card>
-                </Grid>
+            <Grid item wrap='wrap' className={classes.cardStyle}>
+                <Card variant='outlined' key={recipe.id}>
+                    <div key={recipe.id}>
+                        <img alt='recipe-pic' src={recipe.img_id}></img>
+                        <Typography
+                        variant='h6'
+                        gutterBottom
+                        align='center'
+                        >{recipe.title}</Typography>
+                        <Typography
+                        variant='subtitle1'
+                        gutterBottom
+                        align='center'
+                        >{recipe.origin}</Typography>
+                        <button onClick={() => setSelectedRecipeDetail(recipe)}>See More</button>
+                    </div>
+                </Card>
+            </Grid>
                 ))
             }
             </Grid>
