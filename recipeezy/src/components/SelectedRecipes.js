@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
+
+import SelectedRecipeDetail from './SelectedRecipeDetail.js'
+
 import RecipeDetail from './RecipeDetail';
 import { Card, Grid, makeStyles } from '@material-ui/core';
 import { CardContent } from '@material-ui/core';
@@ -12,10 +15,14 @@ const useStyles = makeStyles({
 })
 
 
+
 export default function SelectedRecipes({ token }) {
     const [selectedRecipes, setSelectedRecipes] = useState([])
-    const [chosenRecipe, setSelectedRecipe] = useState(false)
+
+    const [selectedRecipeDetail, setSelectedRecipeDetail] = useState(false)
+
     const classes = useStyles()
+
     
         // map over each recipe for preview
         // then do a show more like we have for search results
@@ -35,13 +42,22 @@ export default function SelectedRecipes({ token }) {
     useEffect(() => {
         getSelectedRecipesList()
     }, [])
+
+    
     
     return (        
+
+
         <>
             <Typography variant='h4' align='center' gutterBottom>
                 Selected Recipes
             </Typography>
             <Grid container justify='center' spacing={2}>
+              {selectedRecipeDetail ? ( 
+                <SelectedRecipeDetail recipe={selectedRecipeDetail} 
+                handleGoBack={() => setSelectedRecipeDetail(null)} token={token}
+                />
+            ) :
                 {selectedRecipes.map((recipe) => (
                 <Grid item wrap='wrap' className={classes.cardStyle}>
                     <Card variant='outlined' key={recipe.id}>
@@ -57,11 +73,14 @@ export default function SelectedRecipes({ token }) {
                             gutterBottom
                             align='center'
                             >{recipe.origin}</Typography>
+                            <button onClick={() => setSelectedRecipeDetail(recipe)}>See More</button>
                         </div>
                     </Card>
                 </Grid>
                 ))}
+            }
             </Grid>
         </>
+
     )
 }
