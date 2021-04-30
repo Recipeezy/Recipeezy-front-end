@@ -53,12 +53,12 @@ export default function SelectedRecipes({ token }) {
                 Selected Recipes
             </Typography>
             <Grid container justify='center' spacing={2}>
-              {selectedRecipeDetail ? ( 
+            {selectedRecipeDetail ? ( 
                 <SelectedRecipeDetail recipe={selectedRecipeDetail} 
                 handleGoBack={() => setSelectedRecipeDetail(null)} token={token}
                 />
             ) :
-                {selectedRecipes.map((recipe) => (
+                selectedRecipes.map((recipe) => (
                 <Grid item wrap='wrap' className={classes.cardStyle}>
                     <Card variant='outlined' key={recipe.id}>
                         <div key={recipe.id}>
@@ -77,7 +77,7 @@ export default function SelectedRecipes({ token }) {
                         </div>
                     </Card>
                 </Grid>
-                ))}
+                ))
             }
             </Grid>
         </>
