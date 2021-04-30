@@ -17,9 +17,9 @@ const useStyles = makeStyles(() => ({
         '&:hover': {
             background: '#fcf5c7',
         },
-        borderRadius:'15px',
+        borderRadius: '15px',
         justifyContent: 'space-between'
-        
+
     },
     submitButton: {
         marginLeft: '15px',
@@ -27,20 +27,20 @@ const useStyles = makeStyles(() => ({
         padding: '0',
         height: '50px',
         width: '70px'
-        
+
     },
     inputField: {
         padding: '10px'
     },
     listIcons: {
-        margin:'0',
+        margin: '0',
         minWidth: '30px',
         height: '24px'
     },
 
 }));
 
-export default function FoodItem({ food, setSelectedIngredients, selectedIngredients, isAtLimit, setIsAtLimit, token }) {
+export default function FoodItem({ food, setSelectedIngredients, selectedIngredients, isAtLimit, setIsAtLimit, token, getSearch }) {
     const [isDeleted, setIsDeleted] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [name, setName] = useState(food.name)
@@ -95,14 +95,16 @@ export default function FoodItem({ food, setSelectedIngredients, selectedIngredi
             setIsAtLimit(false)
         }
 
-        if (!selectedIngredients.includes(e.target.value)) {
+        if (!selectedIngredients.includes(e.target.value) && e.target.checked === true) {
             setSelectedIngredients([...selectedIngredients, e.target.value])
+            console.log("CHECKBOX SELECT INGS", selectedIngredients)
+            getSearch()
         } else {
             let n = [...selectedIngredients]
             n.splice(n.indexOf(e.target.value), 1)
             setSelectedIngredients(n)
+            getSearch()
         }
-        console.log("AFTER CHECKCLICK", selectedIngredients)
     }
 
 
@@ -111,7 +113,7 @@ export default function FoodItem({ food, setSelectedIngredients, selectedIngredi
     return (
         <Grid container alignItems='center'>
             <ListItem className={classes.listItem}>
-                <Checkbox onChange={checkBoxClick} type='checkbox' id={food.name} className="checkboxes" value={food.name} color='secondary'></Checkbox>
+                <Checkbox onChange={checkBoxClick} type='checkbox' id={name} className="checkboxes" value={food.name} color='secondary'></Checkbox>
                 {isEditing ?
                     <Grid container direction='row' alignItems='center'>
                         <TextField margin='dense' onChange={(event) => setName(event.target.value)} value={name}></TextField>
@@ -120,20 +122,20 @@ export default function FoodItem({ food, setSelectedIngredients, selectedIngredi
                     </Grid>
                     :
                     <>
-                    <InputLabel htmlFor={name} className={classes.label}>{food.name}</InputLabel>
-                    
-                    <Grid display='flex'>
-                        <ListItemIcon className={classes.listIcons}>
-                            <EditIcon color='secondary' onClick={() => setIsEditing(true)}>Edit Item</EditIcon>
-                        </ListItemIcon>
-                        <ListItemIcon className={classes.listIcons}>
-                            <DeleteIcon color='secondary'
-                                onClick={(event) => deleteIngredient(event)}>Delete Item
+                        <InputLabel htmlFor={name} className={classes.label}>{food.name}</InputLabel>
+
+                        <Grid display='flex'>
+                            <ListItemIcon className={classes.listIcons}>
+                                <EditIcon color='secondary' onClick={() => setIsEditing(true)}>Edit Item</EditIcon>
+                            </ListItemIcon>
+                            <ListItemIcon className={classes.listIcons}>
+                                <DeleteIcon color='secondary'
+                                    onClick={(event) => deleteIngredient(event)}>Delete Item
                             </DeleteIcon>
-                        </ListItemIcon>
-                    </Grid>
+                            </ListItemIcon>
+                        </Grid>
                     </>
-                    }
+                }
             </ListItem>
         </Grid>
     )
