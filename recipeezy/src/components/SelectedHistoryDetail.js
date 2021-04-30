@@ -77,7 +77,7 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
             <p>{recipe.instructions}</p>
             <p>{recipe.video_id}</p>
         </div>
-        <button onClick={() => swapToSelectedRecipes(recipe.id)}>Cook it again! (sends back to Selected Recipes) </button>
+        <button onClick={() => swapToSelectedRecipes(recipe.id)}>Cook it again! (send back to Selected Recipes) </button>
     </>
     
         )
