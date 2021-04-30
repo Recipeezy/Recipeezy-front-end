@@ -38,9 +38,35 @@ const useStyles = makeStyles({
     }
 });
 
-export default function SelectedRecipeDetail ({ recipe, handleGoBack }) {
+export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
     console.log('recipe is stupid', recipe)
     const classes = useStyles()
+
+
+    const swapToRecipeHistory = () => {
+        axios.put(`https://recipeezy-app.herokuapp.com/recipe_history/${recipe.id}/`,
+        {
+        },
+        {
+            headers: { Authorization: `Token ${token}` },
+        },
+    )
+}
+
+    // console.log('token is ', token)
+    // event.preventDefault();
+    // axios.put(`https://recipeezy-app.herokuapp.com/ingredients/${food.id}/swap/`,
+    //     {
+    //     },
+    //     {
+    //         headers: { Authorization: `Token ${token}` },
+    //     },
+    // )
+    //     .then((response) => {
+    //         setIsDeleted(true)
+    //     },
+    //     )
+
 
     return (
     <>
@@ -65,7 +91,7 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack }) {
             <p>{recipe.video_id}</p>
         </div>
         <button
-            // onClick={() => setSelectedRecipeDetail(recipe)}
+            onClick={() => swapToRecipeHistory(recipe.id)}
                             >Cooked! (sends to Recipe History)
                             </button>
     </>
