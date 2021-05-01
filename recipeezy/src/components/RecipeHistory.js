@@ -34,7 +34,7 @@ export default function RecipeHistory({token}) {
                 <SelectedHistoryDetail recipe={selectedHistoryDetail} 
                 handleGoBack={() => setSelectedHistoryDetail(null)} token={token}
                 />
-            ) :
+            ) : (
                 selectedRecipes.map((recipe) => (
                 
                     <li key={recipe.id}>
@@ -47,7 +47,7 @@ export default function RecipeHistory({token}) {
                     </li>
                 
                 ))
-            }
+            )}
             
         </>
 

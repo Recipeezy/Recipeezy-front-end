@@ -51,12 +51,11 @@ const useStyles = makeStyles({
 
 
 export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
-    console.log('selected recipe ', selectedRecipe)
     console.log(selectedRecipe.strYoutube.replace('watch?', 'embed/'))
     const classes = useStyles()
-
     const [ingredients, setIngredients] = useState([])
-
+    const [selected, setSelected] = useState(false)
+    const [added, setAdded] = useState(false)
     const recipeTitle = selectedRecipe.strMeal 
     const recipeImg = selectedRecipe.strMealThumb
     const recipeCuisine = selectedRecipe.strArea
@@ -96,7 +95,9 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
 
     }
 
-
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        }, []);
 
     const addSelectedRecipe = () => {
         listIngredients()
@@ -135,11 +136,7 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
                 {
                     headers: { Authorization: `Token ${token}` },
                 },
-            ).then(() => {
-                document.querySelector('.add-ing-button').innerHTML = "ADDED SUCCESSFULLY"
-                setTimeout(() => {
-                    document.querySelector('.add-ing-button').innerHTML = "Add All Ingredients to Shopping List"
-                }, 1500) })
+            )
         }
     }
 
@@ -206,23 +203,31 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
                     <li>{selectedRecipe.strIngredient20}</li><Divider style={selectedRecipe.strIngredient20 ? {} : {display:'none'} } variant='fullWidth' component="li" />
                 </List>
             </Grid>
+
                 <Grid align='center' className="add-all-ingredients">
+                    {!selected ? (
+                    <Button
+                    className="add-ing-button"
+                    variant='contained' color='primary'
+                    onClick={() => { addSelectedRecipe(); setSelected(true)}}>
+                        Select Recipe
+                    </Button>
+                    ) : (
                     <Button 
                     style={{marginTop:'15px', marginBottom: '15px'}} 
                     variant='contained' 
                     color='primary' 
-                    onClick={addAllIngredients}>
-                        Add all Ingredients to Shopping List
-                    </Button>
+                    onClick={() => { addAllIngredients(); setAdded(true)}}>
 
-                    <Button
-                    className="add-ing-button"
-                    variant='contained' color='primary'
-                    onClick={addSelectedRecipe}>
-                        Select Recipe
+                        {!added ? (
+                        'Add all Ingredients to Shopping List'
+                        ) : ( 
+                        'Ingredients Added!'
+                        )}
                     </Button>
+                    )}
                 </Grid>
-
+                
 
 
             <div>

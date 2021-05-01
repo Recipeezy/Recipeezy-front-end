@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Typography, IconButton, Button, makeStyles } from '@material-ui/core'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -39,10 +39,15 @@ const useStyles = makeStyles({
     }
 });
 
-export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
+export default function SelectedRecipeDetail ({ recipe, handleGoBack, sentToRecHistory, setSentToRecHistory, token }) {
     console.log('recipe is stupid', recipe)
     const classes = useStyles()    
     const [cooked, setCooked] = useState(null)
+    const [sent, setSent] = useState(false)
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        }, []);
 
 
     const swapToRecipeHistory = () => {
@@ -82,9 +87,19 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
             <p>{recipe.instructions}</p>
             <p>{recipe.video_id}</p>
         </div>
-        <button onClick={() => { swapToRecipeHistory(recipe.id); setCooked(true)}}>
-                            Cooked! (send to Recipe History)
+        <button onClick={() => { swapToRecipeHistory(recipe.id); setCooked(true); setSent(true)}}>
+
+                            {!sent ? ('Cooked! (send to Recipe History)'
+                            ) : (
+                                'Sent!'
+                            )}
                             </button>
+                            {sent ? (
+                                <button onClick={handleGoBack}>Back to Selected Recipes</button>
+                            ) : (
+                                <p></p>
+                            )}
+
         {cooked ? (
             <Confetti />
             ) : (

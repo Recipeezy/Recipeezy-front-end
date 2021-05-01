@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Typography, IconButton, Button, makeStyles } from '@material-ui/core'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -39,9 +39,13 @@ const useStyles = makeStyles({
 });
 
 export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
-    console.log('recipe is stupid', recipe)
+    const [sent, setSent] = useState(false)
+
     const classes = useStyles()
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        }, []);
 
     const swapToSelectedRecipes = () => {
         axios.put(`https://recipeezy-app.herokuapp.com/selected_recipes/${recipe.id}/`,
@@ -71,13 +75,26 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
         </div>
         <div>
             <ul>
-                <li>{recipe.recipe_ingredients}</li>
-                
-            </ul>
+                {console.log('stupid shit', recipe.recipe_ingredients)}
+                {recipe.recipe_ingredients.map((item) => (
+                    <li>{item.ingredient}</li>
+                ))}
+        </ul>
             <p>{recipe.instructions}</p>
             <p>{recipe.video_id}</p>
         </div>
-        <button onClick={() => swapToSelectedRecipes(recipe.id)}>Cook it again! (send back to Selected Recipes) </button>
+        <button onClick={() => {swapToSelectedRecipes(recipe.id); setSent(true)}}>
+        
+        {!sent ? ('Cook it again! (send back to Selected Meals)'
+                            ) : (
+                                'Sent!'
+                            )}</button>
+                            {sent ? (
+                                <button onClick={handleGoBack}>Back to Recipe History</button>
+                            ) : (
+                                <p></p>
+                            )}
+
     </>
     
         )
