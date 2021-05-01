@@ -61,7 +61,7 @@ export default function SelectedRecipes({ token }) {
         } else if (loading) {
             return "Loading..."
         } else if (selectedRecipes.length === 0) {
-            return "You haven't selected any recipes"
+            return "You haven't selected any recipes yet!"
         } else if (selectedRecipes.length > 0) {
             return (
                 selectedRecipes.map((recipe) => (

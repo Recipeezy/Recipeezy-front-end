@@ -43,7 +43,7 @@ export default function Home({ isLoggedIn, logOut, token }) {
 
             <Button
             variant='contained'
-            > Start Meal Plan</Button>
+            > Search Recipes </Button>
             <Typography variant='h6'></Typography>
             
             <SelectedRecipes isLoggedIn={isLoggedIn} token={token} />   
