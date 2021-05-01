@@ -4,6 +4,7 @@ import {Typography, Paper, makeStyles, Button, Container} from '@material-ui/cor
 import { Grid } from '@material-ui/core';
 import Pantry from './Pantry';
 import SelectedRecipes from './SelectedRecipes';
+import RecipeHistory from './RecipeHistory';
 
 const useStyles = makeStyles({
         pantryPaper: {
@@ -46,7 +47,8 @@ export default function Home({ isLoggedIn, logOut, token }) {
             <Typography variant='h6'></Typography>
             <SelectedRecipes isLoggedIn={isLoggedIn} token={token} />   
             <Typography variant='h6'>
-                Past Meals
+                {/* Past Meals */}
+                <RecipeHistory isLoggedIn={isLoggedIn} token={token} />
             </Typography>
         </Grid>
     )
