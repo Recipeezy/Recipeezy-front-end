@@ -18,7 +18,6 @@ import Login from './components/Login';
 import Registration from './components/Registration';
 import SearchResults from './components/SearchResults'
 import theme from './theme'
-import HomeIcon from '@material-ui/icons/Home'
 import RecipeHistory from './components/RecipeHistory'
 
 

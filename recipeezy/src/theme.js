@@ -1,8 +1,4 @@
-import { createMuiTheme, makeStyles } from "@material-ui/core/styles"
-import purple from '@material-ui/core/colors/purple'
-import { Button, withWidth } from '@material-ui/core'
-import { orange } from "@material-ui/core/colors";
-
+import { createMuiTheme } from "@material-ui/core/styles"
 
 const theme = createMuiTheme({
     palette: {
@@ -22,7 +18,8 @@ const theme = createMuiTheme({
             color:'#011936'
         },
         body1: {
-            padding:'15px'
+            padding:'12px',
+            lineHeight:'1.75'
         },
     },
     overrides: {
