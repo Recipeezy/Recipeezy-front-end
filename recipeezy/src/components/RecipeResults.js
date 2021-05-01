@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import RecipeDetail from './RecipeDetail'
-import { Link } from 'react-router-dom'
-import { StylesProvider, ThemeProvider, createMuiTheme } from '@material-ui/core'
+import { ThemeProvider } from '@material-ui/core'
 import { Typography } from '@material-ui/core'
 import { Grid } from '@material-ui/core'
 import { Card } from '@material-ui/core'
-import { CardMedia } from '@material-ui/core'
 import { Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { ButtonBase } from '@material-ui/core'
 import theme from '../theme'
 
 const useStyles = makeStyles({

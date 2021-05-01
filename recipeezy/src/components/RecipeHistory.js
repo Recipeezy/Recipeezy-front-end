@@ -1,16 +1,29 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import SelectedHistoryDetail from './SelectedHistoryDetail'
-import { Typography } from '@material-ui/core';
-import { Card, Grid, makeStyles } from '@material-ui/core';
 
+import { Button, Grid, makeStyles, Card, Typography } from '@material-ui/core';
+
+const useStyles = makeStyles({
+    buttonRoot: {
+        marginTop: '30px',
+        color: '#333',
+    },
+    cardStyle: {
+        maxWidth:'300px'
+    }
+    })
 
 
 
 export default function RecipeHistory({token}) {
     const [selectedRecipes, setSelectedRecipes] = useState([])
     const [selectedHistoryDetail, setSelectedHistoryDetail] = useState(false)
+
     const [loading, setLoading] = useState(false)
+
+    const classes = useStyles()
+
 
 
     const getRecipeHistoryList = () => {
@@ -27,13 +40,21 @@ export default function RecipeHistory({token}) {
     useEffect(() => {
         getRecipeHistoryList()
     }, [])
+
     
     const renderContent = () => {
         if (selectedHistoryDetail) {
             return (
+
+
+
+
                 <SelectedHistoryDetail recipe={selectedHistoryDetail} 
-                handleGoBack={() => setSelectedHistoryDetail(null)} token={token}
+                handleGoBack={() => setSelectedHistoryDetail(null)} 
+                token={token}
+                getRecipeHistoryList={getRecipeHistoryList}
                 />
+
             )
         } else if (loading) {
             return "Loading..."
@@ -69,7 +90,7 @@ export default function RecipeHistory({token}) {
             </Grid>
             
             
-        </>
 
+        </>
     )
 }

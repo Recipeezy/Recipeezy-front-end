@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import FoodItem from './FoodItem.js'
 import FoodItemForm from './FoodItemForm.js'
 import axios from 'axios'
-import HomeIcon from '@material-ui/icons/Home';
-import { IconButton, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import lodash from 'lodash'
 import { Button } from '@material-ui/core'
 import { Typography } from '@material-ui/core'

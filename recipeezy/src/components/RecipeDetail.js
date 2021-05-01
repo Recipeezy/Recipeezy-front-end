@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { Typography, IconButton, Button, makeStyles, Divider } from '@material-ui/core'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Paper, Card } from '@material-ui/core';
 import { CardMedia } from '@material-ui/core';
 import { Container } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
-import { CardContent } from '@material-ui/core';
 import { List } from '@material-ui/core';
-import { ListItem } from '@material-ui/core';
 import axios from 'axios';
 
 const useStyles = makeStyles({
@@ -37,14 +34,11 @@ const useStyles = makeStyles({
         marginTop: '30px'
     },
     gridListContainer: {
-        // display:'flex',
-        // flexWrap:'wrap',
         overflow: 'auto',
-        // justifyContent:'center'
     },
     gridList: {
         width:'300px',
-        height: '200px',
+        height: '150px',
         margin: '0 auto'
     }
 });
@@ -238,7 +232,6 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
             </div>
             <Card className={classes.videoCard}>
                 <CardMedia
-                    // width="100%"
                     src={selectedRecipe.strYoutube.replace('watch?v=', 'embed/')}
                     component='iframe'
                     height='400'
