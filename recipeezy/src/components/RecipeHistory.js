@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import SelectedHistoryDetail from './SelectedHistoryDetail'
+
 import { Button, Grid, makeStyles, Card, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles({
@@ -14,10 +15,15 @@ const useStyles = makeStyles({
     })
 
 
+
 export default function RecipeHistory({token}) {
     const [selectedRecipes, setSelectedRecipes] = useState([])
     const [selectedHistoryDetail, setSelectedHistoryDetail] = useState(false)
+
+    const [loading, setLoading] = useState(false)
+
     const classes = useStyles()
+
 
 
     const getRecipeHistoryList = () => {
@@ -27,6 +33,7 @@ export default function RecipeHistory({token}) {
             .then((data) => {
                 console.log(data.data[0].recipe_history)
                 setSelectedRecipes(data.data[0].recipe_history)
+                setLoading(false)
                 
             })
     }
@@ -34,43 +41,56 @@ export default function RecipeHistory({token}) {
         getRecipeHistoryList()
     }, [])
 
+    
+    const renderContent = () => {
+        if (selectedHistoryDetail) {
+            return (
 
 
-    return (
-        <>
-            
-            <Typography align='center' variant='h3' color='secondary' gutterBottom>
-                Recipe History
-            </Typography>
-            {selectedHistoryDetail ? ( 
+
+
                 <SelectedHistoryDetail recipe={selectedHistoryDetail} 
                 handleGoBack={() => setSelectedHistoryDetail(null)} 
                 token={token}
                 getRecipeHistoryList={getRecipeHistoryList}
                 />
-            ) : (
-                <Grid container justify='center' spacing={2} className='recipe-list'>
-                {selectedRecipes.map((recipe) => (
-                    <Grid item wrap='wrap' className={classes.cardStyle} key={recipe.id} elevation={3} padding={5}>
-                        <Card variant='outlined' key={recipe.id}>
+
+            )
+        } else if (loading) {
+            return "Loading..."
+        } else if (selectedRecipes.length === 0) {
+            return "Oops! Looks like there's nothing here yet. Get to Cookin'!"
+        } else if (selectedRecipes.length > 0) {
+            return (
+                selectedRecipes.map((recipe) => (
+                
+                    <li key={recipe.id}>
+                        <div key={recipe.id}>
                             <img alt='recipe-pic' src={recipe.img_id}></img>
-                            <Typography gutterBottom variant='h6' align='center'>
-                            {recipe.title}
-                            </Typography>
-                            <Typography gutterBottom variant='subtitle1' align='center'>
-                            Cuisine: {recipe.origin}
-                            </Typography>
-                            <Button
-                            fullWidth
-                            variant='contained'
-                            color="primary"
-                            size="small"
-                            onClick={() => setSelectedHistoryDetail(recipe)}>See More</Button>
-                        </Card>
-                    </Grid>
-                ))}
+                            <h3>{recipe.title}</h3>
+                            <p>{recipe.origin}</p>
+                            <button onClick={() => setSelectedHistoryDetail(recipe)}>See More</button>
+                        </div>
+                    </li>
+                
+                ))
+            )
+        }
+    }
+
+    return (
+        <>
+            
+            <h1>Recipe History</h1>
+            <Typography variant='h4' align='center' gutterBottom>
+                Recipe History
+            </Typography>
+            <Grid container justify='center' spacing={2}>
+                {renderContent()}
             </Grid>
-            )}
+            
+            
+
         </>
     )
 }

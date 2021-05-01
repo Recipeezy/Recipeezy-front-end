@@ -44,8 +44,10 @@ const useStyles = makeStyles({
     }
 });
 
+
 export default function SelectedRecipeDetail ({ recipe, handleGoBack, getSelectedRecipesList, token }) {
     console.log('recipe is stupid', recipe)
+
     const classes = useStyles()    
     const [cooked, setCooked] = useState(null)
     const [sent, setSent] = useState(false)
