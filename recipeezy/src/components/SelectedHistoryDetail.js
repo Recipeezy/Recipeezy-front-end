@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Typography, IconButton, Button, makeStyles } from '@material-ui/core'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -39,7 +39,8 @@ const useStyles = makeStyles({
 });
 
 export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
-    console.log('recipe is stupid', recipe)
+    const [sent, setSent] = useState(false)
+
     const classes = useStyles()
 
 
@@ -79,7 +80,18 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
             <p>{recipe.instructions}</p>
             <p>{recipe.video_id}</p>
         </div>
-        <button onClick={() => swapToSelectedRecipes(recipe.id)}>Cook it again! (send back to Selected Recipes) </button>
+        <button onClick={() => {swapToSelectedRecipes(recipe.id); setSent(true)}}>
+        
+        {!sent ? ('Cook it again! (send back to Selected Meals)'
+                            ) : (
+                                'Sent!'
+                            )}</button>
+                            {sent ? (
+                                <button onClick={handleGoBack}>Back to Selected Recipes</button>
+                            ) : (
+                                <p></p>
+                            )}
+
     </>
     
         )
