@@ -89,7 +89,8 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
                 </Typography>
             </Grid>
         </div>
-        <Grid container className={classes.gridListContainer} align='center'>
+        {recipe.recipe_ingredients ? (
+            <Grid container className={classes.gridListContainer} align='center'>
             <List className={classes.gridList}>
                 {recipe.recipe_ingredients.map((item) => (
                     <>
@@ -97,7 +98,10 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
                     </>
                 ))}
             </List>
-        </Grid>
+            </Grid>
+            ) : (
+                <></>
+                )}
         <div>
             <Typography className={classes.subHeader} variant='h5'>
                 Instructions:
