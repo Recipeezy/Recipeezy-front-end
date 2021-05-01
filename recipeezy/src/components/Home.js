@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {Typography, Paper, makeStyles, Button, Container} from '@material-ui/core/'
 import { Grid } from '@material-ui/core';
+
 import Pantry from './Pantry';
 import SelectedRecipes from './SelectedRecipes';
 
@@ -16,6 +17,14 @@ const useStyles = makeStyles({
         header: {
             margin: '0 auto'
         },
+        root: {
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-around',
+            overflow: 'hidden',
+            // backgroundColor: theme.palette.background.paper,
+          },
+          
     })
 
 
@@ -43,8 +52,10 @@ export default function Home({ isLoggedIn, logOut, token }) {
             <Button
             variant='contained'
             > Start Meal Plan</Button>
+            
             <Typography variant='h6'></Typography>
             <SelectedRecipes isLoggedIn={isLoggedIn} token={token} />   
+            
             <Typography variant='h6'>
                 Past Meals
             </Typography>

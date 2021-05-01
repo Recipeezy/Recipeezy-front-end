@@ -104,9 +104,9 @@ function App() {
                   <Link to='/recipehistory' type='button' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>Recipe History</Link>
                 </MenuItem>
               </Menu>
-              <Typography variant='h4' color="secondary">
+              {/* <Typography variant='h4' color="secondary">
                 Recipeezy
-                      </Typography>
+                      </Typography> */}
                       {isLoggedIn ? (
                           <Grid container justify='flex-end'>
                             <Button
