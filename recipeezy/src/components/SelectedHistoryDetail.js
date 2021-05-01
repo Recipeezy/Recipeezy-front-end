@@ -38,7 +38,7 @@ const useStyles = makeStyles({
     }
 });
 
-export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
+export default function SelectedRecipeDetail ({ recipe, handleGoBack, token, getRecipeHistoryList }) {
     const [sent, setSent] = useState(false)
 
     const classes = useStyles()
@@ -57,7 +57,14 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
     )
 }
 
+    useEffect(() => {
+        console.log('component mounted')
 
+        return () => {
+            console.log('component unmounted');
+            getRecipeHistoryList();
+        };
+    }, [])
 
     return (
     <>

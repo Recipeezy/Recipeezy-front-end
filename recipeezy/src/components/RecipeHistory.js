@@ -33,7 +33,7 @@ export default function RecipeHistory({token}) {
     useEffect(() => {
         getRecipeHistoryList()
     }, [])
-    
+
 
 
     return (
@@ -44,7 +44,9 @@ export default function RecipeHistory({token}) {
             </Typography>
             {selectedHistoryDetail ? ( 
                 <SelectedHistoryDetail recipe={selectedHistoryDetail} 
-                handleGoBack={() => setSelectedHistoryDetail(null)} token={token}
+                handleGoBack={() => setSelectedHistoryDetail(null)} 
+                token={token}
+                getRecipeHistoryList={getRecipeHistoryList}
                 />
             ) : (
                 <Grid container justify='center' spacing={2} className='recipe-list'>

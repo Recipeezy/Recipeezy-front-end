@@ -17,7 +17,6 @@ const useStyles = makeStyles({
 export default function SelectedRecipes({ token }) {
     const [selectedRecipes, setSelectedRecipes] = useState([])
     const [selectedRecipeDetail, setSelectedRecipeDetail] = useState(false)
-    const [sentToRecHistory, setSentToRecHistory] = useState(false)
 
     const classes = useStyles()
 
@@ -35,11 +34,6 @@ export default function SelectedRecipes({ token }) {
         getSelectedRecipesList()
     }, [])
 
-    
-    const handleGoBack = () => {
-        setSelectedRecipeDetail(null)
-        setSentToRecHistory(true)
-    }
 
     return (        
 
@@ -53,10 +47,8 @@ export default function SelectedRecipes({ token }) {
                 selectedRecipeDetail ? ( 
                     <SelectedRecipeDetail 
                         recipe={selectedRecipeDetail} 
-                        // handleGoBack={() => setSelectedRecipeDetail(null)}
-                        handleGoBack={handleGoBack}
-                        sentToRecHistory={sentToRecHistory}
-                        setSentToRecHistory={setSentToRecHistory}
+                        handleGoBack={() => setSelectedRecipeDetail(null)}
+                        getSelectedRecipesList={getSelectedRecipesList}
                         token={token}
                     />
                 ) : (
