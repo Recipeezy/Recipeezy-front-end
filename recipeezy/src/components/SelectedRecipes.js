@@ -8,6 +8,7 @@ import { Card, Grid, makeStyles } from '@material-ui/core';
 import { CardContent } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 
+
 const useStyles = makeStyles({
     cardStyle: {
         maxWidth: '300px'
@@ -86,6 +87,8 @@ export default function SelectedRecipes({ token }) {
 
     return (        
         <>
+
+            
             <Typography variant='h4' align='center' gutterBottom>
                 Selected Recipes
             </Typography>

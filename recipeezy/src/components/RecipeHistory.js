@@ -68,24 +68,6 @@ export default function RecipeHistory({token}) {
                 {renderContent()}
             </Grid>
             
-            {/* {selectedHistoryDetail ? ( 
-                <SelectedHistoryDetail recipe={selectedHistoryDetail} 
-                handleGoBack={() => setSelectedHistoryDetail(null)} token={token}
-                />
-            ) : (
-                selectedRecipes.map((recipe) => (
-                
-                    <li key={recipe.id}>
-                        <div key={recipe.id}>
-                            <img alt='recipe-pic' src={recipe.img_id}></img>
-                            <h3>{recipe.title}</h3>
-                            <p>{recipe.origin}</p>
-                            <button onClick={() => setSelectedHistoryDetail(recipe)}>See More</button>
-                        </div>
-                    </li>
-                
-                ))
-            )} */}
             
         </>
 
