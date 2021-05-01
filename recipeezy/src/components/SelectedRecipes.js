@@ -19,16 +19,17 @@ const useStyles = makeStyles({
 export default function SelectedRecipes({ token }) {
     const [selectedRecipes, setSelectedRecipes] = useState([])
     const [selectedRecipeDetail, setSelectedRecipeDetail] = useState(false)
+    const [sentToRecHistory, setSentToRecHistory] = useState(false)
 
     const classes = useStyles()
 
     const getSelectedRecipesList = () => {
-        axios.get('https://recipeezy-app.herokuapp.com/recipes/', {
+        axios.get('https://recipeezy-app.herokuapp.com/selected_recipes/', {
             headers: { 'Authorization': `Token ${token}` },
         })
             .then((data) => {
                 console.log(data.data)
-                setSelectedRecipes(data.data)
+                setSelectedRecipes(data.data[0].selected_recipes)
                 
             })
     }
@@ -36,7 +37,13 @@ export default function SelectedRecipes({ token }) {
         getSelectedRecipesList()
     }, [])
 
+    const handleGoBack = () => {
+        setSelectedRecipeDetail(null)
+        setSentToRecHistory(true)
+    }
     
+    // if (sentToRecHistory) return false;
+
     return (        
 
 
@@ -47,28 +54,30 @@ export default function SelectedRecipes({ token }) {
             <Grid container justify='center' spacing={2}>
             {selectedRecipeDetail ? ( 
                 <SelectedRecipeDetail recipe={selectedRecipeDetail} 
-                handleGoBack={() => setSelectedRecipeDetail(null)} token={token}
+                // handleGoBack={() => setSelectedRecipeDetail(null)} 
+                handleGoBack={handleGoBack}
+                token={token}
                 />
             ) :
                 selectedRecipes.map((recipe) => (
-            <Grid item wrap='wrap' className={classes.cardStyle}>
-                <Card variant='outlined' key={recipe.id}>
-                    <div key={recipe.id}>
-                        <img alt='recipe-pic' src={recipe.img_id}></img>
-                        <Typography
-                        variant='h6'
-                        gutterBottom
-                        align='center'
-                        >{recipe.title}</Typography>
-                        <Typography
-                        variant='subtitle1'
-                        gutterBottom
-                        align='center'
-                        >{recipe.origin}</Typography>
-                        <button onClick={() => setSelectedRecipeDetail(recipe)}>See More</button>
-                    </div>
-                </Card>
-            </Grid>
+                <Grid item wrap='wrap' className={classes.cardStyle}>
+                    <Card variant='outlined' key={recipe.id}>
+                        <div key={recipe.id}>
+                            <img alt='recipe-pic' src={recipe.img_id}></img>
+                            <Typography
+                            variant='h6'
+                            gutterBottom
+                            align='center'
+                            >{recipe.title}</Typography>
+                            <Typography
+                            variant='subtitle1'
+                            gutterBottom
+                            align='center'
+                            >{recipe.origin}</Typography>
+                            <button onClick={() => setSelectedRecipeDetail(recipe)}>See More</button>
+                        </div>
+                    </Card>
+                </Grid>
                 ))
             }
             </Grid>
