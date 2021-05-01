@@ -1,14 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { Typography, IconButton, Button, makeStyles } from '@material-ui/core'
+import { Typography, IconButton, Button, makeStyles, Divider, Card, CardMedia } from '@material-ui/core'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { Paper, Card } from '@material-ui/core';
-import { CardMedia } from '@material-ui/core';
-import { Container } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
-import { CardContent } from '@material-ui/core';
 import { List } from '@material-ui/core';
-import { ListItem } from '@material-ui/core';
 import axios from 'axios';
 
 const useStyles = makeStyles({
@@ -35,6 +30,14 @@ const useStyles = makeStyles({
     subHeader: {
         paddingLeft: '15px',
         marginTop: '30px'
+    },
+    gridListContainer: {
+        overflow: 'auto',
+    },
+    gridList: {
+        width:'300px',
+        height: '150px',
+        margin: '0 auto'
     }
 });
 
@@ -57,27 +60,65 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
 
     return (
     <>
-    <IconButton>
-                <ArrowBackIcon
-                    gutterBottom
-                    onClick={handleGoBack}
-                >Go back</ArrowBackIcon>
-            </IconButton>
+        <IconButton>
+            <ArrowBackIcon
+                gutterBottom
+                onClick={handleGoBack}
+            >Go back</ArrowBackIcon>
+        </IconButton>
+        <Grid
+        className={classes.root}
+        spacing={0}
+        direction="row"
+        alignItems="center"
+        justify="center"
+        container>
         <div>
-            <img src={recipe.img_id}></img>
-            <h1>{recipe.title}</h1>
-            <p>Cuisine: {recipe.origin}</p>
-
+            <Grid item>
+                <img alt='recipe-pic' src={recipe.img_id}></img>
+            </Grid>
+            <Grid item component={Paper}>
+                <Typography
+                variant='subtitle1'
+                align="center"
+                >
+                    {recipe.title}
+                </Typography>
+                <Typography gutterBottom align='center' variant='subtitle1'>
+                        Cuisine: {recipe.origin}
+                </Typography>
+            </Grid>
         </div>
+        <Grid container className={classes.gridListContainer} align='center'>
+            <List className={classes.gridList}>
+                {recipe.recipe_ingredients.map((item) => (
+                    <>
+                        <li>{item.ingredient}</li><Divider style={item.ingredient ? {} : {display:'none'} } variant='fullWidth' component="li" />
+                    </>
+                ))}
+            </List>
+        </Grid>
         <div>
-            <ul>
-                <li>{recipe.recipe_ingredients}</li>
-                
-            </ul>
-            <p>{recipe.instructions}</p>
-            <p>{recipe.video_id}</p>
+            <Typography className={classes.subHeader} variant='h5'>
+                Instructions:
+            </Typography>
+            <Typography variant='body1'>{recipe.instructions}</Typography>
         </div>
-        <button onClick={() => swapToSelectedRecipes(recipe.id)}>Cook it again! (send back to Selected Recipes) </button>
+        <Card className={classes.videoCard}>
+            <CardMedia
+                src={recipe.video_id.replace('watch?v=', 'embed/')}
+                component='iframe'
+                height='400'
+            />
+        </Card>
+        
+        <Button 
+        fullWidth
+        color='primary' variant='contained'
+        onClick={() => swapToSelectedRecipes(recipe.id)}>
+            Cook it again! (send back to Selected Recipes) 
+        </Button>
+        </Grid>
     </>
     
         )

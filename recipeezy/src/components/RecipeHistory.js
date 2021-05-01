@@ -1,11 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import SelectedHistoryDetail from './SelectedHistoryDetail'
+import { Button, Grid, makeStyles, Card, Typography } from '@material-ui/core';
+
+const useStyles = makeStyles({
+    buttonRoot: {
+        marginTop: '30px',
+        color: '#333',
+    },
+    cardStyle: {
+        maxWidth:'300px'
+    }
+    })
 
 
 export default function RecipeHistory({token}) {
     const [selectedRecipes, setSelectedRecipes] = useState([])
     const [selectedHistoryDetail, setSelectedHistoryDetail] = useState(false)
+    const classes = useStyles()
 
 
     const getRecipeHistoryList = () => {
@@ -27,29 +39,36 @@ export default function RecipeHistory({token}) {
     return (
         <>
             
-            <h1>Recipe History</h1>
-            
-            
+            <Typography align='center' variant='h3' color='secondary' gutterBottom>
+                Recipe History
+            </Typography>
             {selectedHistoryDetail ? ( 
                 <SelectedHistoryDetail recipe={selectedHistoryDetail} 
                 handleGoBack={() => setSelectedHistoryDetail(null)} token={token}
                 />
-            ) :
-                selectedRecipes.map((recipe) => (
-                
-                    <li key={recipe.id}>
-                        <div key={recipe.id}>
+            ) : (
+                <Grid container justify='center' spacing={2} className='recipe-list'>
+                {selectedRecipes.map((recipe) => (
+                    <Grid item wrap='wrap' className={classes.cardStyle} key={recipe.id} elevation={3} padding={5}>
+                        <Card variant='outlined' key={recipe.id}>
                             <img alt='recipe-pic' src={recipe.img_id}></img>
-                            <h3>{recipe.title}</h3>
-                            <p>{recipe.origin}</p>
-                            <button onClick={() => setSelectedHistoryDetail(recipe)}>See More</button>
-                        </div>
-                    </li>
-                
-                ))
-            }
-            
+                            <Typography gutterBottom variant='h6' align='center'>
+                            {recipe.title}
+                            </Typography>
+                            <Typography gutterBottom variant='subtitle1' align='center'>
+                            Cuisine: {recipe.origin}
+                            </Typography>
+                            <Button
+                            fullWidth
+                            variant='contained'
+                            color="primary"
+                            size="small"
+                            onClick={() => setSelectedHistoryDetail(recipe)}>See More</Button>
+                        </Card>
+                    </Grid>
+                ))}
+            </Grid>
+            )}
         </>
-
     )
 }
