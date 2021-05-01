@@ -44,10 +44,15 @@ const useStyles = makeStyles({
     }
 });
 
-export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
+export default function SelectedRecipeDetail ({ recipe, handleGoBack, sentToRecHistory, setSentToRecHistory, token }) {
     console.log('recipe is stupid', recipe)
     const classes = useStyles()    
     const [cooked, setCooked] = useState(null)
+    const [sent, setSent] = useState(false)
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        }, []);
 
 
     const swapToRecipeHistory = () => {
@@ -125,6 +130,19 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
         onClick={() => { swapToRecipeHistory(recipe.id); setCooked(true)}}>
             Cooked! (send to Recipe History)
         </Button>
+        <button onClick={() => { swapToRecipeHistory(recipe.id); setCooked(true); setSent(true)}}>
+
+                            {!sent ? ('Cooked! (send to Recipe History)'
+                            ) : (
+                                'Sent!'
+                            )}
+                            </button>
+                            {sent ? (
+                                <button onClick={handleGoBack}>Back to Selected Recipes</button>
+                            ) : (
+                                <p></p>
+                            )}
+
         {cooked ? (
             <Confetti />
             ) : (

@@ -88,19 +88,19 @@ function App() {
                   <Link to='/' type='button' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>Home</Link>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                  <Link to="/reciperesults" type='button' style={{ textDecoration: 'none' }}>Random 10 Recipes</Link>
-                </MenuItem>
-                <MenuItem onClick={handleClose}>
                   <Link to="/pantry" type='button' style={{ textDecoration: 'none' }}>View pantry</Link>
-                </MenuItem>
-                <MenuItem onClick={handleClose}>
-                  <Link to='/selectedrecipes' type='button' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>Selected Recipes</Link>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
                   <Link to='/shoppinglist' type='button' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>Shopping List</Link>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
+                  <Link to='/selectedrecipes' type='button' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>Selected Recipes</Link>
+                </MenuItem>                
+                <MenuItem onClick={handleClose}>
                   <Link to='/recipehistory' type='button' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>Recipe History</Link>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Link to="/reciperesults" type='button' style={{ textDecoration: 'none' }}>10 Random Recipes</Link>
                 </MenuItem>
               </Menu>
               <Typography variant='h4' color="secondary">
