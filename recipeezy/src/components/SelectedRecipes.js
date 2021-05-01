@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-
 import SelectedRecipeDetail from './SelectedRecipeDetail.js'
-
 import RecipeDetail from './RecipeDetail';
-import { Card, Grid, makeStyles } from '@material-ui/core';
+import { Card, Grid, makeStyles, Button } from '@material-ui/core';
 import { CardContent } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 
@@ -66,7 +64,15 @@ export default function SelectedRecipes({ token }) {
                                 <Typography variant='subtitle1' gutterBottom align='center'>
                                     {recipe.origin}
                                 </Typography>
-                            <button onClick={() => setSelectedRecipeDetail(recipe)}>See More</button>
+                                <Button
+                                fullWidth
+                                variant='contained'
+                                color="primary"
+                                size="small"
+                                onClick={() => setSelectedRecipeDetail(recipe)}
+                                >
+                                See more
+                                </Button>
                         </div>
                     </Card>
                 </Grid>
