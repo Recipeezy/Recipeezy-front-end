@@ -51,12 +51,10 @@ const useStyles = makeStyles({
 
 
 export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
-    console.log('selected recipe ', selectedRecipe)
     console.log(selectedRecipe.strYoutube.replace('watch?', 'embed/'))
     const classes = useStyles()
-
     const [ingredients, setIngredients] = useState([])
-
+    const [selected, setSelected] = useState(false)
     const recipeTitle = selectedRecipe.strMeal 
     const recipeImg = selectedRecipe.strMealThumb
     const recipeCuisine = selectedRecipe.strArea
@@ -207,6 +205,14 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
                 </List>
             </Grid>
                 <Grid align='center' className="add-all-ingredients">
+                    {!selected ? (
+                    <Button
+                    className="add-ing-button"
+                    variant='contained' color='primary'
+                    onClick={() => { addSelectedRecipe(); setSelected(true)}}>
+                        Select Recipe
+                    </Button>
+                    ) : (
                     <Button 
                     style={{marginTop:'15px', marginBottom: '15px'}} 
                     variant='contained' 
@@ -214,15 +220,9 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
                     onClick={addAllIngredients}>
                         Add all Ingredients to Shopping List
                     </Button>
-
-                    <Button
-                    className="add-ing-button"
-                    variant='contained' color='primary'
-                    onClick={addSelectedRecipe}>
-                        Select Recipe
-                    </Button>
+                    )}
                 </Grid>
-
+                
 
 
             <div>
