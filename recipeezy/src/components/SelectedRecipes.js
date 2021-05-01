@@ -20,16 +20,19 @@ export default function SelectedRecipes({ token }) {
     const [selectedRecipes, setSelectedRecipes] = useState([])
     const [selectedRecipeDetail, setSelectedRecipeDetail] = useState(false)
     const [sentToRecHistory, setSentToRecHistory] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const classes = useStyles()
 
     const getSelectedRecipesList = () => {
+        setLoading(true)
         axios.get('https://recipeezy-app.herokuapp.com/selected_recipes/', {
             headers: { 'Authorization': `Token ${token}` },
         })
             .then((data) => {
                 console.log('SR data', data.data[0])
                 setSelectedRecipes(data.data[0].selected_recipes)
+                setLoading(false)
                 
             })
     }
@@ -42,6 +45,8 @@ export default function SelectedRecipes({ token }) {
         setSelectedRecipeDetail(null)
         setSentToRecHistory(true)
     }
+
+    if (loading) return "Loading...";
 
     return (        
 
