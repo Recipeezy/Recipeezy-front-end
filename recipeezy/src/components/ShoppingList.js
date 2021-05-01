@@ -88,7 +88,7 @@ function ShoppingList({ token }) {
               color="primary"
               onClick={swapSelected}
             >
-              Swap Selected Ingredients
+              Done Shopping
             </Button>
           </div>
         ) : (
