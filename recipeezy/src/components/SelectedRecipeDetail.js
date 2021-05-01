@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Typography, IconButton, Button, makeStyles } from '@material-ui/core'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -45,6 +45,9 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, sentToRecH
     const [cooked, setCooked] = useState(null)
     const [sent, setSent] = useState(false)
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        }, []);
 
 
     const swapToRecipeHistory = () => {

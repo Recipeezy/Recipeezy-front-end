@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Typography, IconButton, Button, makeStyles } from '@material-ui/core'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -43,6 +43,9 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
 
     const classes = useStyles()
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        }, []);
 
     const swapToSelectedRecipes = () => {
         axios.put(`https://recipeezy-app.herokuapp.com/selected_recipes/${recipe.id}/`,
@@ -87,7 +90,7 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
                                 'Sent!'
                             )}</button>
                             {sent ? (
-                                <button onClick={handleGoBack}>Back to Selected Recipes</button>
+                                <button onClick={handleGoBack}>Back to Recipe History</button>
                             ) : (
                                 <p></p>
                             )}

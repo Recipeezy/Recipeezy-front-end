@@ -95,7 +95,9 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
 
     }
 
-
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        }, []);
 
     const addSelectedRecipe = () => {
         listIngredients()
