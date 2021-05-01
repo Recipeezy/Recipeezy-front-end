@@ -45,7 +45,9 @@ export default function Home({ isLoggedIn, logOut, token }) {
             variant='contained'
             > Start Meal Plan</Button>
             <Typography variant='h6'></Typography>
+            
             <SelectedRecipes isLoggedIn={isLoggedIn} token={token} />   
+            
             <Typography variant='h6'>
                 {/* Past Meals */}
                 <RecipeHistory isLoggedIn={isLoggedIn} token={token} />
