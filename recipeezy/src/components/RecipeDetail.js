@@ -55,6 +55,7 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
     const classes = useStyles()
     const [ingredients, setIngredients] = useState([])
     const [selected, setSelected] = useState(false)
+    const [added, setAdded] = useState(false)
     const recipeTitle = selectedRecipe.strMeal 
     const recipeImg = selectedRecipe.strMealThumb
     const recipeCuisine = selectedRecipe.strArea
@@ -133,11 +134,7 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
                 {
                     headers: { Authorization: `Token ${token}` },
                 },
-            ).then(() => {
-                document.querySelector('.add-ing-button').innerHTML = "ADDED SUCCESSFULLY"
-                setTimeout(() => {
-                    document.querySelector('.add-ing-button').innerHTML = "Add All Ingredients to Shopping List"
-                }, 1500) })
+            )
         }
     }
 
@@ -204,6 +201,7 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
                     <li>{selectedRecipe.strIngredient20}</li><Divider style={selectedRecipe.strIngredient20 ? {} : {display:'none'} } variant='fullWidth' component="li" />
                 </List>
             </Grid>
+
                 <Grid align='center' className="add-all-ingredients">
                     {!selected ? (
                     <Button
@@ -217,8 +215,13 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
                     style={{marginTop:'15px', marginBottom: '15px'}} 
                     variant='contained' 
                     color='primary' 
-                    onClick={addAllIngredients}>
-                        Add all Ingredients to Shopping List
+                    onClick={() => { addAllIngredients(); setAdded(true)}}>
+
+                        {!added ? (
+                        'Add all Ingredients to Shopping List'
+                        ) : ( 
+                        'Ingredients Added!'
+                        )}
                     </Button>
                     )}
                 </Grid>
