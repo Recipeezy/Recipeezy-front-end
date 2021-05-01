@@ -42,6 +42,7 @@ export default function SelectedRecipes({ token }) {
         <SelectedRecipeDetail
           recipe={selectedRecipeDetail}
           handleGoBack={() => setSelectedRecipeDetail(null)}
+          getSelectedRecipesList={getSelectedRecipesList}
           //handleGoBack={handleGoBack}
           token={token}
         />
