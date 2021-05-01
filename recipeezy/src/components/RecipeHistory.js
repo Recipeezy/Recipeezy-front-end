@@ -21,7 +21,7 @@ export default function RecipeHistory({token}) {
     useEffect(() => {
         getRecipeHistoryList()
     }, [])
-    
+
 
 
     return (
@@ -32,7 +32,9 @@ export default function RecipeHistory({token}) {
             
             {selectedHistoryDetail ? ( 
                 <SelectedHistoryDetail recipe={selectedHistoryDetail} 
-                handleGoBack={() => setSelectedHistoryDetail(null)} token={token}
+                handleGoBack={() => setSelectedHistoryDetail(null)} 
+                token={token}
+                getRecipeHistoryList={getRecipeHistoryList}
                 />
             ) : (
                 selectedRecipes.map((recipe) => (

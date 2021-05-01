@@ -39,7 +39,7 @@ const useStyles = makeStyles({
     }
 });
 
-export default function SelectedRecipeDetail ({ recipe, handleGoBack, sentToRecHistory, setSentToRecHistory, token }) {
+export default function SelectedRecipeDetail ({ recipe, handleGoBack, getSelectedRecipesList, token }) {
     console.log('recipe is stupid', recipe)
     const classes = useStyles()    
     const [cooked, setCooked] = useState(null)
@@ -49,6 +49,14 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, sentToRecH
         window.scrollTo(0, 0);
         }, []);
 
+    useEffect(() => {
+        console.log('component mounted')
+    
+        return () => {
+            console.log('component unmounted');
+            getSelectedRecipesList();
+        };
+    }, [])
 
     const swapToRecipeHistory = () => {
         axios.put(`https://recipeezy-app.herokuapp.com/recipe_history/${recipe.id}/`,
