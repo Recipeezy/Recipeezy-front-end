@@ -39,7 +39,7 @@ const useStyles = makeStyles({
     }
 });
 
-export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
+export default function SelectedRecipeDetail ({ recipe, handleGoBack, sentToRecHistory, setSentToRecHistory, token }) {
     console.log('recipe is stupid', recipe)
     const classes = useStyles()    
     const [cooked, setCooked] = useState(null)
@@ -86,7 +86,7 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, token }) {
         </div>
         <button onClick={() => { swapToRecipeHistory(recipe.id); setCooked(true); setSent(true)}}>
 
-                            {!sent ? ('Cooked! (send to Recipe History?)'
+                            {!sent ? ('Cooked! (send to Recipe History)'
                             ) : (
                                 'Sent!'
                             )}
