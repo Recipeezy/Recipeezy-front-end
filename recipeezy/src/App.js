@@ -8,6 +8,7 @@ import {
   Link
 } from "react-router-dom";
 import { Button, Grid, Container, Typography, Menu, AppBar, Toolbar, IconButton, MenuItem, CssBaseline, makeStyles, ThemeProvider } from '@material-ui/core'
+import { Link as UiLink } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu';
 import RecipeResults from './components/RecipeResults'
 import Pantry from './components/Pantry'
@@ -64,6 +65,7 @@ function App() {
 
 
   return (
+    
     <Router>
 
 
@@ -73,18 +75,23 @@ function App() {
           <div>
             <h1>Hello</h1>
           </div>
+
+          
           <AppBar color='primary'>
             <Toolbar>
+            {isLoggedIn ? (
+            <>  
               <IconButton edge='start'>
+              
                 <MenuIcon color='secondary' aria-controls='simple-menu' aria-haspopup='true' onClick={handleClick} />
-              </IconButton>
+              </IconButton>              
               <Menu
                 id='simple-menu'
                 anchorEl={anchorEl}
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
-              >
+              >                
                 <MenuItem onClick={handleClose}>
                   <Link to='/' type='button' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>Home</Link>
                 </MenuItem>
@@ -104,9 +111,12 @@ function App() {
                   <Link to="/reciperesults" type='button' style={{ textDecoration: 'none' }}>10 Random Recipes</Link>
                 </MenuItem>
               </Menu>
-              <Typography variant='h4' color="secondary">
-                Recipeezy
-                      </Typography>
+            </>  
+                ) : (
+                  <p></p>
+                )}
+
+                      <UiLink variant='h4' href='/' type='button' color='secondary' style={{ textDecoration: 'none' }} >Recipeezy</UiLink>
                       {isLoggedIn ? (
                           <Grid container justify='flex-end'>
                             <Button

@@ -66,6 +66,12 @@ export default function Registration({ isLoggedIn, setAuth }) {
             <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
+            Recipeezy
+        </Typography>
+        <Typography component="h1" variant="h5">
+        Discover recipes, build your shopping list, and keep track of your pantry on Recipeezy.
+        </Typography>
+        <Typography component="h1" variant="h5">
             Sign up
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
