@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
     signUpMsg: {
         marginTop: '20px',
-        marginBottom: '20px',
+        marginBottom: '50px',
     }
     }));
 
@@ -68,10 +68,6 @@ export default function Registration({ isLoggedIn, setAuth }) {
             <Avatar className={classes.avatar}>
                 <LockOutlinedIcon />
             </Avatar>
-            <Typography component="h1" variant="h5">
-                Recipeezy
-            </Typography>
-
             <Typography component="h1" variant="h5">
                 Sign up
             </Typography>
