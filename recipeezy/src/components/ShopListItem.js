@@ -21,7 +21,7 @@ const useStyles = makeStyles(() => ({
   },
   listItem: {
     "&:hover": {
-      background: "#c0dfa1",
+      background: "#fcf5c7",
     },
     display: "flex",
     borderRadius: "15px",

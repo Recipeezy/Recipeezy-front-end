@@ -14,7 +14,12 @@ const useStyles = makeStyles({
     },
     recipeHistoryHeader: {
         marginTop: '30px',
-        marginBottom: '30px'
+        marginBottom: '30px',
+        position: 'sticky',
+        margin: '0 auto',
+        right: 20,
+        bottom: 20,
+        left: 'auto',
     }
     })
 

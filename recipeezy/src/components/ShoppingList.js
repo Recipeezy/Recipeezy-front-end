@@ -9,8 +9,10 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: 400,
     maxWidth: 300,
-    // backgroundColor: theme.palette.background.paper,
   },
+  buttonSpacing: {
+    marginTop: '30px'
+  }
 }));
 
 function ShoppingList({ token }) {
@@ -83,6 +85,8 @@ function ShoppingList({ token }) {
               getShopList={getShopList}
             />
             <Button
+              style={{marginTop: '30px'}}
+              fullWidth
               className="swap-selected-ings"
               variant="contained"
               color="primary"
