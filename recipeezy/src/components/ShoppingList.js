@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link, useHistory } from 'react-router-dom';
 import axios from "axios";
 import ShopListItem from "./ShopListItem.js";
 import ShopItemForm from "./ShopItemForm.js";
@@ -15,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
 
 function ShoppingList({ token }) {
   const [shopList, setShopList] = useState([]);
+  const history = useHistory()
   const classes = useStyles();
   const getShopList = () => {
     axios
@@ -23,7 +25,6 @@ function ShoppingList({ token }) {
       })
       .then((data) => {
         setShopList(data.data[0].ingredients);
-        console.log(data.data[0].ingredients);
       });
   };
 
@@ -60,13 +61,17 @@ function ShoppingList({ token }) {
     });
   };
 
+  const backToPantry = () => {
+    history.push('/', {})
+  }
+
   return (
     <div>
       <Typography variant="h4" align="center" gutterBottom>
         Shopping List
       </Typography>
       <div className="shopping-list-main-container">
-        {shopList ? (
+        {(shopList && shopList.length > 0) ? (
           <div>
             {shopList.map((food) => (
               <ShopListItem
@@ -92,7 +97,14 @@ function ShoppingList({ token }) {
             </Button>
           </div>
         ) : (
-          <p>Loading...</p>
+          <>
+            <ShopItemForm
+              addShopItem={addShopItem}
+              token={token}
+              getShopList={getShopList}
+            />
+            <Button className="back-home" variant="contained" color="primary" onClick={backToPantry}>Back Home</Button>
+          </>
         )}
       </div>
     </div>
