@@ -34,7 +34,9 @@ const useStyles = makeStyles(() => ({
 function App() {
   const [username, setUsername] = useLocalStorageState('username', '')
   const [token, setToken] = useLocalStorageState('token', '')
+  const [loggedOut, setLoggedOut] = useState(false)
   const classes = useStyles();
+
 
   function setAuth(username, token) {
     setUsername(username)
@@ -44,7 +46,7 @@ function App() {
   function logOut() {
     setUsername(null)
     setToken(null)
-    alert('You have been logged out')
+    setLoggedOut(true)
   }
 
 
@@ -70,7 +72,6 @@ function App() {
         <Container maxWidth='md'>
           <div>
             <h1>Hello</h1>
-            {/* <RecipeResults /> */}
           </div>
           <AppBar color='primary'>
             <Toolbar>
@@ -88,9 +89,6 @@ function App() {
                   <Link to='/' type='button' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>Home</Link>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                  <Link to="/reciperesults" type='button' style={{ textDecoration: 'none' }}>Random 10 Recipes</Link>
-                </MenuItem>
-                <MenuItem onClick={handleClose}>
                   <Link to="/pantry" type='button' style={{ textDecoration: 'none' }}>View pantry</Link>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
@@ -101,6 +99,9 @@ function App() {
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
                   <Link to='/recipehistory' type='button' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>Recipe History</Link>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Link to="/reciperesults" type='button' style={{ textDecoration: 'none' }}>10 Random Recipes</Link>
                 </MenuItem>
               </Menu>
               <Typography variant='h4' color="secondary">
@@ -139,45 +140,65 @@ function App() {
                         )}
             </Toolbar>
           </AppBar>
+                        
+                        
+          {loggedOut ? (
+          <div>
+            <p>You have been logged out.</p>
+            <button onClick={() => setLoggedOut(false)}>OK</button>
+          </div>
+            ) : (
+          <p></p>
+            )}
+
 
 
           <div>
             <Switch>
-              <Route path='/reciperesults'>
-                <RecipeResults isLoggedIn={isLoggedIn} token={token} />
-              </Route>
-              <Route exact path='/'>
-                <Home isLoggedIn={isLoggedIn} token={token} logOut={logOut} />
-              </Route>
-              <Route path='/pantry'>
-                <Pantry isLoggedIn={isLoggedIn} token={token} />
-              </Route>
-              <Route path='/login'>
 
+              <Route path='/reciperesults' render={() => isLoggedIn ? (<RecipeResults isLoggedIn={isLoggedIn} token={token}/>)
+              : ( <Registration />)}>                
+              </Route>
+
+              <Route exact path='/' render={() => isLoggedIn ? (<Home isLoggedIn={isLoggedIn} token={token} logOut={logOut} />)
+              : (<Registration />)}>                
+              </Route>
+
+              <Route path='/pantry' render={() => isLoggedIn ? (<Pantry isLoggedIn={isLoggedIn} token={token} logOut={logOut} />)
+              : (<Registration />)}>                
+              </Route>
+
+              <Route path='/login'>
                 <Login setAuth={setAuth} isLoggedIn={isLoggedIn} token={token} />
               </Route>
+
               <Route path='/registration'>
                 <Registration setAuth={setAuth} isLoggedIn={isLoggedIn} />
               </Route>
-              <Route path="/shoppinglist">
-                <ShoppingList
-                  setAuth={setAuth}
-                  isLoggedIn={isLoggedIn} token={token}/>
+
+              <Route path="/shoppinglist" render={() => isLoggedIn ? (<ShoppingList isLoggedIn={isLoggedIn} token={token} logOut={logOut} />)
+              : (<Registration />)}>
             </Route>
-            <Route path='/searchresults'>
-              <SearchResults token={token}/>
+
+            <Route path='/searchresults' render={() => isLoggedIn ? (<SearchResults token={token} />)
+              : (<Registration />)}>
             </Route>
-            <Route path='/selectedrecipes'>
-              <SelectedRecipes isLoggedIn={isLoggedIn} token={token} />
+
+            <Route path='/selectedrecipes' render={() => isLoggedIn ? (<SelectedRecipes isLoggedIn={isLoggedIn} token={token} logOut={logOut} />)
+              : (<Registration />)}>
             </Route>
-            <Route path='/recipehistory'>
-              <RecipeHistory isLoggedIn={isLoggedIn} token={token} />
+
+            <Route path='/recipehistory' render={() => isLoggedIn ? (<RecipeHistory isLoggedIn={isLoggedIn} token={token} logOut={logOut} />)
+              : (<Registration />)}>
             </Route>
+
             </Switch>
           </div>
         </Container>
       </ThemeProvider>
     </Router>
+
+    
 
   );
 }
