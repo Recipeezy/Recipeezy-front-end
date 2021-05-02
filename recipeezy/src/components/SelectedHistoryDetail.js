@@ -124,25 +124,23 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, token, get
             />
         </Card>
         
-        <Button 
-        fullWidth
+        
+        
+        <Button fullWidth
         color='primary' variant='contained'
-        onClick={() => swapToSelectedRecipes(recipe.id)}>
-            Cook it again! (send back to Selected Recipes) 
-        </Button>
-        </Grid>
-        <button onClick={() => {swapToSelectedRecipes(recipe.id); setSent(true)}}>
+        onClick={() => {swapToSelectedRecipes(recipe.id); setSent(true)}}>
         
         {!sent ? ('Cook it again! (send back to Selected Meals)'
                             ) : (
                                 'Sent!'
-                            )}</button>
+                            )}</Button>
                             {sent ? (
-                                <button onClick={handleGoBack}>Back to Recipe History</button>
+                                <Button fullWidth
+                                color='primary' variant='contained' onClick={handleGoBack}>Back to Recipe History</Button>
                             ) : (
                                 <p></p>
                             )}
-
+    </Grid>
     </>
     
         )
