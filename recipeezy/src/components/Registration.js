@@ -69,7 +69,7 @@ export default function Registration({ isLoggedIn, setAuth }) {
             Recipeezy
         </Typography>
         <Typography component="h1" variant="h5">
-        Discover recipes, build your shopping list, and keep track of your pantry on Recipeezy
+        Discover recipes, build your shopping list, and keep track of your pantry on Recipeezy.
         </Typography>
         <Typography component="h1" variant="h5">
             Sign up
