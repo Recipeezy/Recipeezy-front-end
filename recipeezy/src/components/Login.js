@@ -69,7 +69,13 @@ export default function Login({ setAuth, isLoggedIn }) {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Sign in
+                Recipeezy
+                </Typography>
+                <Typography component="h1" variant="h5">
+                Discover recipes, build your shopping list, and keep track of your pantry on Recipeezy.
+                </Typography>
+                <Typography component="h1" variant="h5">
+                Sign in
                 </Typography>
                 <form className={classes.form} onSubmit={handleSubmit}>
                     <TextField
