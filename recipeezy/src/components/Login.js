@@ -108,7 +108,7 @@ export default function Login({ setAuth, isLoggedIn }) {
                     </Button>
                     <Grid container>
                         <Grid item>
-                            <Link href="/registration" type="button" variant='body2'>
+                            <Link color='secondary' href="/registration" type="button" variant='body2'>
                                 Don't have an account? Sign up
                             </Link>
                         </Grid>

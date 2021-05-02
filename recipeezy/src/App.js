@@ -7,7 +7,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import { Button, Grid, Container, Typography, Menu, AppBar, Toolbar, IconButton, MenuItem, CssBaseline, makeStyles, ThemeProvider } from '@material-ui/core'
+import { Button, Grid, Container, Typography, Menu, AppBar, Toolbar, IconButton, MenuItem, CssBaseline, makeStyles, ThemeProvider, Paper } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu';
 import RecipeResults from './components/RecipeResults'
 import Pantry from './components/Pantry'
@@ -19,6 +19,7 @@ import Registration from './components/Registration';
 import SearchResults from './components/SearchResults'
 import theme from './theme'
 import RecipeHistory from './components/RecipeHistory'
+import { Link as UiLink } from '@material-ui/core'
 
 
 
@@ -27,7 +28,9 @@ const useStyles = makeStyles(() => ({
     marginTop:'0px',
     color: '#de1616',
     backgroundColor: '#FFFFFF'
-    
+  },
+  okButton: {
+    marginBottom:'30px'
   }
 }));
 
@@ -89,10 +92,10 @@ function App() {
                   <Link to='/' type='button' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>Home</Link>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                  <Link to="/pantry" type='button' style={{ textDecoration: 'none' }}>View pantry</Link>
+                  <Link to="/pantry" type='button' variant='body2' style={{ textDecoration: 'none' }}>View pantry</Link>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                  <Link to='/selectedrecipes' type='button' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>Selected Recipes</Link>
+                  <Link to='/selectedrecipes' type='button' variant='body2' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>Selected Recipes</Link>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
                   <Link to='/shoppinglist' type='button' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>Shopping List</Link>
@@ -104,9 +107,9 @@ function App() {
                   <Link to="/reciperesults" type='button' style={{ textDecoration: 'none' }}>10 Random Recipes</Link>
                 </MenuItem>
               </Menu>
-              <Typography variant='h4' color="secondary">
-                Recipeezy
-                      </Typography>
+              {/* <Typography variant='h4' color="secondary"> */}
+                <UiLink variant='h4' href='/' type='button' color='secondary' style={{ textDecoration: 'none' }} >Recipeezy</UiLink>
+              {/* </Typography> */}
                       {isLoggedIn ? (
                           <Grid container justify='flex-end'>
                             <Button
@@ -115,7 +118,7 @@ function App() {
                             color="primary"
                             size="small"
                             >
-                              <Link to="/" onClick={logOut} style={{ textDecoration: 'none' }}  type="button">Log Out</Link>
+                              <Link to="/" onClick={logOut} style={{ textDecoration: 'none' }} type="button">Log Out</Link>
                             </Button>
                           </Grid>
                         ) : (
@@ -143,10 +146,10 @@ function App() {
                         
                         
           {loggedOut ? (
-          <div>
-            <p>You have been logged out.</p>
-            <button onClick={() => setLoggedOut(false)}>OK</button>
-          </div>
+          <Grid component={Paper} align='center'>
+            <Typography variant='body1'>You have been logged out.</Typography>
+            <Button color='primary' className={classes.okButton} variant='contained' onClick={() => setLoggedOut(false)}>OK</Button>
+          </Grid>
             ) : (
           <p></p>
             )}
