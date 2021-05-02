@@ -117,6 +117,7 @@ export default function Pantry({ token }) {
                     <FoodItemForm addFoodItem={addFoodItem} token={token} getPantry={getPantry} />
 
                     <Button
+                        color='primary'
                         fullWidth
                         style={{ marginTop: '30px' }}
                         variant='contained'
