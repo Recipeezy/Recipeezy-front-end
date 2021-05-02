@@ -133,22 +133,24 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, getSelecte
                 height='400'
             />
         </Card>
-        <Button
-        // style={ setCooked(true) ? {backgroundColor:'#00ff00'} : {} }
+        <Button 
         fullWidth
-        color='primary' variant='contained'
-        onClick={() => { swapToRecipeHistory(recipe.id); setCooked(true)}}>
-            Cooked! (send to Recipe History)
-        </Button>
-        <button onClick={() => { swapToRecipeHistory(recipe.id); setCooked(true); setSent(true)}}>
-
+        variant='contained'
+        color="primary"
+        size="small"
+        onClick={() => { swapToRecipeHistory(recipe.id); setCooked(true); setSent(true)}}>
                             {!sent ? ('Cooked! (send to Recipe History)'
                             ) : (
                                 'Sent!'
                             )}
-                            </button>
+                            </Button>
                             {sent ? (
-                                <button onClick={handleGoBack}>Back to Selected Recipes</button>
+                                <Button 
+                                fullWidth
+                                variant='contained'
+                                color="primary"
+                                size="small"
+                                onClick={handleGoBack}>Back to Selected Recipes</Button>
                             ) : (
                                 <p></p>
                             )}

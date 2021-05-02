@@ -9,7 +9,11 @@ import { Typography } from "@material-ui/core";
 const useStyles = makeStyles({
   cardStyle: {
     maxWidth: "300px",
-  },
+  },    
+  selectedHeader: {
+    marginTop: '30px',
+    marginBottom: '30px'
+}
 });
 
 export default function SelectedRecipes({ token }) {
@@ -63,9 +67,14 @@ export default function SelectedRecipes({ token }) {
               <Typography variant="subtitle1" gutterBottom align="center">
                 {recipe.origin}
               </Typography>
-              <button onClick={() => setSelectedRecipeDetail(recipe)}>
+              <Button
+              fullWidth
+              variant='contained'
+              color="primary"
+              size="small"
+              onClick={() => setSelectedRecipeDetail(recipe)}>
                 See More
-              </button>
+              </Button>
             </div>
           </Card>
         </Grid>
@@ -75,7 +84,7 @@ export default function SelectedRecipes({ token }) {
 
   return (
     <>
-      <Typography variant="h4" align="center" gutterBottom>
+      <Typography variant="h4" align="center" className={classes.selectedHeader}>
         Selected Recipes
       </Typography>
       <Grid container justify="center" spacing={2}>
