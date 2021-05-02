@@ -88,7 +88,7 @@ function ShoppingList({ token }) {
               color="primary"
               onClick={swapSelected}
             >
-              Done Shopping
+              Add to Pantry
             </Button>
           </div>
         ) : (

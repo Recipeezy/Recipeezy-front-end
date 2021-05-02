@@ -19,7 +19,6 @@ const useStyles = makeStyles({
 export default function RecipeHistory({token}) {
     const [selectedRecipes, setSelectedRecipes] = useState([])
     const [selectedHistoryDetail, setSelectedHistoryDetail] = useState(false)
-
     const [loading, setLoading] = useState(false)
 
     const classes = useStyles()
@@ -45,9 +44,6 @@ export default function RecipeHistory({token}) {
     const renderContent = () => {
         if (selectedHistoryDetail) {
             return (
-
-
-
 
                 <SelectedHistoryDetail recipe={selectedHistoryDetail} 
                 handleGoBack={() => setSelectedHistoryDetail(null)} 
