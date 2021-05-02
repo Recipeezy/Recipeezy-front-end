@@ -69,7 +69,7 @@ function App() {
 
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Container maxWidth='sm'>
+        <Container maxWidth='md'>
           <div>
             <h1>Hello</h1>
           </div>

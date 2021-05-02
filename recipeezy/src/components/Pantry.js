@@ -10,8 +10,12 @@ import { Typography } from '@material-ui/core'
 
 const useStyles = makeStyles({
     search: {
-        margin: '0 auto'
-    }
+        margin: '0 auto',
+        right: 20,
+        bottom: 20,
+        left: 'auto',
+        position: 'sticky',
+        }
 })
 
 

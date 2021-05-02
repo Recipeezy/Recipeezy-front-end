@@ -1,5 +1,5 @@
 import React from 'react'
-import {Typography, Paper, makeStyles, Button } from '@material-ui/core/'
+import {Typography, Paper, makeStyles, Button, GridList, GridListTile } from '@material-ui/core/'
 import { Grid } from '@material-ui/core';
 import Pantry from './Pantry';
 import SelectedRecipes from './SelectedRecipes';
@@ -15,6 +15,16 @@ const useStyles = makeStyles({
         },
         header: {
             margin: '0 auto'
+        },
+        horizontalBox: {
+            marginTop: '50px',
+            overflow: 'scroll',
+            flexDirection: 'row',
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-around',
+            width: 'auto',
+            height: '500px',
         },
     })
 
@@ -32,21 +42,29 @@ export default function Home({ isLoggedIn, logOut, token }) {
         justify="center"
         className={classes.container}>
 
-        <Paper style={{maxHeight: 350, overflow: 'auto' }} className={classes.pantryPaper}>
-            <Pantry isLoggedIn={isLoggedIn} token={token}/>
-        </Paper>
+            <Paper style={{maxHeight: 350, overflow: 'auto' }} className={classes.pantryPaper}>
+                <Pantry isLoggedIn={isLoggedIn} token={token}/>
+            </Paper>
+
 
             <Button
             variant='contained'
             > Search Recipes </Button>
             <Typography variant='h6'></Typography>
-            
-            <SelectedRecipes isLoggedIn={isLoggedIn} token={token} />   
-            
+
+        <div >
+
+            <SelectedRecipes isLoggedIn={isLoggedIn} token={token} />  
+
+        </div>
+
+        <Grid className={classes.horizontalBox} >
             <Typography variant='h6'>
-                {/* Past Meals */}
                 <RecipeHistory isLoggedIn={isLoggedIn} token={token} />
             </Typography>
+        </Grid>
+
+
         </Grid>
     )
 }

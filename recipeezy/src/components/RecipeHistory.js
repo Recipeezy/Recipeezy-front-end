@@ -11,6 +11,15 @@ const useStyles = makeStyles({
     },
     cardStyle: {
         maxWidth:'300px'
+    },
+    recipeHistoryHeader: {
+        marginTop: '30px',
+        marginBottom: '30px',
+        position: 'sticky',
+        margin: '0 auto',
+        right: 20,
+        bottom: 20,
+        left: 'auto',
     }
     })
 
@@ -64,14 +73,26 @@ export default function RecipeHistory({token}) {
             return (
                 selectedRecipes.map((recipe) => (
                 
-                    <li key={recipe.id}>
-                        <div key={recipe.id}>
+                    <Grid item wrap='wrap' className={classes.cardStyle} key={recipe.id}>
+                        <Card variant='outlined' elevation={3} padding={5} key={recipe.id}>
                             <img alt='recipe-pic' src={recipe.img_id}></img>
-                            <h3>{recipe.title}</h3>
-                            <p>{recipe.origin}</p>
-                            <button onClick={() => setSelectedHistoryDetail(recipe)}>See More</button>
-                        </div>
-                    </li>
+                            <Typography gutterBottom variant='h6' align='center'>
+                            {recipe.title}
+                            </Typography>
+                            <Typography gutterBottom variant='subtitle1' align='center'>
+                                Cuisine: {recipe.origin}
+                            </Typography>
+                            <Button
+                            fullWidth
+                            variant='contained'
+                            color="primary"
+                            size="small"
+                            onClick={() => setSelectedHistoryDetail(recipe)}
+                            >
+                            See more
+                            </Button>
+                        </Card>
+                    </Grid>
                 
                 ))
             )
@@ -80,17 +101,12 @@ export default function RecipeHistory({token}) {
 
     return (
         <>
-            
-            <h1>Recipe History</h1>
-            <Typography variant='h4' align='center' gutterBottom>
+            <Typography variant='h4' align='center' className={classes.recipeHistoryHeader}>
                 Recipe History
             </Typography>
             <Grid container justify='center' spacing={2}>
                 {renderContent()}
             </Grid>
-            
-            
-
         </>
     )
 }
