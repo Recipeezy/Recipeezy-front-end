@@ -34,7 +34,9 @@ const useStyles = makeStyles(() => ({
 function App() {
   const [username, setUsername] = useLocalStorageState('username', '')
   const [token, setToken] = useLocalStorageState('token', '')
+  const [loggedOut, setLoggedOut] = useState(false)
   const classes = useStyles();
+
 
   function setAuth(username, token) {
     setUsername(username)
@@ -44,7 +46,7 @@ function App() {
   function logOut() {
     setUsername(null)
     setToken(null)
-    alert('You have been logged out')
+    setLoggedOut(true)
   }
 
 
@@ -70,7 +72,6 @@ function App() {
         <Container maxWidth='sm'>
           <div>
             <h1>Hello</h1>
-            {/* <RecipeResults /> */}
           </div>
           <AppBar color='primary'>
             <Toolbar>
@@ -139,7 +140,16 @@ function App() {
                         )}
             </Toolbar>
           </AppBar>
-
+                        
+                        
+          {loggedOut ? (
+          <div>
+            <p>You have been logged out.</p>
+            <button onClick={() => setLoggedOut(false)}>OK</button>
+          </div>
+            ) : (
+          <p></p>
+            )}
 
           <div>
             <Switch>
@@ -178,6 +188,8 @@ function App() {
         </Container>
       </ThemeProvider>
     </Router>
+
+    
 
   );
 }
