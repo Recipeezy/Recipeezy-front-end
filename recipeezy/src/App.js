@@ -8,6 +8,7 @@ import {
   Link
 } from "react-router-dom";
 import { Button, Grid, Container, Typography, Menu, AppBar, Toolbar, IconButton, MenuItem, CssBaseline, makeStyles, ThemeProvider } from '@material-ui/core'
+import { Link as UiLink } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu';
 import RecipeResults from './components/RecipeResults'
 import Pantry from './components/Pantry'
@@ -115,9 +116,7 @@ function App() {
                   <p></p>
                 )}
 
-              <Typography variant='h4' color="secondary">
-                Recipeezy
-                      </Typography>
+                      <UiLink variant='h4' href='/' type='button' color='secondary' style={{ textDecoration: 'none' }} >Recipeezy</UiLink>
                       {isLoggedIn ? (
                           <Grid container justify='flex-end'>
                             <Button
