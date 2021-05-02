@@ -8,7 +8,7 @@ export default function ShopItemForm({ addShopItem, token, getShopList }) {
         e.preventDefault()
         axios
             .post(
-                'https://recipeezy-app.herokuapp.com/shopping_list/add/',
+                'https://recipeezy-app.herokuapp.com/shopping_list/',
                 {
                     ingredients: [
                         { name: name }
@@ -25,7 +25,7 @@ export default function ShopItemForm({ addShopItem, token, getShopList }) {
     }
     return (
         <form onSubmit={handleSubmit}>
-            <Grid alignItems='center' container style={{ justifyContent: 'center'}} spacing={2}>
+            <Grid alignItems='center' container style={{ justifyContent: 'center' }} spacing={2}>
                 <label htmlFor='item-name'></label>
                 <TextField
                     id='item-name'
