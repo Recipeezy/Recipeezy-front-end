@@ -1,12 +1,14 @@
 import { createMuiTheme } from "@material-ui/core/styles"
 
+
+
 const theme = createMuiTheme({
     palette: {
         primary:{
-            main:'#fcf5c7'
+            main:'#187B8B'
         },
         secondary: {
-            main: '#de1616'
+            main: '#ffd000'
         }
     },
     typography: {
@@ -22,7 +24,7 @@ const theme = createMuiTheme({
             lineHeight:'1.75'
         },
         body2: {
-            color: '#de1616'
+            color: '#000000'
         },
     },
     overrides: {

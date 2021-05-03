@@ -26,8 +26,8 @@ import RecipeHistory from './components/RecipeHistory'
 const useStyles = makeStyles(() => ({
   navButtons: {
     marginTop:'0px',
-    color: '#de1616',
-    backgroundColor: '#FFFFFF'
+    // color: '#de1616',
+    // backgroundColor: '#FFFFFF'
   },
   okButton: {
     marginBottom:'30px'
@@ -123,29 +123,29 @@ function App() {
                             <Button
                             className={classes.navButtons}
                             variant='contained'
-                            color="primary"
+                            color="secondary"
                             size="small"
                             >
-                              <Link to="/" onClick={logOut} style={{ textDecoration: 'none' }} type="button">Log Out</Link>
+                              <UiLink to="/" color='primary' onClick={logOut} style={{ textDecoration: 'none' }} type="button">Log Out</UiLink>
                             </Button>
                           </Grid>
                         ) : (
                         <Grid container alignItems='center' justify='flex-end'>
                           <Button
-                            style={{marginRight: '10px', backgroundColor:"#FFFFFF"}}
+                            style={{marginRight: '10px'}}
                             className={classes.navButtons}
                             variant='contained'
-                            color="primary"
+                            color="secondary"
                             size="small">
-                            <Link to="/registration" style={{ textDecoration: 'none' }} type="button">Register</Link>
+                            <UiLink to="/registration" style={{ textDecoration: 'none' }} type="button">Register</UiLink>
                           </Button>
                           <Button
                             className={classes.navButtons}
                             variant='contained'
-                            color="primary"
+                            color="secondary"
                             size='small'
                           >
-                            <Link to="/login" type="button" style={{ textDecoration: 'none' }}>Log In</Link>
+                            <UiLink to="/login" type="button" style={{ textDecoration: 'none' }}>Log In</UiLink>
                           </Button>
                         </Grid>
                         )}

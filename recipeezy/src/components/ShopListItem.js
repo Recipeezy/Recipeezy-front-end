@@ -43,6 +43,10 @@ const useStyles = makeStyles(() => ({
     height: "50px",
     width: "70px",
   },
+  checkboxLabel: {
+    display: 'flex',
+    alignItems: 'center'
+  }
 }));
 
 export default function ShopListItem({ food, token }) {
@@ -110,13 +114,18 @@ export default function ShopListItem({ food, token }) {
   return (
     <Grid>
       <ListItem className={classes.listItem}>
-        <Checkbox
-          type="checkbox"
-          id={food.id}
-          className="checkboxes"
-          value={food.name}
-          onChange={toggleCrossOut}
-        ></Checkbox>
+        <div className={classes.checkboxLabel}>
+          <Checkbox
+            type="checkbox"
+            id={food.id}
+            className="checkboxes"
+            value={food.name}
+            onChange={toggleCrossOut}
+          ></Checkbox>
+          <Typography style={isEditing ? {display:'none'} : {} }  className={classes.label}>
+            <label htmlFor={name}>{name}</label>
+          </Typography>
+        </div>
         {isEditing ? (
           <Grid container direction="row" alignItems="center">
             <TextField
@@ -135,18 +144,14 @@ export default function ShopListItem({ food, token }) {
           </Grid>
         ) : (
           <>
-            <Typography className={classes.label}>
-              <label htmlFor={name}>{name}</label>
-            </Typography>
-
             <Grid spacing={0} item alignContent="flex-end">
               <ListItemIcon className={classes.listIcons}>
-                <EditIcon color='secondary' onClick={() => setIsEditing(true)}>
+                <EditIcon color='primary' onClick={() => setIsEditing(true)}>
                   Edit Item
                 </EditIcon>
               </ListItemIcon>
               <ListItemIcon className={classes.listIcons}>
-                <DeleteIcon color='secondary' onClick={(event) => deleteShopListItem(event)}>
+                <DeleteIcon style={{color:'#495057'}} onClick={(event) => deleteShopListItem(event)}>
                   Delete Item
                 </DeleteIcon>
               </ListItemIcon>

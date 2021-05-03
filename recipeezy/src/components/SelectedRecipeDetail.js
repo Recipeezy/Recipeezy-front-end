@@ -41,6 +41,9 @@ const useStyles = makeStyles({
         width:'300px',
         height: '150px',
         margin: '0 auto'
+    },
+    cookedButton: {
+        marginBottom: '20px'
     }
 });
 
@@ -134,6 +137,7 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, getSelecte
             />
         </Card>
         <Button 
+        className={classes.cookedButton}
         fullWidth
         variant='contained'
         color="primary"

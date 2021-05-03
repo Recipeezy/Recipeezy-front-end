@@ -12,10 +12,10 @@ const useStyles = makeStyles({
     search: {
         margin: '0 auto',
         right: 20,
-        bottom: 20,
+        bottom: 0,
         left: 'auto',
         position: 'sticky',
-        }
+        },
 })
 
 
