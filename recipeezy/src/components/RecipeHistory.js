@@ -53,7 +53,7 @@ export default function RecipeHistory({token}) {
 
             )
         } else if (loading) {
-            return "Loading..."
+            return "test..."
         } else if (selectedRecipes.length === 0) {
             return "Oops! Looks like there's nothing here yet. Get to Cookin'!"
         } else if (selectedRecipes.length > 0) {
