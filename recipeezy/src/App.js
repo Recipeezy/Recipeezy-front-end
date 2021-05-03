@@ -95,22 +95,22 @@ function App() {
                 onClose={handleClose}
               >                
                 <MenuItem onClick={handleClose}>
-                  <Link to='/' type='button' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>Home</Link>
+                  <UiLink href='/' type='button' style={{ textDecoration: 'none', textDecorationColor: 'black' }} variant='body2'>Home</UiLink>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                  <Link to="/pantry" type='button' variant='body2' style={{ textDecoration: 'none' }}>View pantry</Link>
+                  <UiLink href="/pantry" type='button' variant='body2' style={{ textDecoration: 'none' }}>View pantry</UiLink>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                  <Link to='/selectedrecipes' type='button' variant='body2' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>Selected Recipes</Link>
+                  <UiLink href='/selectedrecipes' type='button' variant='body2' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>Selected Recipes</UiLink>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                  <Link to='/shoppinglist' type='button' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>Shopping List</Link>
+                  <UiLink href='/shoppinglist' type='button' variant='body2' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>Shopping List</UiLink>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                  <Link to='/recipehistory' type='button' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>Recipe History</Link>
+                  <UiLink href='/recipehistory' type='button' variant='body2' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>Recipe History</UiLink>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                  <Link to="/reciperesults" type='button' style={{ textDecoration: 'none' }}>10 Random Recipes</Link>
+                  <UiLink href="/reciperesults" type='button' variant='body2' style={{ textDecoration: 'none' }}>10 Random Recipes</UiLink>
                 </MenuItem>
               </Menu>
             </>  
@@ -126,7 +126,7 @@ function App() {
                             color="secondary"
                             size="small"
                             >
-                              <UiLink to="/" color='primary' onClick={logOut} style={{ textDecoration: 'none' }} type="button">Log Out</UiLink>
+                              <UiLink href="/" color='primary' onClick={logOut} style={{ textDecoration: 'none' }} type="button">Log Out</UiLink>
                             </Button>
                           </Grid>
                         ) : (
@@ -137,7 +137,7 @@ function App() {
                             variant='contained'
                             color="secondary"
                             size="small">
-                            <UiLink to="/registration" style={{ textDecoration: 'none' }} type="button">Register</UiLink>
+                            <UiLink href="/registration" style={{ textDecoration: 'none' }} type="button">Register</UiLink>
                           </Button>
                           <Button
                             className={classes.navButtons}
@@ -145,7 +145,7 @@ function App() {
                             color="secondary"
                             size='small'
                           >
-                            <UiLink to="/login" type="button" style={{ textDecoration: 'none' }}>Log In</UiLink>
+                            <UiLink href="/login" type="button" style={{ textDecoration: 'none' }}>Log In</UiLink>
                           </Button>
                         </Grid>
                         )}

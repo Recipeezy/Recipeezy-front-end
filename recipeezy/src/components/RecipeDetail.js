@@ -41,7 +41,10 @@ const useStyles = makeStyles({
         height: '150px',
         margin: '0 auto'
     },
-
+    backButton: {
+        "&:hover": {
+            background: "#fcf5c7"}
+    },
 });
 
 
@@ -143,10 +146,10 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
     return (
         <Container>
             <div style={{ display:'flex', alignItems:'baseline', width:'100%'}}>
-                <IconButton>
+                <IconButton className={classes.backButton}>
                     <ArrowBackIcon
+                        className={classes.backButton}
                         color='primary'
-                        gutterBottom
                         onClick={handleGoBack}
                     >Go back</ArrowBackIcon>
                 </IconButton>
