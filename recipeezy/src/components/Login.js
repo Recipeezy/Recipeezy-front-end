@@ -42,6 +42,10 @@ const useStyles = makeStyles((theme) => ({
 export default function Login({ setAuth, isLoggedIn }) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [inError, setInError] = useState(false)
+    const [errorUsername, setErrorUsername] = useState([])
+    const [errorPassword, setErrorPassword] = useState([])
+    const [errorNonfielderrors, setErrorNonfielderrors] = useState([])
     const classes = useStyles();
 
     if (isLoggedIn) {
@@ -60,8 +64,14 @@ export default function Login({ setAuth, isLoggedIn }) {
                 if (data && data.data.auth_token) {
                     setAuth(username, data.data.auth_token)
                 }
-            })
-    }
+            }).catch(error => {
+                console.log(error.response.data)
+                setErrorUsername(error.response.data.username)
+                setErrorPassword(error.response.data.password)
+                setErrorNonfielderrors(error.response.data.non_field_errors)
+                setInError(true)
+        })
+    }    
 
     return (
         <Container component="main" maxWidth="xs">
@@ -103,6 +113,15 @@ export default function Login({ setAuth, isLoggedIn }) {
                         autoComplete="current-password"
                         onChange={(event) => setPassword(event.target.value)}
                     />
+                    {inError ? (
+                    <div>
+                    {errorUsername}
+                    {errorPassword}
+                    {errorNonfielderrors}
+                    </div>
+                    ) : (
+                    <p></p>
+                    )}
                     <Button
                         type="submit"
                         fullWidth

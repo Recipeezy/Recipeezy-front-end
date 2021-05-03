@@ -31,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
 export default function Registration({ isLoggedIn, setAuth }) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [inError, setInError] = useState(false)
+    const [errorUsername, setErrorUsername] = useState([])
+    const [errorPassword, setErrorPassword] = useState([])
     const classes = useStyles();
 
     if (isLoggedIn) {
@@ -44,8 +47,8 @@ export default function Registration({ isLoggedIn, setAuth }) {
                 username,
                 password,
             })
-            .then((response) => {
-                return axios 
+            .then((response) => {                
+                return axios
                 .post('https://recipeezy-app.herokuapp.com/auth/token/login', {
                     username,
                     password,
@@ -55,6 +58,16 @@ export default function Registration({ isLoggedIn, setAuth }) {
                         setAuth(username, data.data.auth_token)
                     }
                 })
+            }).catch(error => {
+                setErrorUsername(error.response.data.username)
+                setErrorPassword(error.response.data.password)
+                setInError(true)
+                console.log('errorUsername is ', errorUsername)
+                console.log('errorPassword is ', errorPassword)
+
+                // console.log('error.response.data is ', error.response.data.username[0])
+                // console.log('error.response.data is ', error.response.data.password[0])
+                // console.log('error.response.data is ', error.response.data.password[1])
             })
     }
 
@@ -101,6 +114,14 @@ export default function Registration({ isLoggedIn, setAuth }) {
                     />
                 </Grid>
                 </Grid>
+                {inError ? (
+                <div>
+                {errorUsername}
+                {errorPassword}
+                </div>
+                ) : (
+                <p></p>
+                )}
                 <Button
                 type="submit"
                 fullWidth
