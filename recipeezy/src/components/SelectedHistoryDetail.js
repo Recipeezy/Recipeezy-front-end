@@ -99,13 +99,14 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, token, get
         </div>
         {recipe.recipe_ingredients ? (
             <Grid container className={classes.gridListContainer} align='center'>
-            <List className={classes.gridList}>
-                {recipe.recipe_ingredients.map((item) => (
-                    <>
-                        <li>{item.ingredient}</li><Divider style={item.ingredient ? {} : {display:'none'} } variant='fullWidth' component="li" />
-                    </>
-                ))}
-            </List>
+                <List className={classes.gridList}>
+                {console.log('stupid shit', recipe.recipe_ingredients)}
+                    {recipe.recipe_ingredients.map((item) => (
+                        <>
+                            <li>{item.ingredient}</li><Divider style={item.ingredient ? {} : {display:'none'} } variant='fullWidth' component="li" />
+                        </>
+                    ))}
+                </List>
             </Grid>
             ) : (
                 <></>

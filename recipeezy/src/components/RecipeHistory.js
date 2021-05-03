@@ -10,7 +10,8 @@ const useStyles = makeStyles({
         color: '#333',
     },
     cardStyle: {
-        maxWidth:'300px'
+        maxWidth:'300px',
+        flexDirection: 'row'
     },
     recipeHistoryHeader: {
         marginTop: '30px',
@@ -28,9 +29,7 @@ const useStyles = makeStyles({
 export default function RecipeHistory({token}) {
     const [selectedRecipes, setSelectedRecipes] = useState([])
     const [selectedHistoryDetail, setSelectedHistoryDetail] = useState(false)
-
     const [loading, setLoading] = useState(false)
-
     const classes = useStyles()
 
 
