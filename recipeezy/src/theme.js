@@ -21,6 +21,9 @@ const theme = createMuiTheme({
             padding:'12px',
             lineHeight:'1.75'
         },
+        body2: {
+            color: '#de1616'
+        },
     },
     overrides: {
         MuiButton: {

@@ -46,12 +46,6 @@ export default function Home({ isLoggedIn, logOut, token }) {
                 <Pantry isLoggedIn={isLoggedIn} token={token}/>
             </Paper>
 
-
-            <Button
-            variant='contained'
-            > Search Recipes </Button>
-            <Typography variant='h6'></Typography>
-
         <div >
 
             <SelectedRecipes isLoggedIn={isLoggedIn} token={token} />  

@@ -141,17 +141,12 @@ export default function ShopListItem({ food, token }) {
 
             <Grid spacing={0} item alignContent="flex-end">
               <ListItemIcon className={classes.listIcons}>
-                <AddIcon onClick={(event) => swapItemToPantry(event)}>
-                  Add to Pantry
-                </AddIcon>
-              </ListItemIcon>
-              <ListItemIcon className={classes.listIcons}>
-                <EditIcon onClick={() => setIsEditing(true)}>
+                <EditIcon color='secondary' onClick={() => setIsEditing(true)}>
                   Edit Item
                 </EditIcon>
               </ListItemIcon>
               <ListItemIcon className={classes.listIcons}>
-                <DeleteIcon onClick={(event) => deleteShopListItem(event)}>
+                <DeleteIcon color='secondary' onClick={(event) => deleteShopListItem(event)}>
                   Delete Item
                 </DeleteIcon>
               </ListItemIcon>

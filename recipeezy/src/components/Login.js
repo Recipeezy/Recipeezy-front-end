@@ -32,6 +32,10 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
         },
+    signUpMsg: {
+        marginTop: '20px',
+        marginBottom: '50px',
+    }
     }));
 
 
@@ -62,18 +66,14 @@ export default function Login({ setAuth, isLoggedIn }) {
     return (
         <Container component="main" maxWidth="xs">
             <div className={classes.paper}>
-                <h1>Login</h1>
-                <CssBaseline />
-                
+                <Grid container align='center' className={classes.signUpMsg}>
+                    <Typography  component="h1" variant="h5">
+                    Discover recipes, build your shopping list, and keep track of your pantry on Recipeezy.
+                    </Typography>
+                </Grid>
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5">
-                Recipeezy
-                </Typography>
-                <Typography component="h1" variant="h5">
-                Discover recipes, build your shopping list, and keep track of your pantry on Recipeezy.
-                </Typography>
                 <Typography component="h1" variant="h5">
                 Sign in
                 </Typography>
@@ -114,7 +114,7 @@ export default function Login({ setAuth, isLoggedIn }) {
                     </Button>
                     <Grid container>
                         <Grid item>
-                            <Link href="/registration" type="button" variant='body2'>
+                            <Link color='secondary' href="/registration" type="button" variant='body2'>
                                 Don't have an account? Sign up
                             </Link>
                         </Grid>
