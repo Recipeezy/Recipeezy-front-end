@@ -36,6 +36,7 @@ export default function RecipeHistory({token}) {
 
 
     const getRecipeHistoryList = () => {
+        setLoading(true);
         axios.get('https://recipeezy-app.herokuapp.com/recipe_history/', {
             headers: { 'Authorization': `Token ${token}` },
         })
@@ -54,10 +55,6 @@ export default function RecipeHistory({token}) {
     const renderContent = () => {
         if (selectedHistoryDetail) {
             return (
-
-
-
-
                 <SelectedHistoryDetail recipe={selectedHistoryDetail} 
                 handleGoBack={() => setSelectedHistoryDetail(null)} 
                 token={token}

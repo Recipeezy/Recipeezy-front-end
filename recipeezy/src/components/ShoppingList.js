@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import axios from "axios";
 import ShopListItem from "./ShopListItem.js";
 import ShopItemForm from "./ShopItemForm.js";
-import { makeStyles, Typography, Button } from "@material-ui/core";
+import { makeStyles, Typography, Button, Grid, Paper } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,7 +19,9 @@ const useStyles = makeStyles((theme) => ({
 function ShoppingList({ token }) {
   const [shopList, setShopList] = useState([]);
   const history = useHistory()
+  const [doneShopping, setDoneShopping] = useState(false)
   const classes = useStyles();
+
   const getShopList = () => {
     axios
       .get("https://recipeezy-app.herokuapp.com/shopping_list/", {
@@ -89,14 +91,22 @@ function ShoppingList({ token }) {
               token={token}
               getShopList={getShopList}
             />
+            {doneShopping ? (
+          <Grid component={Paper} align='center'>
+            <Typography variant='body1'>These items have been added to your Pantry!</Typography>
+            <Button color='primary' className={classes.okButton} variant='contained' onClick={() => setDoneShopping(false)}>OK</Button>
+          </Grid>
+            ) : (
+          <p></p>
+            )}
             <Button
               style={{marginTop: '30px'}}
               fullWidth
               className="swap-selected-ings"
               variant="contained"
               color="primary"
-              onClick={swapSelected}
-            >
+              // onClick={swapSelected}
+              onClick={() => {swapSelected(); setDoneShopping(true)}}>
               Done Shopping
             </Button>
           </div>
