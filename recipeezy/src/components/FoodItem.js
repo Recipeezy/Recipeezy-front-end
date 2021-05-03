@@ -37,7 +37,10 @@ const useStyles = makeStyles(() => ({
         minWidth: '30px',
         height: '24px'
     },
-
+    checkboxLabel: {
+        display: 'flex',
+        alignItems: 'center'
+    },
 }));
 
 export default function FoodItem({ food, setSelectedIngredients, selectedIngredients, isAtLimit, setIsAtLimit, token, getSearch }) {
@@ -113,7 +116,10 @@ export default function FoodItem({ food, setSelectedIngredients, selectedIngredi
     return (
         <Grid container alignItems='center'>
             <ListItem className={classes.listItem}>
-                <Checkbox onChange={checkBoxClick} type='checkbox' id={name} className="checkboxes" value={food.name} color='secondary'></Checkbox>
+                <div className={classes.checkboxLabel}>
+                    <Checkbox onChange={checkBoxClick} type='checkbox' id={name} className="checkboxes" value={food.name} color='secondary'></Checkbox>
+                    <InputLabel htmlFor={name} className={classes.label} style={isEditing ? {display:'none'} : {} }>{food.name}</InputLabel>
+                </div>
                 {isEditing ?
                     <Grid container direction='row' alignItems='center'>
                         <TextField margin='dense' onChange={(event) => setName(event.target.value)} value={name}></TextField>
@@ -122,14 +128,14 @@ export default function FoodItem({ food, setSelectedIngredients, selectedIngredi
                     </Grid>
                     :
                     <>
-                        <InputLabel htmlFor={name} className={classes.label}>{food.name}</InputLabel>
+                        
 
                         <Grid display='flex'>
                             <ListItemIcon className={classes.listIcons}>
-                                <EditIcon color='secondary' onClick={() => setIsEditing(true)}>Edit Item</EditIcon>
+                                <EditIcon color='primary' onClick={() => setIsEditing(true)}>Edit Item</EditIcon>
                             </ListItemIcon>
                             <ListItemIcon className={classes.listIcons}>
-                                <DeleteIcon color='secondary'
+                                <DeleteIcon style={{color:'#495057'}}
                                     onClick={(event) => deleteIngredient(event)}>Delete Item
                             </DeleteIcon>
                             </ListItemIcon>

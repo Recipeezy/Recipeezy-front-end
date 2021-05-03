@@ -41,6 +41,13 @@ const useStyles = makeStyles({
         width:'300px',
         height: '150px',
         margin: '0 auto'
+    },
+    cookedButton: {
+        marginBottom: '20px'
+    },
+    backButton: {
+        marginBottom: '30px'
+
     }
 });
 
@@ -78,12 +85,13 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, getSelecte
 
     return (
     <Container>
-        <IconButton>
-            <ArrowBackIcon
-            gutterBottom
+        <Grid className={classes.backButton} align='center'>
+            <Button
+            color='secondary'
+            variant='contained'
             onClick={handleGoBack}
-            >Go back</ArrowBackIcon>
-        </IconButton>
+            >Go back</Button>
+        </Grid>
         <Grid
         className={classes.root}
         spacing={0}
@@ -134,6 +142,7 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, getSelecte
             />
         </Card>
         <Button 
+        className={classes.cookedButton}
         fullWidth
         variant='contained'
         color="primary"

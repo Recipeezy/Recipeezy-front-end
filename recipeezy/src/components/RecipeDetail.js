@@ -40,7 +40,11 @@ const useStyles = makeStyles({
         width:'300px',
         height: '150px',
         margin: '0 auto'
-    }
+    },
+    backButton: {
+        "&:hover": {
+            background: "#fcf5c7"}
+    },
 });
 
 
@@ -141,15 +145,18 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
 
     return (
         <Container>
-            <IconButton>
-                <ArrowBackIcon
-                    gutterBottom
-                    onClick={handleGoBack}
-                >Go back</ArrowBackIcon>
-            </IconButton>
-            <Typography className={classes.mealTitle} variant='h4' align='center'>
-                {selectedRecipe.strMeal}
-            </Typography>
+            <div style={{ display:'flex', alignItems:'baseline', width:'100%'}}>
+                <IconButton className={classes.backButton}>
+                    <ArrowBackIcon
+                        className={classes.backButton}
+                        color='primary'
+                        onClick={handleGoBack}
+                    >Go back</ArrowBackIcon>
+                </IconButton>
+                <Typography className={classes.mealTitle} variant='h4' align='center'>
+                    {selectedRecipe.strMeal}
+                </Typography>
+            </div>
 
             <Grid
                 className={classes.root}
