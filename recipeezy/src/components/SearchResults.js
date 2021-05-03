@@ -1,5 +1,5 @@
 import { Button } from '@material-ui/core'
-import { Card, Grid, makeStyles, Typography } from '@material-ui/core'
+import { Card, Grid, makeStyles, Typography, IconButton } from '@material-ui/core'
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { useLocation, Link } from 'react-router-dom'
@@ -54,9 +54,11 @@ function SearchResults({ token }) {
 
     return (
         <div>
-            {/* <IconButton component={Link} to='/pantry'>
-                <ArrowBackIcon>Back to Pantry</ArrowBackIcon>
-            </IconButton> */}
+            {!selectedRecipe && (
+                <IconButton component={Link} to='/'>
+                    <ArrowBackIcon>Back to Pantry</ArrowBackIcon>
+                </IconButton>
+            )}
 
             <Typography variant='subtitle2' align='center'>
                 <h1>Search({recipes.length}) Results for: {location.state.item}</h1>
