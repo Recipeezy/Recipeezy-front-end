@@ -90,8 +90,8 @@ export default function Login({ setAuth, isLoggedIn }) {
                         required
                         fullWidth
                         id="email"
-                        label="Email Address"
-                        name="email"
+                        label="Username"
+                        name="Username"
                         autoComplete="email"
                         autoFocus
                         value={username}
