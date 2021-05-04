@@ -146,7 +146,7 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
             let mesList = listToObjectsMeasure(measurements)
             let ingAndMes = combineObjects(ingList, mesList)
             axios.post(
-                'https://recipeezy-app.herokuapp.com/recipes/test/',
+                'https://recipeezy-app.herokuapp.com/recipes/',
                 {
                     title: recipeTitle,
                     origin: recipeCuisine,
