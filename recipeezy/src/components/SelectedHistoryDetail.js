@@ -115,7 +115,10 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, token, get
             <Typography className={classes.subHeader} variant='h5'>
                 Instructions:
             </Typography>
-            <Typography variant='body1'>{recipe.instructions}</Typography>
+            <Typography 
+                variant='body1'
+                dangerouslySetInnerHTML={{__html: recipe.instructions.replaceAll('.','. <br/>')}}> 
+            </Typography>
         </div>
         <Card className={classes.videoCard}>
             <CardMedia
