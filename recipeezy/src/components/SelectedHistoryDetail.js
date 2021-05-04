@@ -115,34 +115,39 @@ export default function SelectedRecipeDetail({ recipe, handleGoBack, token, getR
                     <Typography className={classes.subHeader} variant='h5'>
                         Instructions:
             </Typography>
-                    <Typography variant='body1'>{recipe.instructions}</Typography>
-                </div>
-                <Card className={classes.videoCard}>
-                    <CardMedia
-                        src={recipe.video_id.replace('watch?v=', 'embed/')}
-                        component='iframe'
-                        height='400'
-                    />
-                </Card>
 
+            <Typography 
+                variant='body1'
+                dangerouslySetInnerHTML={{__html: recipe.instructions.replaceAll('.','. <br/>')}}> 
+            </Typography>
+        </div>
+        <Card className={classes.videoCard}>
+            <CardMedia
+                src={recipe.video_id.replace('watch?v=', 'embed/')}
+                component='iframe'
+                height='400'
+            />
+        </Card>
+        
+        
+        
+        <Button fullWidth
+        color='primary' variant='contained'
+        onClick={() => {swapToSelectedRecipes(recipe.id); setSent(true)}}>
+        
+        {!sent ? ('Cook it again! (send back to Selected Meals)'
+                            ) : (
+                                'Sent!'
+                            )}</Button>
+                            {sent ? (
+                                <Button fullWidth
+                                color='primary' variant='contained' onClick={handleGoBack}>Back to Recipe History</Button>
+                            ) : (
+                                <p></p>
+                            )}
+    </Grid>
+    </>
+    
+        )
+    }
 
-
-                <Button fullWidth
-                    color='primary' variant='contained'
-                    onClick={() => { swapToSelectedRecipes(recipe.id); setSent(true) }}>
-
-                    {!sent ? ('Cook it again! (send back to Selected Meals)'
-                    ) : (
-                        'Sent!'
-                    )}</Button>
-                {sent ? (
-                    <Button fullWidth
-                        color='primary' variant='contained' onClick={handleGoBack}>Back to Recipe History</Button>
-                ) : (
-                    <p></p>
-                )}
-            </Grid>
-        </>
-
-    )
-}

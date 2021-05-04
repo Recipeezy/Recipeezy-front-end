@@ -281,7 +281,8 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
                 <Typography className={classes.subHeader} variant='h5'>
                     Instructions:
                 </Typography>
-                <Typography variant='body1'>{selectedRecipe.strInstructions}</Typography>
+                <Typography variant='body1'
+                dangerouslySetInnerHTML={{__html: selectedRecipe.strInstructions.replaceAll('.','. <br/>')}}></Typography>
             </div>
             <Card className={classes.videoCard}>
                 <CardMedia
