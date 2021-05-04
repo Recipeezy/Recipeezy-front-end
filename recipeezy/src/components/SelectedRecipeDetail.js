@@ -131,7 +131,7 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, getSelecte
             </Typography>
             <Typography
                 variant='body1'
-                dangerouslySetInnerHTML={{__html: recipe.instructions.replaceAll('.', '<br/>')}}
+                dangerouslySetInnerHTML={{__html: recipe.instructions.replaceAll('.','. <br/>')}}
             />
         </div>
         <Card className={classes.videoCard}>
