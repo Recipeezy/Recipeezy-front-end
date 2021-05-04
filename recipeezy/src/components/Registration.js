@@ -65,9 +65,7 @@ export default function Registration({ isLoggedIn, setAuth }) {
                 console.log('errorUsername is ', errorUsername)
                 console.log('errorPassword is ', errorPassword)
 
-                // console.log('error.response.data is ', error.response.data.username[0])
-                // console.log('error.response.data is ', error.response.data.password[0])
-                // console.log('error.response.data is ', error.response.data.password[1])
+            
             })
     }
 

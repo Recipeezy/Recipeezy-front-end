@@ -24,7 +24,7 @@ export default function RecipeResults({ token }) {
   const [selectedRecipe, setSelectedRecipe] = useState(false)
   const classes = useStyles()
 
-  // function handleGoBack={() => setSelectedRecipe(null)}
+  
 
 
 

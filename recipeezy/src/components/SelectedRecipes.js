@@ -10,11 +10,11 @@ const useStyles = makeStyles({
     cardStyle: {
     maxWidth: "300px",
     },    
-  selectedHeader: {
+    selectedHeader: {
     marginTop: '30px',
     marginBottom: '30px'
     },
-  });
+});
 
 export default function SelectedRecipes({ token }) {
     const [selectedRecipes, setSelectedRecipes] = useState([]);
@@ -47,7 +47,7 @@ export default function SelectedRecipes({ token }) {
             recipe={selectedRecipeDetail}
             handleGoBack={() => setSelectedRecipeDetail(null)}
             getSelectedRecipesList={getSelectedRecipesList}
-          //handleGoBack={handleGoBack}
+        
             token={token}
         />
         );

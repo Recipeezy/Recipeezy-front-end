@@ -63,8 +63,7 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
     const [measurements, setMeasurements] = useState([])
 
 
-    // gets all ingredients and puts in list
-    // deletes empty strings to avoid 400 error
+    
     const listIngredients = () => {
         let ingredientsList = []
         for (let i = 1; i < 21; i++) {
@@ -78,7 +77,7 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
 
         }
 
-        // console.log(ingredientsList)
+        
         let measureList = []
         for (let i = 1; i < 21; i++) {
             eval('measureList.push(selectedRecipe.strMeasure' + i + ')')
@@ -115,7 +114,7 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
 
     }
 
-    // Turns list into a list of objects
+    
     const listToObjects = (list) => {
         let listObjects = list.map(x => {
             let properties = {
