@@ -60,7 +60,7 @@ function SearchResults({ token }) {
                 </IconButton>
             )}
 
-            <Typography variant='subtitle2' align='center'>
+            <Typography variant='h6' align='center'>
                 <h1>Result{recipes.length > 1 ? 's' : ""} for {location.state.item}</h1>
             </Typography>
             <div>

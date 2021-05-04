@@ -13,6 +13,7 @@ const theme = createMuiTheme({
     },
     typography: {
         h6: {
+            fontFamily:'kalam',
             wordWrap:'break-word',
         },
         h4: {

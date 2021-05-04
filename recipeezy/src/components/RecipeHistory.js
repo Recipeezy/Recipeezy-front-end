@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import SelectedHistoryDetail from './SelectedHistoryDetail'
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 
 import { Button, Grid, makeStyles, Card, Typography } from '@material-ui/core';
 
@@ -18,8 +20,8 @@ const useStyles = makeStyles({
         marginBottom: '30px',
         position: 'sticky',
         margin: '0 auto',
-        right: 20,
-        bottom: 20,
+        // right: 20,
+        // bottom: 20,
         left: 'auto',
     }
     })
@@ -29,6 +31,7 @@ const useStyles = makeStyles({
 export default function RecipeHistory({token}) {
     const [selectedRecipes, setSelectedRecipes] = useState([])
     const [selectedHistoryDetail, setSelectedHistoryDetail] = useState(false)
+    const [isExpanded, setIsExpanded] = useState(window.location.pathname.includes('/recipehistory') ? true : false)
     const [loading, setLoading] = useState(false)
     const classes = useStyles()
 
@@ -97,12 +100,15 @@ export default function RecipeHistory({token}) {
 
     return (
         <>
-            <Typography variant='h4' align='center' className={classes.recipeHistoryHeader}>
+            <Typography 
+            onClick={() => setIsExpanded(!isExpanded)}
+            variant='h4' align='center' className={classes.recipeHistoryHeader}>
                 Recipe History
+                { isExpanded ? <ArrowDropDownIcon/> : <ArrowDropUpIcon/> }
             </Typography>
-            <Grid style={{maxHeight: 450, overflowY: 'auto', overflowX: 'hidden' }} container justify='center' spacing={2}>
-                {renderContent()}
-            </Grid>
+                <Grid style={{maxHeight: window.location.pathname.includes('/recipehistory') ? null : 450, overflowY: 'auto', overflowX: 'hidden', display: isExpanded ? null : 'none' }} container justify='center' spacing={2}>
+                    {renderContent()}
+                </Grid>
         </>
     )
 }
