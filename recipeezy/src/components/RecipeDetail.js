@@ -37,13 +37,14 @@ const useStyles = makeStyles({
         overflow: 'auto',
     },
     gridList: {
-        width:'300px',
+        width: '300px',
         height: '150px',
         margin: '0 auto'
     },
     backButton: {
         "&:hover": {
-            background: "#fcf5c7"}
+            background: "#fcf5c7"
+        }
     },
 });
 
@@ -54,11 +55,12 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
     const [ingredients, setIngredients] = useState([])
     const [selected, setSelected] = useState(false)
     const [added, setAdded] = useState(false)
-    const recipeTitle = selectedRecipe.strMeal 
+    const recipeTitle = selectedRecipe.strMeal
     const recipeImg = selectedRecipe.strMealThumb
     const recipeCuisine = selectedRecipe.strArea
     const recipeInstruc = selectedRecipe.strInstructions
     const recipeVideo = selectedRecipe.strYoutube
+    const [measurements, setMeasurements] = useState([])
 
 
     // gets all ingredients and puts in list
@@ -76,7 +78,40 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
 
         }
 
-        console.log(ingredientsList)
+        // console.log(ingredientsList)
+        let measureList = []
+        for (let i = 1; i < 21; i++) {
+            eval('measureList.push(selectedRecipe.strMeasure' + i + ')')
+        }
+        if (measureList.length > 0) {
+            let newMeasureList = measureList.filter(function (measure) {
+                return (measure && measure.length > 0)
+            })
+            setMeasurements(newMeasureList)
+        }
+    }
+    const listMeasurements = () => {
+        let measureList = []
+        for (let i = 1; i < 21; i++) {
+            eval('measureList.push(selectedRecipe.strMeasure' + i + ')')
+        }
+        if (measureList.length > 0) {
+            let newMeasureList = measureList.filter(function (measure) {
+                return (measure && measure.length > 0)
+            })
+            setMeasurements(newMeasureList)
+        }
+    }
+
+    const listToObjectsMeasure = (list) => {
+        let listObjects = list.map(x => {
+            let properties = {
+                "measurement": x
+            }
+            return properties
+        })
+        console.log("Measure LIST", listObjects)
+        return listObjects
 
     }
 
@@ -93,31 +128,42 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
 
     }
 
+    const combineObjects = (obj1, obj2) => {
+        return obj1.map((item, x) => Object.assign({}, item, obj2[x]))
+    }
+
+
     useEffect(() => {
         window.scrollTo(0, 0);
-        }, []);
+    }, []);
 
     const addSelectedRecipe = () => {
         listIngredients()
-        if(ingredients.length > 0) {
+        // listMeasurements()
+        if (ingredients.length > 0 || measurements.length > 0) {
+            console.log("measure", measurements)
             let ingList = listToObjects(ingredients)
+            let mesList = listToObjectsMeasure(measurements)
+            let ingAndMes = combineObjects(ingList, mesList)
             axios.post(
-                'https://recipeezy-app.herokuapp.com/recipes/',
+                'https://recipeezy-app.herokuapp.com/recipes/test/',
                 {
                     title: recipeTitle,
                     origin: recipeCuisine,
                     instructions: recipeInstruc,
                     img_id: recipeImg,
                     video_id: recipeVideo,
-                    ingredients: ingList
+                    ingredients: ingAndMes,
+                    category: selectedRecipe.strCategory
                 },
-                    {
-                        headers: { Authorization: `Token ${token}` },
-                    },
-                ).then(() => {
-                    console.log('done')
-                })
-        }        
+                {
+                    headers: { Authorization: `Token ${token}` },
+                },
+            ).then(() => {
+                console.log('done')
+
+            })
+        }
     }
 
 
@@ -145,7 +191,7 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
 
     return (
         <Container>
-            <div style={{ display:'flex', alignItems:'baseline', width:'100%'}}>
+            <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
                 <IconButton className={classes.backButton}>
                     <ArrowBackIcon
                         className={classes.backButton}
@@ -182,53 +228,53 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
 
             <Grid container className={classes.gridListContainer} align='center'>
                 <List className={classes.gridList}>
-                    <li>{selectedRecipe.strIngredient1}</li><Divider style={selectedRecipe.strIngredient1 ? {} : {display:'none'} } variant='fullWidth' component="li" />
-                    <li>{selectedRecipe.strIngredient2}</li><Divider style={selectedRecipe.strIngredient2 ? {} : {display:'none'} } variant='fullWidth' component="li" />
-                    <li>{selectedRecipe.strIngredient3}</li><Divider style={selectedRecipe.strIngredient3 ? {} : {display:'none'} } variant='fullWidth' component="li" />
-                    <li>{selectedRecipe.strIngredient4}</li><Divider style={selectedRecipe.strIngredient4 ? {} : {display:'none'} } variant='fullWidth' component="li" />
-                    <li>{selectedRecipe.strIngredient5}</li><Divider style={selectedRecipe.strIngredient5 ? {} : {display:'none'} } variant='fullWidth' component="li" />
-                    <li>{selectedRecipe.strIngredient6}</li><Divider style={selectedRecipe.strIngredient6 ? {} : {display:'none'} } variant='fullWidth' component="li" />
-                    <li>{selectedRecipe.strIngredient7}</li><Divider style={selectedRecipe.strIngredient7 ? {} : {display:'none'} } variant='fullWidth' component="li" />
-                    <li>{selectedRecipe.strIngredient8}</li><Divider style={selectedRecipe.strIngredient8 ? {} : {display:'none'} } variant='fullWidth' component="li" />
-                    <li>{selectedRecipe.strIngredient9}</li><Divider style={selectedRecipe.strIngredient9 ? {} : {display:'none'} } variant='fullWidth' component="li" />
-                    <li>{selectedRecipe.strIngredient10}</li><Divider style={selectedRecipe.strIngredient10 ? {} : {display:'none'} }  variant='fullWidth' component="li" />
-                    <li>{selectedRecipe.strIngredient11}</li><Divider style={selectedRecipe.strIngredient11 ? {} : {display:'none'} } variant='fullWidth' component="li" />
-                    <li>{selectedRecipe.strIngredient12}</li><Divider style={selectedRecipe.strIngredient12 ? {} : {display:'none'} } variant='fullWidth' component="li" />
-                    <li>{selectedRecipe.strIngredient13}</li><Divider style={selectedRecipe.strIngredient13 ? {} : {display:'none'} } variant='fullWidth' component="li" />
-                    <li>{selectedRecipe.strIngredient14}</li><Divider style={selectedRecipe.strIngredient14 ? {} : {display:'none'} } variant='fullWidth' component="li" />
-                    <li>{selectedRecipe.strIngredient15}</li><Divider style={selectedRecipe.strIngredient15 ? {} : {display:'none'} } variant='fullWidth' component="li" />
-                    <li>{selectedRecipe.strIngredient16}</li><Divider style={selectedRecipe.strIngredient16 ? {} : {display:'none'} } variant='fullWidth' component="li" />
-                    <li>{selectedRecipe.strIngredient17}</li><Divider style={selectedRecipe.strIngredient17 ? {} : {display:'none'} } variant='fullWidth' component="li" />
-                    <li>{selectedRecipe.strIngredient18}</li><Divider style={selectedRecipe.strIngredient18 ? {} : {display:'none'} } variant='fullWidth' component="li" />
-                    <li>{selectedRecipe.strIngredient19}</li><Divider style={selectedRecipe.strIngredient19 ? {} : {display:'none'} } variant='fullWidth' component="li" />
-                    <li>{selectedRecipe.strIngredient20}</li><Divider style={selectedRecipe.strIngredient20 ? {} : {display:'none'} } variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strMeasure1} {selectedRecipe.strIngredient1}</li><Divider style={selectedRecipe.strIngredient1 ? {} : { display: 'none' }} variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strMeasure2} {selectedRecipe.strIngredient2}</li><Divider style={selectedRecipe.strIngredient2 ? {} : { display: 'none' }} variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strMeasure3} {selectedRecipe.strIngredient3}</li><Divider style={selectedRecipe.strIngredient3 ? {} : { display: 'none' }} variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strMeasure4} {selectedRecipe.strIngredient4}</li><Divider style={selectedRecipe.strIngredient4 ? {} : { display: 'none' }} variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strMeasure5} {selectedRecipe.strIngredient5}</li><Divider style={selectedRecipe.strIngredient5 ? {} : { display: 'none' }} variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strMeasure6} {selectedRecipe.strIngredient6}</li><Divider style={selectedRecipe.strIngredient6 ? {} : { display: 'none' }} variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strMeasure7} {selectedRecipe.strIngredient7}</li><Divider style={selectedRecipe.strIngredient7 ? {} : { display: 'none' }} variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strMeasure8} {selectedRecipe.strIngredient8}</li><Divider style={selectedRecipe.strIngredient8 ? {} : { display: 'none' }} variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strMeasure9} {selectedRecipe.strIngredient9}</li><Divider style={selectedRecipe.strIngredient9 ? {} : { display: 'none' }} variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strMeasure10} {selectedRecipe.strIngredient10}</li><Divider style={selectedRecipe.strIngredient10 ? {} : { display: 'none' }} variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strMeasure11} {selectedRecipe.strIngredient11}</li><Divider style={selectedRecipe.strIngredient11 ? {} : { display: 'none' }} variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strMeasure12} {selectedRecipe.strIngredient12}</li><Divider style={selectedRecipe.strIngredient12 ? {} : { display: 'none' }} variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strMeasure13} {selectedRecipe.strIngredient13}</li><Divider style={selectedRecipe.strIngredient13 ? {} : { display: 'none' }} variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strMeasure14} {selectedRecipe.strIngredient14}</li><Divider style={selectedRecipe.strIngredient14 ? {} : { display: 'none' }} variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strMeasure15} {selectedRecipe.strIngredient15}</li><Divider style={selectedRecipe.strIngredient15 ? {} : { display: 'none' }} variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strMeasure16} {selectedRecipe.strIngredient16}</li><Divider style={selectedRecipe.strIngredient16 ? {} : { display: 'none' }} variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strMeasure17} {selectedRecipe.strIngredient17}</li><Divider style={selectedRecipe.strIngredient17 ? {} : { display: 'none' }} variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strMeasure18} {selectedRecipe.strIngredient18}</li><Divider style={selectedRecipe.strIngredient18 ? {} : { display: 'none' }} variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strMeasure19} {selectedRecipe.strIngredient19}</li><Divider style={selectedRecipe.strIngredient19 ? {} : { display: 'none' }} variant='fullWidth' component="li" />
+                    <li>{selectedRecipe.strMeasure20} {selectedRecipe.strIngredient20}</li><Divider style={selectedRecipe.strIngredient20 ? {} : { display: 'none' }} variant='fullWidth' component="li" />
                 </List>
             </Grid>
 
-                <Grid align='center' className="add-all-ingredients">
-                    {!selected ? (
+            <Grid align='center' className="add-all-ingredients">
+                {!selected ? (
                     <Button
-                    className="add-ing-button"
-                    variant='contained' color='primary'
-                    onClick={() => { addSelectedRecipe(); setSelected(true)}}>
+                        className="add-ing-button"
+                        variant='contained' color='primary'
+                        onClick={() => { addSelectedRecipe(); setSelected(true) }}>
                         Select Recipe
                     </Button>
-                    ) : (
-                    <Button 
-                    style={{marginTop:'15px', marginBottom: '15px'}} 
-                    variant='contained' 
-                    color='primary' 
-                    onClick={() => { addAllIngredients(); setAdded(true)}}>
+                ) : (
+                    <Button
+                        style={{ marginTop: '15px', marginBottom: '15px' }}
+                        variant='contained'
+                        color='primary'
+                        onClick={() => { addAllIngredients(); setAdded(true) }}>
 
                         {!added ? (
-                        'Add all Ingredients to Shopping List'
-                        ) : ( 
-                        'Ingredients Added!'
+                            'Add all Ingredients to Shopping List'
+                        ) : (
+                            'Ingredients Added!'
                         )}
                     </Button>
-                    )}
-                </Grid>
-                
+                )}
+            </Grid>
+
 
 
             <div>

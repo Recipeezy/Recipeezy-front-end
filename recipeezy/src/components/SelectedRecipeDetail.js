@@ -39,7 +39,7 @@ const useStyles = makeStyles({
         overflow: 'auto',
     },
     gridList: {
-        width:'300px',
+        width: '300px',
         height: '150px',
         margin: '0 auto'
     },
@@ -53,20 +53,20 @@ const useStyles = makeStyles({
 });
 
 
-export default function SelectedRecipeDetail ({ recipe, handleGoBack, getSelectedRecipesList, token }) {
+export default function SelectedRecipeDetail({ recipe, handleGoBack, getSelectedRecipesList, token }) {
     console.log('recipe is stupid', recipe)
 
-    const classes = useStyles()    
+    const classes = useStyles()
     const [cooked, setCooked] = useState(null)
     const [sent, setSent] = useState(false)
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        }, []);
+    }, []);
 
     useEffect(() => {
         console.log('component mounted')
-    
+
         return () => {
             console.log('component unmounted');
             getSelectedRecipesList();
@@ -75,108 +75,108 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, getSelecte
 
     const swapToRecipeHistory = () => {
         axios.put(`https://recipeezy-app.herokuapp.com/recipe_history/${recipe.id}/`,
-        {
-        },
-        {
-            headers: { Authorization: `Token ${token}` },
-        },
-    )
-}
+            {
+            },
+            {
+                headers: { Authorization: `Token ${token}` },
+            },
+        )
+    }
 
     // const replaceLinebreak = (recipe) => {
     //     lodash.replace(recipe, 'the', 'shit' )
-        
+
     // }
 
     return (
-    <Container>
-        <Grid className={classes.backButton} align='center'>
-            <Button
-            color='secondary'
-            variant='contained'
-            onClick={handleGoBack}
-            >Go back</Button>
-        </Grid>
-        <Grid
-        className={classes.root}
-        spacing={0}
-        direction="row"
-        alignItems="center"
-        justify="center"
-        container>
-        <div className={classes.cardDetails}>
-            <Grid item>
-                <img alt='recipe-pic' src={recipe.img_id}></img>
+        <Container>
+            <Grid className={classes.backButton} align='center'>
+                <Button
+                    color='secondary'
+                    variant='contained'
+                    onClick={handleGoBack}
+                >Go back</Button>
             </Grid>
-            <Grid item component={Paper}>
-                    <Typography
-                    variant='subtitle1'
-                    align="center"
-                    >
-                        {recipe.title}
-                    </Typography>
-                    <Typography gutterBottom align='center' variant='subtitle1'>
-                        Cuisine: {recipe.origin}
-                    </Typography>
+            <Grid
+                className={classes.root}
+                spacing={0}
+                direction="row"
+                alignItems="center"
+                justify="center"
+                container>
+                <div className={classes.cardDetails}>
+                    <Grid item>
+                        <img alt='recipe-pic' src={recipe.img_id}></img>
+                    </Grid>
+                    <Grid item component={Paper}>
+                        <Typography
+                            variant='subtitle1'
+                            align="center"
+                        >
+                            {recipe.title}
+                        </Typography>
+                        <Typography gutterBottom align='center' variant='subtitle1'>
+                            Cuisine: {recipe.origin}
+                        </Typography>
+                    </Grid>
+                </div>
             </Grid>
-        </div>
-        </Grid>
-        <Grid container className={classes.gridListContainer} align='center'>
-            <List className={classes.gridList}>
-                {console.log('stupid shit', recipe.recipe_ingredients)}
-                {recipe.recipe_ingredients.map((item) => (
-                    <>
-                        <li>{item.ingredient}</li><Divider style={item.ingredient ? {} : {display:'none'} } variant='fullWidth' component="li" />
-                    </>
-                ))}
-                
-                
-            </List>
-        </Grid>
-        <div>
-            <Typography className={classes.subHeader} variant='h5'>
-                Instructions:
-            </Typography>
-            <Typography
-                variant='body1'
-                dangerouslySetInnerHTML={{__html: recipe.instructions.replaceAll('.','. <br/>')}}
-            />
-        </div>
-        <Card className={classes.videoCard}>
-            <CardMedia
-                src={recipe.video_id.replace('watch?v=', 'embed/')}
-                component='iframe'
-                height='400'
-            />
-        </Card>
-        <Button 
-        className={classes.cookedButton}
-        fullWidth
-        variant='contained'
-        color="primary"
-        size="small"
-        onClick={() => { swapToRecipeHistory(recipe.id); setCooked(true); setSent(true)}}>
-                            {!sent ? ('Cooked! (send to Recipe History)'
-                            ) : (
-                                'Sent!'
-                            )}
-                            </Button>
-                            {sent ? (
-                                <Button 
-                                fullWidth
-                                variant='contained'
-                                color="primary"
-                                size="small"
-                                onClick={handleGoBack}>Back to Selected Recipes</Button>
-                            ) : (
-                                <p></p>
-                            )}
+            <Grid container className={classes.gridListContainer} align='center'>
+                <List className={classes.gridList}>
+                    {console.log('stupid shit', recipe.recipe_ingredients)}
+                    {recipe.recipe_ingredients.map((item) => (
+                        <>
+                            <li>{item.measurement} {item.ingredient}</li><Divider style={item.ingredient ? {} : { display: 'none' }} variant='fullWidth' component="li" />
+                        </>
+                    ))}
 
-        {cooked ? (
-            <Confetti />
+
+                </List>
+            </Grid>
+            <div>
+                <Typography className={classes.subHeader} variant='h5'>
+                    Instructions:
+            </Typography>
+                <Typography
+                    variant='body1'
+                    dangerouslySetInnerHTML={{ __html: recipe.instructions.replaceAll('.', '. <br/>') }}
+                />
+            </div>
+            <Card className={classes.videoCard}>
+                <CardMedia
+                    src={recipe.video_id.replace('watch?v=', 'embed/')}
+                    component='iframe'
+                    height='400'
+                />
+            </Card>
+            <Button
+                className={classes.cookedButton}
+                fullWidth
+                variant='contained'
+                color="primary"
+                size="small"
+                onClick={() => { swapToRecipeHistory(recipe.id); setCooked(true); setSent(true) }}>
+                {!sent ? ('Cooked! (send to Recipe History)'
+                ) : (
+                    'Sent!'
+                )}
+            </Button>
+            {sent ? (
+                <Button
+                    fullWidth
+                    variant='contained'
+                    color="primary"
+                    size="small"
+                    onClick={handleGoBack}>Back to Selected Recipes</Button>
             ) : (
                 <p></p>
             )}
-    </Container>
-        )
-    }
+
+            {cooked ? (
+                <Confetti />
+            ) : (
+                <p></p>
+            )}
+        </Container>
+    )
+}
