@@ -100,7 +100,7 @@ export default function RecipeHistory({token}) {
             <Typography variant='h4' align='center' className={classes.recipeHistoryHeader}>
                 Recipe History
             </Typography>
-            <Grid container justify='center' spacing={2}>
+            <Grid style={{maxHeight: 450, overflowY: 'auto', overflowX: 'hidden' }} container justify='center' spacing={2}>
                 {renderContent()}
             </Grid>
         </>

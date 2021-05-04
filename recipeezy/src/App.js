@@ -116,7 +116,7 @@ function App() {
                 ) : (
                   <p></p>
                 )}
-                      <UiLink variant='h4' href='/' type='button' color='secondary' style={{ textDecoration: 'none' }} >Recipeezy</UiLink>
+                      <UiLink variant='h4' href='/' type='button' color='secondary' style={{ textDecoration: 'none', fontWeight:'bold' }} >Recipeezy</UiLink>
                       {isLoggedIn ? (
                           <Grid container justify='flex-end'>
                             <Button
