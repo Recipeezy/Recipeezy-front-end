@@ -8,6 +8,7 @@ import { Grid } from '@material-ui/core';
 import { List } from '@material-ui/core';
 import axios from 'axios';
 import Confetti from 'react-confetti'
+import lodash from 'lodash';
 
 const useStyles = makeStyles({
     videoCard: {
@@ -82,6 +83,10 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, getSelecte
     )
 }
 
+    // const replaceLinebreak = (recipe) => {
+    //     lodash.replace(recipe, 'the', 'shit' )
+        
+    // }
 
     return (
     <Container>
@@ -132,7 +137,10 @@ export default function SelectedRecipeDetail ({ recipe, handleGoBack, getSelecte
             <Typography className={classes.subHeader} variant='h5'>
                 Instructions:
             </Typography>
-            <Typography variant='body1'>{recipe.instructions}</Typography>
+            <Typography
+                variant='body1'
+                dangerouslySetInnerHTML={{__html: recipe.instructions.replaceAll('.', '<br/>')}}
+            />
         </div>
         <Card className={classes.videoCard}>
             <CardMedia
