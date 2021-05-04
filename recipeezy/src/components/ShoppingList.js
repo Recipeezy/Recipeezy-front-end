@@ -105,7 +105,7 @@ function ShoppingList({ token }) {
               className="swap-selected-ings"
               variant="contained"
               color="primary"
-              // onClick={swapSelected}
+              
               onClick={() => {swapSelected(); setDoneShopping(true)}}>
               Done Shopping
             </Button>

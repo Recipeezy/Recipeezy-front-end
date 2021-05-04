@@ -83,10 +83,7 @@ export default function SelectedRecipeDetail({ recipe, handleGoBack, getSelected
         )
     }
 
-    // const replaceLinebreak = (recipe) => {
-    //     lodash.replace(recipe, 'the', 'shit' )
-
-    // }
+    
 
     return (
         <Container>

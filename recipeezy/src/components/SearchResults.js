@@ -82,9 +82,7 @@ function SearchResults({ token }) {
                                                     <Typography variant='h6' align='center' gutterBottom>
                                                         {recipe.meals[0].strMeal}
                                                     </Typography>
-                                                    {/* <Typography variant='caption'>
-                                                        {recipe.meals[0].idMeal}    
-                                                    </Typography>     */}
+                                                    
                                                     <Typography variant='subtitle1' align='center'>
                                                         Cuisine: {recipe.meals[0].strArea}
                                                     </Typography>

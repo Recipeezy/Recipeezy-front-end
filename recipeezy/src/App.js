@@ -26,8 +26,7 @@ import RecipeHistory from './components/RecipeHistory'
 const useStyles = makeStyles(() => ({
   navButtons: {
     marginTop:'0px',
-    // color: '#de1616',
-    // backgroundColor: '#FFFFFF'
+    
   },
   okButton: {
     marginBottom:'30px'
