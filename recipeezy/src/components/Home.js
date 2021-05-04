@@ -46,14 +46,10 @@ export default function Home({ isLoggedIn, logOut, token }) {
                 <Pantry isLoggedIn={isLoggedIn} token={token}/>
             </Paper>
             <Grid>
-                <Typography variant='h6'>
-                    <SelectedRecipes isLoggedIn={isLoggedIn} token={token} />  
-                </Typography>
+                <SelectedRecipes isLoggedIn={isLoggedIn} token={token} />  
             </Grid>
-            <Grid style={{marginBottom:'50px'}} className={classes.horizontalBox}  >
-                <Typography variant='h6'>
-                    <RecipeHistory isLoggedIn={isLoggedIn} token={token} />
-                </Typography>
+            <Grid style={{marginBottom:'50px'}}>
+                <RecipeHistory isLoggedIn={isLoggedIn} token={token} />
             </Grid>
         </Grid>
     )

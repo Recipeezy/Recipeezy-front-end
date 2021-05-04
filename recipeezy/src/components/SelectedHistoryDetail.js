@@ -68,12 +68,13 @@ export default function SelectedRecipeDetail({ recipe, handleGoBack, token, getR
 
     return (
         <>
-            <IconButton>
-                <ArrowBackIcon
-                    gutterBottom
+            <Grid style={{marginBottom:'30px'}} align='center'>
+                <Button
+                    color='secondary'
+                    variant='contained'
                     onClick={handleGoBack}
-                >Go back</ArrowBackIcon>
-            </IconButton>
+                >Go back</Button>
+            </Grid>
             <Grid
                 className={classes.root}
                 spacing={0}
@@ -114,7 +115,7 @@ export default function SelectedRecipeDetail({ recipe, handleGoBack, token, getR
                 <div>
                     <Typography className={classes.subHeader} variant='h5'>
                         Instructions:
-            </Typography>
+                    </Typography>
 
             <Typography 
                 variant='body1'

@@ -20,6 +20,7 @@ import Registration from './components/Registration';
 import SearchResults from './components/SearchResults'
 import theme from './theme'
 import RecipeHistory from './components/RecipeHistory'
+import SelectedRecipeDetail from './components/SelectedHistoryDetail';
 
 
 
