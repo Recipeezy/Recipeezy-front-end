@@ -35,7 +35,7 @@ export default function ShopItemForm({ addShopItem, token, getShopList }) {
                     onChange={(event) => setName(event.target.value)}
                 ></TextField>
                 <Button
-                    style={{color:'#187B8B'}}
+                    style={{color:'#004e64'}}
                     color='secondary'
                     size='small'
                     variant='contained'

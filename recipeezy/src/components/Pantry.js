@@ -100,7 +100,7 @@ export default function Pantry({ token }) {
 
     return (
         <div className='pantry-wrapper'>
-            <Typography variant='h4' align='center' gutterBottom>
+            <Typography variant='h5' align='center' gutterBottom>
                 Pantry
             </Typography>
             {foodList ? (
