@@ -43,11 +43,11 @@ export default function Home({ isLoggedIn, logOut, token }) {
         justify="center"
         className={classes.container}>
 
-            <Paper style={{maxHeight: 350, overflowY: 'auto', overflowX: 'hidden' }} className={classes.pantryPaper}>
+            <Paper className={classes.pantryPaper}>
                 <Pantry isLoggedIn={isLoggedIn} token={token}/>
             </Paper>
 
-        <Grid className={classes.horizontalBox} >
+        <Grid>
             <Typography variant='h6'>
                 <SelectedRecipes isLoggedIn={isLoggedIn} token={token} />  
             </Typography>

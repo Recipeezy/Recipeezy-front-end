@@ -191,18 +191,17 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
 
     return (
         <Container>
-            <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                <IconButton className={classes.backButton}>
-                    <ArrowBackIcon
-                        className={classes.backButton}
-                        color='primary'
-                        onClick={handleGoBack}
-                    >Go back</ArrowBackIcon>
-                </IconButton>
+            <Grid align='center'>
+                <Button
+                    style={{marginBottom: 30}}
+                    color='secondary'
+                    variant='contained'
+                    onClick={handleGoBack}
+                >Go back</Button>
                 <Typography className={classes.mealTitle} variant='h4' align='center'>
                     {selectedRecipe.strMeal}
                 </Typography>
-            </div>
+            </Grid>
 
             <Grid
                 className={classes.root}

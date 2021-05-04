@@ -135,7 +135,7 @@ export default function FoodItem({ food, setSelectedIngredients, selectedIngredi
                                 <EditIcon color='primary' onClick={() => setIsEditing(true)}>Edit Item</EditIcon>
                             </ListItemIcon>
                             <ListItemIcon className={classes.listIcons}>
-                                <DeleteIcon style={{color:'#495057'}}
+                                <DeleteIcon color='primary'
                                     onClick={(event) => deleteIngredient(event)}>Delete Item
                             </DeleteIcon>
                             </ListItemIcon>

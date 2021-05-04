@@ -151,7 +151,7 @@ export default function ShopListItem({ food, token }) {
                 </EditIcon>
               </ListItemIcon>
               <ListItemIcon className={classes.listIcons}>
-                <DeleteIcon style={{color:'#495057'}} onClick={(event) => deleteShopListItem(event)}>
+                <DeleteIcon color='primary' onClick={(event) => deleteShopListItem(event)}>
                   Delete Item
                 </DeleteIcon>
               </ListItemIcon>
