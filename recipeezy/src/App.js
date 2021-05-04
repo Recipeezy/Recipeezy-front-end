@@ -26,8 +26,7 @@ import RecipeHistory from './components/RecipeHistory'
 const useStyles = makeStyles(() => ({
   navButtons: {
     marginTop:'0px',
-    // color: '#de1616',
-    // backgroundColor: '#FFFFFF'
+    
   },
   okButton: {
     marginBottom:'30px'
@@ -117,7 +116,7 @@ function App() {
                 ) : (
                   <p></p>
                 )}
-                      <UiLink variant='h4' href='/' type='button' color='secondary' style={{ textDecoration: 'none' }} >Recipeezy</UiLink>
+                      <UiLink variant='h4' href='/' type='button' color='secondary' style={{ textDecoration: 'none', fontWeight:'bold' }} >Recipeezy</UiLink>
                       {isLoggedIn ? (
                           <Grid container justify='flex-end'>
                             <Button

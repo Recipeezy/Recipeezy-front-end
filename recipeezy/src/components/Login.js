@@ -43,8 +43,6 @@ export default function Login({ setAuth, isLoggedIn }) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [inError, setInError] = useState(false)
-    const [errorUsername, setErrorUsername] = useState([])
-    const [errorPassword, setErrorPassword] = useState([])
     const [errorNonfielderrors, setErrorNonfielderrors] = useState([])
     const classes = useStyles();
 
@@ -66,8 +64,6 @@ export default function Login({ setAuth, isLoggedIn }) {
                 }
             }).catch(error => {
                 console.log(error.response.data)
-                setErrorUsername(error.response.data.username)
-                setErrorPassword(error.response.data.password)
                 setErrorNonfielderrors(error.response.data.non_field_errors)
                 setInError(true)
         })
@@ -115,8 +111,6 @@ export default function Login({ setAuth, isLoggedIn }) {
                     />
                     {inError ? (
                     <div>
-                    {errorUsername}
-                    {errorPassword}
                     {errorNonfielderrors}
                     </div>
                     ) : (

@@ -63,8 +63,7 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
     const [measurements, setMeasurements] = useState([])
 
 
-    // gets all ingredients and puts in list
-    // deletes empty strings to avoid 400 error
+    
     const listIngredients = () => {
         let ingredientsList = []
         for (let i = 1; i < 21; i++) {
@@ -78,7 +77,7 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
 
         }
 
-        // console.log(ingredientsList)
+        
         let measureList = []
         for (let i = 1; i < 21; i++) {
             eval('measureList.push(selectedRecipe.strMeasure' + i + ')')
@@ -115,7 +114,7 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
 
     }
 
-    // Turns list into a list of objects
+    
     const listToObjects = (list) => {
         let listObjects = list.map(x => {
             let properties = {
@@ -191,18 +190,17 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
 
     return (
         <Container>
-            <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                <IconButton className={classes.backButton}>
-                    <ArrowBackIcon
-                        className={classes.backButton}
-                        color='primary'
-                        onClick={handleGoBack}
-                    >Go back</ArrowBackIcon>
-                </IconButton>
+            <Grid align='center'>
+                <Button
+                    style={{marginBottom: 30}}
+                    color='secondary'
+                    variant='contained'
+                    onClick={handleGoBack}
+                >Go back</Button>
                 <Typography className={classes.mealTitle} variant='h4' align='center'>
                     {selectedRecipe.strMeal}
                 </Typography>
-            </div>
+            </Grid>
 
             <Grid
                 className={classes.root}
@@ -281,7 +279,8 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
                 <Typography className={classes.subHeader} variant='h5'>
                     Instructions:
                 </Typography>
-                <Typography variant='body1'>{selectedRecipe.strInstructions}</Typography>
+                <Typography variant='body1'
+                dangerouslySetInnerHTML={{__html: selectedRecipe.strInstructions.replaceAll('.','. <br/>')}}></Typography>
             </div>
             <Card className={classes.videoCard}>
                 <CardMedia

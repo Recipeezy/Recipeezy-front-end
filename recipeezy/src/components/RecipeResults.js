@@ -24,7 +24,7 @@ export default function RecipeResults({ token }) {
   const [selectedRecipe, setSelectedRecipe] = useState(false)
   const classes = useStyles()
 
-  // function handleGoBack={() => setSelectedRecipe(null)}
+  
 
 
 
@@ -42,7 +42,7 @@ export default function RecipeResults({ token }) {
   return (
     <ThemeProvider theme={theme}>
       <div>
-        <Typography align='center' variant='h3' color='secondary' gutterBottom>
+        <Typography align='center' variant='h4' color='secondary' gutterBottom>
           Recipe Results
           </Typography>
         <div className='recipe-list'>

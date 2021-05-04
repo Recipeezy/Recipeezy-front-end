@@ -57,7 +57,6 @@ export default function FoodItemForm({ addFoodItem, token, getPantry }) {
                     size='small'
                     color='secondary'
                     variant='contained'
-                    // style={{ padding: '0', height: '50px', width:'40px'}}
                     className={classes.addButton}
                     type="submit"
                 >Add</Button>

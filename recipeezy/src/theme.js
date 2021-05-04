@@ -19,6 +19,10 @@ const theme = createMuiTheme({
             fontFamily:'kalam',
             color:'#011936'
         },
+        h3: {
+            fontFamily:'kalam',
+            fontWeight: 'bold'
+        },
         body1: {
             padding:'12px',
             lineHeight:'1.75'

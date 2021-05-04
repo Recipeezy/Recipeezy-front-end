@@ -1,31 +1,27 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SelectedRecipeDetail from "./SelectedRecipeDetail.js";
-import RecipeDetail from "./RecipeDetail";
 import { Card, Grid, makeStyles, Button } from "@material-ui/core";
-import { CardContent } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles({
     cardStyle: {
     maxWidth: "300px",
     },    
-  selectedHeader: {
+    selectedHeader: {
     marginTop: '30px',
     marginBottom: '30px'
     },
-  });
+});
 
 export default function SelectedRecipes({ token }) {
     const [selectedRecipes, setSelectedRecipes] = useState([]);
     const [selectedRecipeDetail, setSelectedRecipeDetail] = useState(false);
-
     const [loading, setLoading] = useState(false);
-
     const classes = useStyles();
-
     const getSelectedRecipesList = () => {
     setLoading(true);
+
     axios
         .get("https://recipeezy-app.herokuapp.com/selected_recipes/", {
         headers: { Authorization: `Token ${token}` },
@@ -47,7 +43,7 @@ export default function SelectedRecipes({ token }) {
             recipe={selectedRecipeDetail}
             handleGoBack={() => setSelectedRecipeDetail(null)}
             getSelectedRecipesList={getSelectedRecipesList}
-          //handleGoBack={handleGoBack}
+        
             token={token}
         />
         );
@@ -87,7 +83,7 @@ export default function SelectedRecipes({ token }) {
       <Typography variant="h4" align="center" className={classes.selectedHeader}>
         Selected Recipes
         </Typography>
-        <Grid container justify="center" spacing={2}>
+        <Grid style={{maxHeight: 450, overflowY: 'auto', overflowX: 'hidden' }} container justify="center" spacing={2}>
         {renderContent()}
         </Grid>
     </>

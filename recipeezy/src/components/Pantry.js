@@ -105,26 +105,26 @@ export default function Pantry({ token }) {
             </Typography>
             {foodList ? (
                 <div>
-                    {foodList.map((food) => (
-                        <FoodItem food={food} key={food.id} selectedIngredients={selectedIngredients} setSelectedIngredients={setSelectedIngredients} token={token} isAtLimit={isAtLimit} setIsAtLimit={setIsAtLimit} getSearch={getSearch} />
-                    ))}
-                    {isAtLimit ? (
-                        <div><p>You may only select a maximum of 4 ingredients</p></div>
-                    ) : (
-                        <p></p>
-                    )}
-
-                    <FoodItemForm addFoodItem={addFoodItem} token={token} getPantry={getPantry} />
-
-                    <Button
-                        color='primary'
-                        fullWidth
-                        style={{ marginTop: '30px' }}
-                        variant='contained'
-                        className={classes.search} id="search-button" onClick={handleSearch}>Search</Button>
-                    <div>
-                        <h2 className="errorh2"></h2>
+                    <div style={{maxHeight: 200, overflowY: 'auto', overflowX: 'hidden' }}>
+                        {foodList.map((food) => (
+                            <FoodItem food={food} key={food.id} selectedIngredients={selectedIngredients} setSelectedIngredients={setSelectedIngredients} token={token} isAtLimit={isAtLimit} setIsAtLimit={setIsAtLimit} getSearch={getSearch} />
+                        ))}
+                        {isAtLimit ? (
+                            <div><p>You may only select a maximum of 4 ingredients</p></div>
+                        ) : (
+                            <p></p>
+                        )}
                     </div>
+                        <FoodItemForm addFoodItem={addFoodItem} token={token} getPantry={getPantry} />
+                        <Button
+                            color='primary'
+                            fullWidth
+                            style={{ marginTop: '30px' }}
+                            variant='contained'
+                            className={classes.search} id="search-button" onClick={handleSearch}>Search</Button>
+                        <div>
+                            <h2 className="errorh2"></h2>
+                        </div>
                 </div>
             ) : (
                 <p>Loading...</p>

@@ -77,15 +77,17 @@ function ShoppingList({ token }) {
       <div className="shopping-list-main-container">
         {(shopList && shopList.length > 0) ? (
           <div>
-            {shopList.map((food) => (
-              <ShopListItem
-                food={food}
-                key={food.id}
-                token={token}
-                setShopList={setShopList}
-                shopList={shopList}
-              />
-            ))}
+            <div style={{maxHeight: 450, overflowY: 'auto', overflowX: 'hidden' }}>
+              {shopList.map((food) => (
+                <ShopListItem
+                  food={food}
+                  key={food.id}
+                  token={token}
+                  setShopList={setShopList}
+                  shopList={shopList}
+                />
+              ))}
+            </div>
             <ShopItemForm
               addShopItem={addShopItem}
               token={token}
@@ -100,12 +102,12 @@ function ShoppingList({ token }) {
           <p></p>
             )}
             <Button
-              style={{marginTop: '30px'}}
+              style={{marginTop: '30px', marginBottom:'30px'}}
               fullWidth
               className="swap-selected-ings"
               variant="contained"
               color="primary"
-              // onClick={swapSelected}
+              
               onClick={() => {swapSelected(); setDoneShopping(true)}}>
               Done Shopping
             </Button>
@@ -117,7 +119,8 @@ function ShoppingList({ token }) {
               token={token}
               getShopList={getShopList}
             />
-            <Button className="back-home" variant="contained" color="primary" onClick={backToPantry}>Back Home</Button>
+            <Button
+            className="back-home" variant="contained" color="primary" onClick={backToPantry}>Back Home</Button>
           </>
         )}
       </div>

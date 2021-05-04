@@ -17,7 +17,7 @@ const useStyles = makeStyles({
             margin: '0 auto'
         },
         horizontalBox: {
-            marginTop: '50px',
+            marginTop: '60px',
             overflowY: 'scroll',
             overflowX: 'hidden',
             flexDirection: 'row',
@@ -42,15 +42,15 @@ export default function Home({ isLoggedIn, logOut, token }) {
         alignItems="center"
         justify="center"
         className={classes.container}>
-            <Paper style={{maxHeight: 350, overflowY: 'auto', overflowX: 'hidden' }} className={classes.pantryPaper}>
+            <Paper className={classes.pantryPaper}>
                 <Pantry isLoggedIn={isLoggedIn} token={token}/>
             </Paper>
-            <Grid className={classes.horizontalBox} >
+            <Grid>
                 <Typography variant='h6'>
                     <SelectedRecipes isLoggedIn={isLoggedIn} token={token} />  
                 </Typography>
             </Grid>
-            <Grid className={classes.horizontalBox} >
+            <Grid style={{marginBottom:'50px'}} className={classes.horizontalBox}  >
                 <Typography variant='h6'>
                     <RecipeHistory isLoggedIn={isLoggedIn} token={token} />
                 </Typography>
