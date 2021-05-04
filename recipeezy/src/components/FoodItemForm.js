@@ -10,7 +10,7 @@ const useStyles = makeStyles({
         maxHeight:'50px',
         maxWidth: '40px',
         padding: '0px 0px 0px 0px',
-        color:'#187B8B'
+        color:'#004e64'
     },
     container: {
         justifyContent:'center',

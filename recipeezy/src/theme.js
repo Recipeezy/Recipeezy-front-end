@@ -5,7 +5,8 @@ import { createMuiTheme } from "@material-ui/core/styles"
 const theme = createMuiTheme({
     palette: {
         primary:{
-            main:'#187B8B'
+            // main:'#187B8b'
+            main: '#004e64'
         },
         secondary: {
             main: '#ffd000'
@@ -17,19 +18,19 @@ const theme = createMuiTheme({
             wordWrap:'break-word',
         },
         h4: {
-            fontFamily:'kalam',
+            fontFamily:'overlock',
             color:'#011936'
         },
-        h3: {
+        h5: {
             fontFamily:'kalam',
-            fontWeight: 'bold'
         },
         body1: {
             padding:'12px',
             lineHeight:'1.75'
         },
         body2: {
-            color: '#000000'
+            color: '#000000',
+            fontFamily: 'Roboto'
         },
     },
     overrides: {
@@ -37,6 +38,7 @@ const theme = createMuiTheme({
             root: {
                 marginTop:"10px",
                 padding:'2px 7px',
+                fontFamily: 'Roboto'
             }
         },
     }

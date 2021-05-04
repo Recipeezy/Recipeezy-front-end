@@ -89,6 +89,7 @@ export default function SelectedRecipeDetail({ recipe, handleGoBack, getSelected
         <Container>
             <Grid className={classes.backButton} align='center'>
                 <Button
+                    style={{color:'#004e64'}}
                     color='secondary'
                     variant='contained'
                     onClick={handleGoBack}
