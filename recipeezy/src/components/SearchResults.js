@@ -61,10 +61,7 @@ function SearchResults({ token }) {
             )}
 
             <Typography variant='subtitle2' align='center'>
-                <h1>Search({recipes.length}) Results for: {location.state.item}</h1>
-            </Typography>
-            <Typography variant='subtitle1' align='center' gutterBottom>
-                RECIPES: {recipes.length}
+                <h1>Result{recipes.length > 1 ? 's' : ""} for {location.state.item}</h1>
             </Typography>
             <div>
                 {(recipes && recipes.length > 0) ? (
