@@ -26,7 +26,8 @@ const theme = createMuiTheme({
         },
         body1: {
             padding:'12px',
-            lineHeight:'1.75'
+            lineHeight:'1.75',
+            fontFamily: 'Roboto',
         },
         body2: {
             color: '#000000',
