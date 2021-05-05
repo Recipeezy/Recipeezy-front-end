@@ -43,7 +43,7 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-export default function FoodItem({ food, setSelectedIngredients, selectedIngredients, isAtLimit, setIsAtLimit, token, getSearch }) {
+export default function FoodItem({ food, setSelectedIngredients, selectedIngredients, isAtLimit, setIsAtLimit, token, getSearch, getPantry }) {
     const [isDeleted, setIsDeleted] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [name, setName] = useState(food.name)
@@ -62,7 +62,10 @@ export default function FoodItem({ food, setSelectedIngredients, selectedIngredi
                 headers: { Authorization: `Token ${token}` },
             },
         )
-            .then(setIsEditing(false))
+            .then((res) => {
+                setIsEditing(false)
+                getPantry()
+            })
 
 
     }
@@ -108,6 +111,7 @@ export default function FoodItem({ food, setSelectedIngredients, selectedIngredi
             setSelectedIngredients(n)
             getSearch()
         }
+        console.log("CLICKEDDDD")
     }
 
 
@@ -118,7 +122,7 @@ export default function FoodItem({ food, setSelectedIngredients, selectedIngredi
             <ListItem className={classes.listItem}>
                 <div className={classes.checkboxLabel}>
                     <Checkbox onChange={checkBoxClick} type='checkbox' id={name} className="checkboxes" value={food.name} color='secondary'></Checkbox>
-                    <InputLabel htmlFor={name} className={classes.label} style={isEditing ? {display:'none'} : {} }>{food.name}</InputLabel>
+                    <InputLabel htmlFor={name} className={classes.label} style={isEditing ? { display: 'none' } : {}}>{food.name}</InputLabel>
                 </div>
                 {isEditing ?
                     <Grid container direction='row' alignItems='center'>
@@ -128,7 +132,7 @@ export default function FoodItem({ food, setSelectedIngredients, selectedIngredi
                     </Grid>
                     :
                     <>
-                        
+
 
                         <Grid display='flex'>
                             <ListItemIcon className={classes.listIcons}>
