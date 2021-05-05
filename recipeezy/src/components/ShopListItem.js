@@ -59,7 +59,7 @@ export default function ShopListItem({ food, token }) {
     event.preventDefault();
     axios
       .put(
-        `http://recipeezy-app.herokuapp.com/ingredients/${food.id}/`,
+        `https://recipeezy-app.herokuapp.com/ingredients/${food.id}/`,
         {
           name: name,
         },
@@ -73,7 +73,7 @@ export default function ShopListItem({ food, token }) {
   const deleteShopListItem = (event) => {
     event.preventDefault();
     axios
-      .delete(`http://recipeezy-app.herokuapp.com/ingredients/${food.id}`, {
+      .delete(`https://recipeezy-app.herokuapp.com/ingredients/${food.id}`, {
         headers: { Authorization: `Token ${token}` },
       })
       .then((response) => {

@@ -68,7 +68,7 @@ export default function FoodItem({ food, setSelectedIngredients, selectedIngredi
     }
     const deleteIngredient = (event) => {
         event.preventDefault();
-        axios.delete(`http://recipeezy-app.herokuapp.com/ingredients/${food.id}`,
+        axios.delete(`https://recipeezy-app.herokuapp.com/ingredients/${food.id}`,
             {
                 headers: { Authorization: `Token ${token}` },
             }
