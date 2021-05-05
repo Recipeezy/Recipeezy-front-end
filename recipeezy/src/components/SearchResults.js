@@ -55,13 +55,19 @@ function SearchResults({ token }) {
     return (
         <div>
             {!selectedRecipe && (
-                <IconButton component={Link} to='/'>
-                    <ArrowBackIcon>Back to Pantry</ArrowBackIcon>
-                </IconButton>
+                <Grid align='center'>
+                    <Button
+                    style={{marginBottom: 30, color: '#004e64'}}
+                    color='secondary'
+                    variant='contained'
+                    component={Link} to='/'>
+                        Back to Pantry
+                    </Button>
+                </Grid>
             )}
 
-            <Typography variant='h6' align='center'>
-                <h1>Result{recipes.length > 1 ? 's' : ""} for {location.state.item}</h1>
+            <Typography variant='h5' align='center' style={{ marginBottom: '30px'}}>
+                Result{recipes.length > 1 ? 's' : ""} for {location.state.item}
             </Typography>
             <div>
                 {(recipes && recipes.length > 0) ? (

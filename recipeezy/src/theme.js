@@ -16,6 +16,7 @@ const theme = createMuiTheme({
         h6: {
             fontFamily:'kalam',
             wordWrap:'break-word',
+            fontSize: '30px'
         },
         h4: {
             fontFamily:'overlock',
@@ -23,6 +24,7 @@ const theme = createMuiTheme({
         },
         h5: {
             fontFamily:'kalam',
+            fontSize: '35px'
         },
         body1: {
             padding:'12px',

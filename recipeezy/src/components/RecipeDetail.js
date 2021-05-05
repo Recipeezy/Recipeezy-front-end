@@ -192,12 +192,12 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
         <Container>
             <Grid align='center'>
                 <Button
-                    style={{marginBottom: 30}}
+                    style={{marginBottom: 30, color: '#004e64'}}
                     color='secondary'
                     variant='contained'
                     onClick={handleGoBack}
                 >Go back</Button>
-                <Typography className={classes.mealTitle} variant='h4' align='center'>
+                <Typography className={classes.mealTitle} variant='h6' align='center'>
                     {selectedRecipe.strMeal}
                 </Typography>
             </Grid>
@@ -252,16 +252,16 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
             <Grid align='center' className="add-all-ingredients">
                 {!selected ? (
                     <Button
-                        className="add-ing-button"
-                        variant='contained' color='primary'
+                        className="add-ing-button" style={{ color: '#004e64'}}
+                        variant='contained' color='secondary'
                         onClick={() => { addSelectedRecipe(); setSelected(true) }}>
                         Select Recipe
                     </Button>
                 ) : (
                     <Button
-                        style={{ marginTop: '15px', marginBottom: '15px' }}
+                        style={{ marginTop: '15px', marginBottom: '15px', color: '#004e64' }}
                         variant='contained'
-                        color='primary'
+                        color='secondary'
                         onClick={() => { addAllIngredients(); setAdded(true) }}>
 
                         {!added ? (
@@ -272,8 +272,6 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
                     </Button>
                 )}
             </Grid>
-
-
 
             <div>
                 <Typography className={classes.subHeader} variant='h5'>

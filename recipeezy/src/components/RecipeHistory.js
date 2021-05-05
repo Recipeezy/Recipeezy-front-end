@@ -102,7 +102,7 @@ export default function RecipeHistory({token}) {
         <>
             <Typography 
             onClick={() => setIsExpanded(!isExpanded)}
-            variant='h4' align='center' className={classes.recipeHistoryHeader}>
+            variant='h5' align='center' className={classes.recipeHistoryHeader}>
                 Recipe History
                 { isExpanded ? <ArrowDropDownIcon/> : <ArrowDropUpIcon/> }
             </Typography>
