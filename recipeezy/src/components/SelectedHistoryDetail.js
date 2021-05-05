@@ -70,7 +70,7 @@ export default function SelectedRecipeDetail({ recipe, handleGoBack, token, getR
         <>
             <Grid style={{marginBottom:'30px'}} align='center'>
                 <Button
-                    style={{color:'#187B8B'}}
+                    style={{color:'#004e64'}}
                     color='secondary'
                     variant='contained'
                     onClick={handleGoBack}

@@ -73,7 +73,7 @@ export default function Login({ setAuth, isLoggedIn }) {
         <Container component="main" maxWidth="xs">
             <div className={classes.paper}>
                 <Grid container align='center' className={classes.signUpMsg}>
-                    <Typography  component="h1" variant="h5">
+                    <Typography  component="h1" variant="body1">
                     Discover recipes, build your shopping list, and keep track of your pantry on Recipeezy.
                     </Typography>
                 </Grid>

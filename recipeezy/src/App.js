@@ -74,11 +74,6 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Container maxWidth='md'>
-          <div>
-            <h1>Hello</h1>
-          </div>
-
-          
           <AppBar color='primary'>
             <Toolbar>
             {isLoggedIn ? (
