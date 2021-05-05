@@ -71,7 +71,7 @@ function ShoppingList({ token }) {
 
   return (
     <div>
-      <Typography variant="h4" align="center" gutterBottom>
+      <Typography variant="h5" align="center" gutterBottom>
         Shopping List
       </Typography>
       <div className="shopping-list-main-container">
@@ -94,9 +94,9 @@ function ShoppingList({ token }) {
               getShopList={getShopList}
             />
             {doneShopping ? (
-          <Grid component={Paper} align='center'>
+          <Grid component={Paper} align='center' style={{ marginTop: '30px'}}>
             <Typography variant='body1'>These items have been added to your Pantry!</Typography>
-            <Button color='primary' className={classes.okButton} variant='contained' onClick={() => setDoneShopping(false)}>OK</Button>
+            <Button color='secondary' style={{ marginBottom: '10px', color: '#004e64'}} variant='contained' onClick={() => setDoneShopping(false)}>OK</Button>
           </Grid>
             ) : (
           <p></p>
@@ -119,8 +119,11 @@ function ShoppingList({ token }) {
               token={token}
               getShopList={getShopList}
             />
-            <Button
-            className="back-home" variant="contained" color="primary" onClick={backToPantry}>Back Home</Button>
+            <Grid align='center' className={classes.buttonSpacing}>
+              <Button
+              style={{ color: '#004e64'}}
+              className="back-home" variant="contained" color="secondary" onClick={backToPantry}>Back Home</Button>
+            </Grid>
           </>
         )}
       </div>

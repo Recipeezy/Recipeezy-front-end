@@ -31,6 +31,9 @@ const useStyles = makeStyles(() => ({
   },
   okButton: {
     marginBottom:'30px'
+  },
+  marginButton: {
+    marginBottom: '80px'
   }
 }));
 
@@ -67,19 +70,17 @@ function App() {
 
 
   return (
-    
     <Router>
-
-
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Container maxWidth='md'>
+          <div className={classes.marginButton}>
+          </div>
           <AppBar color='primary'>
             <Toolbar>
             {isLoggedIn ? (
             <>  
               <IconButton edge='start'>
-              
                 <MenuIcon color='secondary' aria-controls='simple-menu' aria-haspopup='true' onClick={handleClick} />
               </IconButton>              
               <Menu

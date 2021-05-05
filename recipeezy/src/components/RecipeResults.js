@@ -42,9 +42,9 @@ export default function RecipeResults({ token }) {
   return (
     <ThemeProvider theme={theme}>
       <div>
-        <Typography align='center' variant='h4' color='secondary' gutterBottom>
+        <Typography align='center' variant='h5' gutterBottom>
           Recipe Results
-          </Typography>
+        </Typography>
         <div className='recipe-list'>
           <>
             {recipes.meals ? (

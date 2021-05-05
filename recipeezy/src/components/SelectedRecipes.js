@@ -89,7 +89,7 @@ export default function SelectedRecipes({ token }) {
     <>
         <Typography
         onClick={() => setIsExpanded(!isExpanded)}
-        variant="h4" align="center" className={classes.selectedHeader}>
+        variant="h5" align="center" className={classes.selectedHeader}>
             Selected Recipes
             { isExpanded ? <ArrowDropDownIcon/> : <ArrowDropUpIcon/> }
         </Typography>
