@@ -105,7 +105,7 @@ export default function Pantry({ token }) {
             </Typography>
             {foodList ? (
                 <div>
-                    <div style={{maxHeight: 200, overflowY: 'auto', overflowX: 'hidden' }}>
+                    <div style={{maxHeight: window.location.pathname.includes('/pantry') ? null : 200, overflowY: 'auto', overflowX: 'hidden' }}>
                         {foodList.map((food) => (
                             <FoodItem food={food} key={food.id} selectedIngredients={selectedIngredients} setSelectedIngredients={setSelectedIngredients} token={token} isAtLimit={isAtLimit} setIsAtLimit={setIsAtLimit} getSearch={getSearch} />
                         ))}
