@@ -57,16 +57,16 @@ function SearchResults({ token }) {
             {!selectedRecipe && (
                 <Grid align='center'>
                     <Button
-                    style={{marginBottom: 30, color: '#004e64'}}
-                    color='secondary'
-                    variant='contained'
-                    component={Link} to='/'>
+                        style={{ marginBottom: 30, color: '#004e64' }}
+                        color='secondary'
+                        variant='contained'
+                        component={Link} to='/'>
                         Back to Pantry
                     </Button>
                 </Grid>
             )}
 
-            <Typography variant='h5' align='center' style={{ marginBottom: '30px'}}>
+            <Typography variant='h5' align='center' style={{ marginBottom: '30px' }}>
                 Result{recipes.length > 1 ? 's' : ""} for {location.state.item}
             </Typography>
             <div>
@@ -85,7 +85,7 @@ function SearchResults({ token }) {
                                                     <Typography variant='h6' align='center' gutterBottom>
                                                         {recipe.meals[0].strMeal}
                                                     </Typography>
-                                                    
+
                                                     <Typography variant='subtitle1' align='center'>
                                                         Cuisine: {recipe.meals[0].strArea}
                                                     </Typography>
@@ -106,7 +106,7 @@ function SearchResults({ token }) {
                         )}
                     </div>
                 ) : (
-                    <h1>no results</h1>
+                    <h1></h1>
                 )}
             </div>
 

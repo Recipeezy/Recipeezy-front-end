@@ -218,7 +218,7 @@ export default function RecipeDetail({ selectedRecipe, handleGoBack, token }) {
                             variant='subtitle1'
                             align="center"
                         >Cuisine: {selectedRecipe.strArea}</Typography>
-                        <Typography gutterBottom align='center' variant='subtitle1'>Category: {selectedRecipe.strCategory}</Typography>
+                        {/* <Typography gutterBottom align='center' variant='subtitle1'>Category: {selectedRecipe.strCategory}</Typography> */}
                     </Grid>
                 </div>
             </Grid>

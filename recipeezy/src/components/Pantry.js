@@ -15,7 +15,7 @@ const useStyles = makeStyles({
         bottom: 0,
         left: 'auto',
         position: 'sticky',
-        },
+    },
 })
 
 
@@ -64,6 +64,9 @@ export default function Pantry({ token }) {
         for (let c of checkedValues) {
             templist.push(c.id)
         }
+        if (templist.length > 4) {
+            setIsAtLimit(true)
+        }
         console.log('checked values', checkedValues)
         console.log("TMEPLIST", templist)
         axios.get(`https://www.themealdb.com/api/json/v2/9973533/filter.php?i=${templist.join()}`).then((response) => {
@@ -90,7 +93,7 @@ export default function Pantry({ token }) {
         }
 
         if (searchResults.length > 0) {
-            history.push('/searchresults', { search: searchResults, item: selectedIngredients.join() })
+            history.push('/searchresults', { search: searchResults, item: selectedIngredients.join(', ') })
         } else {
             console.log("AHAHHAH")
         }
@@ -105,9 +108,11 @@ export default function Pantry({ token }) {
             </Typography>
             {foodList ? (
                 <div>
+
                     <div style={{maxHeight: window.location.pathname.includes('/pantry') ? null : 200, overflowY: 'auto', overflowX: 'hidden' }}>
+
                         {foodList.map((food) => (
-                            <FoodItem food={food} key={food.id} selectedIngredients={selectedIngredients} setSelectedIngredients={setSelectedIngredients} token={token} isAtLimit={isAtLimit} setIsAtLimit={setIsAtLimit} getSearch={getSearch} />
+                            <FoodItem food={food} key={food.id} selectedIngredients={selectedIngredients} setSelectedIngredients={setSelectedIngredients} token={token} isAtLimit={isAtLimit} setIsAtLimit={setIsAtLimit} getSearch={getSearch} getPantry={getPantry} />
                         ))}
                         {isAtLimit ? (
                             <div><p>You may only select a maximum of 4 ingredients</p></div>
@@ -115,16 +120,16 @@ export default function Pantry({ token }) {
                             <p></p>
                         )}
                     </div>
-                        <FoodItemForm addFoodItem={addFoodItem} token={token} getPantry={getPantry} />
-                        <Button
-                            color='primary'
-                            fullWidth
-                            style={{ marginTop: '30px' }}
-                            variant='contained'
-                            className={classes.search} id="search-button" onClick={handleSearch}>Search</Button>
-                        <div>
-                            <h2 className="errorh2"></h2>
-                        </div>
+                    <FoodItemForm addFoodItem={addFoodItem} token={token} getPantry={getPantry} />
+                    <Button
+                        color='primary'
+                        fullWidth
+                        style={{ marginTop: '30px' }}
+                        variant='contained'
+                        className={classes.search} id="search-button" onClick={handleSearch}>Search</Button>
+                    <div>
+                        <h2 className="errorh2"></h2>
+                    </div>
                 </div>
             ) : (
                 <p>Loading...</p>
